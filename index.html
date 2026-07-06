@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Carte des permis de brûlage</title>
 
-    <link relnpkg.com/leaflet/dist/leaflet.css
-
-    <style>
-        body {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflety {
             margin: 0;
         }
 
@@ -22,9 +20,11 @@
 
 <div id="carte"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.jsipt>
+<script srckg.com/leaflet/dist/leaflet.js
 
-var carte = L.map('carte').setView([48.845, -67.53], 10);
+<script>
+
+var carte = L.map('carte').setView([48.85, -67.53], 10);
 
 L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -33,11 +33,13 @@ L.tileLayer(
     }
 ).addTo(carte);
 
-L.marker([48.845, -67.53])
+L.marker([48.85, -67.53])
     .addTo(carte)
-    .bindPopup('Permis de brûlage actif');
+    .bindPopup("Permis de brûlage actif");
 
 </script>
 
 </body>
+
 </html>
+``
