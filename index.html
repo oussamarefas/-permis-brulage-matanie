@@ -1,52 +1,43 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <title>Carte des permis de brûlage</title>
 
-<meta charset="utf-8">
+    <link relnpkg.com/leaflet/dist/leaflet.css
 
-<title>Permis de brûlage Matanie</title>
+    <style>
+        body {
+            margin: 0;
+        }
 
-https://unpkg.com/leaflet/dist/leaflet.css
-
-<style>
-
-body{
-margin:0;
-}
-
-#map{
-height:100vh;
-width:100%;
-}
-
-</style>
-
+        #carte {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
-<div id="map"></div>
+<div id="carte"></div>
 
-/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.jsipt>
 
-<script>
-
-var map = L.map('map').setView([48.841, -67.531], 10);
+var carte = L.map('carte').setView([48.845, -67.53], 10);
 
 L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-maxZoom:19
-}
-).addTo(map);
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '&copy; OpenStreetMap'
+    }
+).addTo(carte);
 
-L.marker([48.841,-67.531])
-.addTo(map)
-.bindPopup("Permis de brûlage actif");
+L.marker([48.845, -67.53])
+    .addTo(carte)
+    .bindPopup('Permis de brûlage actif');
 
 </script>
 
 </body>
-
 </html>
