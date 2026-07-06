@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "Feu à ciel ouvert",
+        "municipalite": "Matane",
+        "expiration": "2026-07-15",
+        "statut": "Actif"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-67.5300,48.8500]
+      }
+    }
+  ]
+}
