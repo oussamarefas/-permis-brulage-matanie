@@ -2,13 +2,15 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carte des permis de brûlage</title>
 
-pkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href.9.4/dist/leaflet.css
 
 <style>
 html, body {
     margin: 0;
+    padding: 0;
     height: 100%;
 }
 
@@ -26,20 +28,18 @@ html, body {
 @1.9.4/dist/leaflet.js"></script>
 
 <script>
-
 var map = L.map('map').setView([48.85, -67.53], 10);
 
 L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution: '&copy; OpenStreetMap'
-    }
+'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+attribution: '&copy; OpenStreetMap'
+}
 ).addTo(map);
 
 L.marker([48.85, -67.53])
 .addTo(map)
 .bindPopup('Permis de brûlage actif');
-
 </script>
 
 </body>
