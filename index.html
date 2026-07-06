@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Permis de brûlage Matanie</title>
+
+https://unpkg.com/leaflet/dist/leaflet.css
+
+<style>
+
+body{
+margin:0;
+}
+
+#map{
+height:100vh;
+width:100%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([48.841, -67.531], 10);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+maxZoom:19
+}
+).addTo(map);
+
+L.marker([48.841,-67.531])
+.addTo(map)
+.bindPopup("Permis de brûlage actif");
+
+</script>
+
+</body>
+
+</html>
