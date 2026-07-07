@@ -81,3 +81,30 @@ fetch('https://permis-brulage.oussama-refas.workers.dev')
                 radius: 9,
                 color: couleur,
                 fillColor: couleur,
+                fillOpacity: 0.8,
+                weight: 2
+            }
+        );
+
+        marker.addTo(map);
+
+        marker.bindPopup(`
+            <b>Permis #${p.RecordID}</b><br>
+            <b>Adresse :</b> ${p.adresseComplete}<br>
+            <b>Date de fin :</b> ${p.Data.EndDate}<br>
+            <b>Type :</b> ${p.Data.BurningPermitsTypeID}<br>
+            <b>Statut :</b> ${p.Data.__DPBstatut}
+        `);
+
+    });
+
+})
+.catch(error => {
+    console.error("Erreur :", error);
+});
+
+</script>
+
+</body>
+
+</html>
