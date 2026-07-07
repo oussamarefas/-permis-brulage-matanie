@@ -1,76 +1,18 @@
-Version 2 - Carte des permis de brûlage 
-
 <!DOCTYPE html> 
 <html lang="fr"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Carte des permis de brûlage - MRC de La Matanie</title> 
+<title>Carte des permis de brûlage - V2.1</title> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
-<style> 
-:root{--bleu:#003E6B;--vert:#5A9E3A;--jaune:#D7A937;--rouge:#C0392B;--gris:#F5F7FA;} 
-html,body{margin:0;padding:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);} 
-.header{background:var(--bleu);color:#fff;padding:25px;} 
-.header h1{margin:0;} 
-.stats{display:flex;gap:20px;padding:20px;flex-wrap:wrap;} 
-.card{flex:1;min-width:220px;background:#fff;padding:20px;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,.08)} 
-.card h2{margin:0;color:var(--bleu);font-size:36px;} 
-.filtres{padding:0 20px 15px 20px;display:flex;gap:10px;flex-wrap:wrap;} 
-.filtres select,.filtres input{padding:10px;border-radius:8px;border:1px solid #ccc;} 
-.legend{padding:0 20px 15px 20px;display:flex;gap:20px;} 
-.dot{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:6px;} 
-#map{height:65vh;margin:0 20px 20px 20px;border-radius:18px;overflow:hidden;} 
-</style> 
+<style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f5f7fa} .header{background:#003E6B;color:#fff;padding:25px} .stats{display:flex;gap:15px;padding:20px}.card{background:#fff;padding:20px;border-radius:12px;flex:1}.legend{padding:0 20px 15px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%}.green{background:#5A9E3A}.yellow{background:#D7A937}.red{background:#C0392B} #map{height:65vh;margin:20px;border-radius:15px}</style> 
 </head> 
 <body> 
-<div class="header"> 
-<h1>Carte des permis de brûlage</h1> 
-<p>MRC de La Matanie - Mise à jour en temps réel</p> 
-</div> 
-<div class="stats"> 
-<div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
-<div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
-<div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
-</div> 
-<div class="filtres"> 
-<select id="filtreMunicipalite"><option value="">Toutes les municipalités</option></select> 
-<input type="text" id="recherche" placeholder="Rechercher une adresse"> 
-</div> 
-<div class="legend"> 
-<div><span class="dot" style="background:#5A9E3A"></span>Actif</div> 
-<div><span class="dot" style="background:#D7A937"></span>Expire bientôt</div> 
-<div><span class="dot" style="background:#C0392B"></span>Expiré</div> 
-</div> 
+<div class="header"><h1>Carte des permis de brûlage</h1><p>MRC de La Matanie</p></div> 
+<div class="stats"><div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div><div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div><div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div></div> 
+<div class="legend"><span class="dot green"></span> Actif &nbsp; <span class="dot yellow"></span> Expire bientôt &nbsp; <span class="dot red"></span> Expiré</div> 
 <div id="map"></div> 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
-<script> 
-const map=L.map('map').setView([48.85,-67.53],9); 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
-let actifs=0,expireBientot=0;const villes=new Set();const points=[]; 
-fetch('https://permis-brulage.oussama-refas.workers.dev') 
-.then(r=>r.json()) 
-.then(permis=>{ 
-permis.forEach(p=>{ 
-if(!p.latitude||!p.longitude)return; 
-let couleur='#5A9E3A'; 
-const fin=new Date(p.Data.EndDate); 
-const heures=(fin-new Date())/3600000; 
-if(heures<=48&&heures>0){couleur='#D7A937';expireBientot++;} 
-if(heures<=0){couleur='#C0392B';} else {actifs++;} 
-if(p.adresseComplete){ 
-const ville=p.adresseComplete.split(',')[1]?.trim(); 
-if(ville) villes.add(ville); 
-} 
-points.push([parseFloat(p.latitude),parseFloat(p.longitude)]); 
-L.circleMarker([parseFloat(p.latitude),parseFloat(p.longitude)],{radius:8,color:couleur,fillColor:couleur,fillOpacity:.8}) 
-.addTo(map) 
-.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate); 
-}); 
-document.getElementById('actifs').innerText=actifs; 
-document.getElementById('expire').innerText=expireBientot; 
-document.getElementById('municipalites').innerText=villes.size; 
-if(points.length>0){map.fitBounds(points);} 
-}); 
-</script> 
+<script>const map=L.map('map').setView([48.85,-67.53],9);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);let actifs=0,expire=0;const villes=new Set();const pts=[];fetch('https://permis-brulage.oussama-refas.workers.dev').then(r=>r.json()).then(permis=>{permis.forEach(p=>{if(!p.latitude||!p.longitude)return;let c='#5A9E3A';const h=(new Date(p.Data.EndDate)-new Date())/3600000;if(h<=48&&h>0){c='#D7A937';expire++;} if(h>0) actifs++; const v=p.adresseComplete?.split(',')[1]?.trim(); if(v) villes.add(v); pts.push([parseFloat(p.latitude),parseFloat(p.longitude)]); L.circleMarker([parseFloat(p.latitude),parseFloat(p.longitude)],{radius:8,color:c,fillColor:c,fillOpacity:.8}).addTo(map).bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate);}); document.getElementById('actifs').innerText=actifs; document.getElementById('expire').innerText=expire; document.getElementById('municipalites').innerText=villes.size; if(pts.length) map.fitBounds(pts);});</script> 
 </body> 
 </html> 
