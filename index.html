@@ -3,21 +3,112 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Carte des permis de brûlage - V2.1</title> 
+<title>Carte des permis de brûlage - V2.2</title> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
-<style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f5f7fa} .header{background:#003E6B;color:#fff;padding:25px} .stats{display:flex;gap:15px;padding:20px}.card{background:#fff;padding:20px;border-radius:12px;flex:1}.legend{padding:0 20px 15px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%}.green{background:#5A9E3A}.yellow{background:#D7A937}.red{background:#C0392B} #map{height:65vh;margin:20px;border-radius:15px}</style> 
+<style> 
+body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f5f7fa} 
+.header{background:#003E6B;color:#fff;padding:25px} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
+.card{background:#fff;padding:20px;border-radius:12px;flex:1;min-width:220px} 
+.legend{padding:0 20px 15px} 
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%} 
+.green{background:#5A9E3A} 
+.yellow{background:#D7A937} 
+.red{background:#C0392B} 
+#map{height:65vh;margin:20px;border-radius:15px} 
+</style> 
 </head> 
 <body> 
-<div class="header"><h1>Carte des permis de brûlage</h1><p>MRC de La Matanie</p></div> 
-<div class="stats"><div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div><div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div><div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div></div> 
-<div class="legend"><span class="dot green"></span> Actif &nbsp; <span class="dot yellow"></span> Expire bientôt &nbsp; <span class="dot red"></span> Expiré</div> 
+<div class="header"> 
+<h1>Carte des permis de brûlage</h1> 
+<p>MRC de La Matanie</p> 
+</div> 
+<div class="stats"> 
+<div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
+<div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
+<div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
+</div> 
+<div class="legend"> 
+<span class="dot green"></span> Actif &nbsp;&nbsp; 
+<span class="dot yellow"></span> Expire bientôt &nbsp;&nbsp; 
+<span class="dot red"></span> Expiré 
+</div> 
 <div id="map"></div> 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
-<script>const map=L.map('map').setView([48.85,-67.53],9);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);let actifs=0,expire=0;const villes=new Set();const pts=[];
-fetch(
-  'https://permis-brulage.oussama-refas.workers.dev?t=' +
-  Date.now()
-)
-.then(r=>r.json()).then(permis=>{permis.forEach(p=>{if(!p.latitude||!p.longitude)return;let c='#5A9E3A';const h=(new Date(p.Data.EndDate)-new Date())/3600000;if(h<=48&&h>0){c='#D7A937';expire++;} if(h>0) actifs++; const v=p.adresseComplete?.split(',')[1]?.trim(); if(v) villes.add(v); pts.push([parseFloat(p.latitude),parseFloat(p.longitude)]); L.circleMarker([parseFloat(p.latitude),parseFloat(p.longitude)],{radius:8,color:c,fillColor:c,fillOpacity:.8}).addTo(map).bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate);}); document.getElementById('actifs').innerText=actifs; document.getElementById('expire').innerText=expire; document.getElementById('municipalites').innerText=villes.size; if(pts.length) map.fitBounds(pts);});</script> 
+<script> 
+const map=L.map('map').setView([48.85,-67.53],9); 
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
+ 
+let markersLayer=L.layerGroup().addTo(map); 
+ 
+async function chargerPermis(){ 
+ 
+markersLayer.clearLayers(); 
+ 
+let actifs=0; 
+let expire=0; 
+const municipalites=new Set(); 
+const pts=[]; 
+ 
+try{ 
+const response=await fetch('https://permis-brulage.oussama-refas.workers.dev?t='+Date.now()); 
+const permis=await response.json(); 
+ 
+permis.forEach(p=>{ 
+if(!p.latitude||!p.longitude)return; 
+ 
+let couleur='#5A9E3A'; 
+const heures=(new Date(p.Data.EndDate)-new Date())/3600000; 
+ 
+if(heures<=48 && heures>0){ 
+couleur='#D7A937'; 
+expire++; 
+} 
+ 
+if(heures<=0){ 
+couleur='#C0392B'; 
+}else{ 
+actifs++; 
+} 
+ 
+const ville=p.adresseComplete?.split(',')[1]?.trim(); 
+if(ville) municipalites.add(ville); 
+ 
+pts.push([parseFloat(p.latitude),parseFloat(p.longitude)]); 
+ 
+L.circleMarker([ 
+parseFloat(p.latitude), 
+parseFloat(p.longitude) 
+],{ 
+radius:8, 
+color:couleur, 
+fillColor:couleur, 
+fillOpacity:0.8, 
+weight:2 
+}) 
+.addTo(markersLayer) 
+.bindPopup( 
+'<b>Permis #'+p.RecordID+'</b><br>'+ 
+p.adresseComplete+'<br>'+ 
+'Expiration : '+p.Data.EndDate 
+); 
+}); 
+ 
+document.getElementById('actifs').innerText=actifs; 
+document.getElementById('expire').innerText=expire; 
+document.getElementById('municipalites').innerText=municipalites.size; 
+ 
+if(pts.length>0){ 
+map.fitBounds(pts); 
+} 
+ 
+}catch(error){ 
+console.error('Erreur chargement permis:',error); 
+} 
+} 
+ 
+chargerPermis(); 
+setInterval(chargerPermis,60000); 
+</script> 
 </body> 
 </html> 
