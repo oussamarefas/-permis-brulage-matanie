@@ -3,45 +3,40 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Portail des permis de brûlage - MRC de La Matanie</title> 
+<title>Portail des permis de brûlage</title> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
 <style> 
 :root{--bleu:#003E6B;--bleu2:#005A93;--vert:#5A9E3A;--jaune:#D7A937;--rouge:#C0392B;--gris:#f4f6f8;} 
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)} 
-.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;padding:30px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)} 
-.header h1{margin:10px 0;font-size:42px}.header p{opacity:.9} 
-.logos{display:flex;justify-content:center;gap:40px;align-items:center;flex-wrap:wrap} 
-.logos img{height:90px} 
-.status{margin-top:15px;display:inline-block;background:rgba(255,255,255,.15);padding:10px 18px;border-radius:25px} 
-.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap}.card{flex:1;min-width:220px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
-.card h2{margin:0;color:var(--bleu);font-size:36px} 
-.layout{display:flex;gap:20px;padding:0 20px 20px}.sidebar{width:320px;background:#fff;border-radius:16px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:70vh;overflow:auto}.sidebar h3{margin-top:0} 
-#map{flex:1;height:70vh;border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.15)} 
-.search,input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin-bottom:10px} 
-.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer}.permis-item:hover{background:#f8fafc} 
-.legend{padding:0 20px 15px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px} 
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:white;padding:30px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)} 
+.logo{height:120px;margin-bottom:15px} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
+.card{flex:1;min-width:220px;background:white;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
+.card h2{margin:0;color:#003E6B;font-size:36px} 
+.legend{padding:0 20px 15px} 
+.layout{display:flex;gap:20px;padding:0 20px 20px} 
+.sidebar{width:320px;background:white;border-radius:16px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:70vh;overflow:auto} 
+#map{flex:1;height:70vh;border-radius:18px;overflow:hidden} 
+.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
+.permis-item:hover{background:#f7fafc} 
 </style> 
 </head> 
 <body> 
 <div class="header"> 
-<div class="logos"> 
-<img src="LOGO MATANIE Blanc sur fond transparent.png"> 
-<img src="Logo-SPI-Transparent.png"> 
-</div> 
+<img src="Logo-SPI-Transparent.png" class="logo" alt="Prévention incendie"> 
 <h1>Carte des permis de brûlage</h1> 
 <p>MRC de La Matanie</p> 
-<div class="status">🟢 Synchronisation automatique toutes les 60 secondes</div> 
+<p>Synchronisation automatique toutes les 60 secondes</p> 
 </div> 
 <div class="stats"> 
 <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
 <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
 <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
 </div> 
-<div class="legend"><span class="dot" style="background:#5A9E3A"></span>Actif&nbsp;&nbsp;<span class="dot" style="background:#D7A937"></span>Expire bientôt&nbsp;&nbsp;<span class="dot" style="background:#C0392B"></span>Expiré</div> 
+<div class="legend">🟢 Actif &nbsp;&nbsp; 🟡 Expire bientôt &nbsp;&nbsp; 🔴 Expiré</div> 
 <div class="layout"> 
 <div class="sidebar"> 
 <h3>Permis actifs</h3> 
-<input id="recherche" placeholder="Rechercher une adresse..."> 
 <div id="listePermis"></div> 
 </div> 
 <div id="map"></div> 
@@ -54,7 +49,7 @@ let markers=L.layerGroup().addTo(map);
 async function chargerPermis(){ 
 markers.clearLayers(); 
 document.getElementById('listePermis').innerHTML=''; 
-let actifs=0;let expire=0;let municipalites=new Set();let bounds=[]; 
+let actifs=0,expire=0;const municipalites=new Set();const bounds=[]; 
 const r=await fetch('https://permis-brulage.oussama-refas.workers.dev?t='+Date.now()); 
 const permis=await r.json(); 
 permis.forEach(p=>{ 
@@ -66,14 +61,17 @@ if(h<=0){couleur='#C0392B';} else {actifs++;}
 const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude); 
 bounds.push([lat,lon]); 
 const marker=L.circleMarker([lat,lon],{radius:10,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(markers); 
-marker.bindPopup('<div><strong>Permis #'+p.RecordID+'</strong><hr><b>Adresse</b><br>'+p.adresseComplete+'<br><br><b>Expiration</b><br>'+p.Data.EndDate+'</div>'); 
+marker.bindPopup('<div><strong>Permis #'+p.RecordID+'</strong><br><br>'+p.adresseComplete+'<br><br>Expiration : '+p.Data.EndDate+'</div>'); 
 const ville=p.adresseComplete?.split(',')[1]?.trim(); if(ville) municipalites.add(ville); 
 const item=document.createElement('div'); item.className='permis-item'; item.innerHTML='<strong>#'+p.RecordID+'</strong><br>'+p.adresseComplete; item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();}; document.getElementById('listePermis').appendChild(item); 
 }); 
-document.getElementById('actifs').innerText=actifs; document.getElementById('expire').innerText=expire; document.getElementById('municipalites').innerText=municipalites.size; 
+document.getElementById('actifs').innerText=actifs; 
+document.getElementById('expire').innerText=expire; 
+document.getElementById('municipalites').innerText=municipalites.size; 
 if(bounds.length) map.fitBounds(bounds); 
 } 
-chargerPermis(); setInterval(chargerPermis,60000); 
+chargerPermis(); 
+setInterval(chargerPermis,60000); 
 </script> 
 </body> 
 </html> 
