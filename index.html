@@ -18,6 +18,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)}
 #map{flex:1;height:75vh;border-radius:16px;overflow:hidden} 
 .permis-item{padding:10px;margin-bottom:8px;border-radius:8px;background:#f8fafc;cursor:pointer} 
 .danger-zone{padding:12px;border-radius:10px;color:white;margin-bottom:10px;font-weight:bold} 
+.alert{margin:20px;background:#ee7c22;color:white;padding:15px;border-radius:12px;text-align:center;font-size:22px;font-weight:bold} 
 </style> 
 </head> 
 <body> 
@@ -26,6 +27,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)}
 <h1>Portail Prévention Incendie</h1> 
 <p>MRC de La Matanie</p> 
 </div> 
+<div id="alerteDanger" class="alert">Chargement du danger SOPFEU...</div> 
 <div class="stats"> 
 <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
 <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
@@ -42,5 +44,58 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)}
 <div id="map"></div> 
 </div> 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
-</body> 
-</html> 
+<script> 
+const map=L.map('map').setView([48.85,-67.53],9); 
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
+const permisLayer=L.layerGroup().addTo(map); 
+async function chargerPermis(){ 
+permisLayer.clearLayers(); 
+document.getElementById('listePermis').innerHTML=''; 
+let actifs=0,expire=0;const municipalites=new Set();const bounds=[]; 
+const r=await fetch('https://permis-brulage.oussama-refas.workers.dev/?t='+Date.now()); 
+const permis=await r.json(); 
+permis.forEach(p=>{ 
+if(!p.latitude||!p.longitude)return; 
+let couleur='#5A9E3A'; 
+const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
+if(h<=48&&h>0){couleur='#D7A937';expire++;} 
+if(h<=0){couleur='#C0392B';}else{actifs++;} 
+const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude); 
+bounds.push([lat,lon]); 
+const marker=L.circleMarker([lat,lon],{radius:12,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(permisLayer); 
+marker.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate); 
+const item=document.createElement('div'); 
+item.className='permis-item'; 
+item.style.borderLeft='6px solid '+couleur; 
+item.innerHTML='<b>#'+p.RecordID+'</b><br>'+p.adresseComplete; 
+item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();}; 
+document.getElementById('listePermis').appendChild(item); 
+const ville=p.adresseComplete?.split(',')[1]?.trim(); if(ville)municipalites.add(ville); 
+}); 
+document.getElementById('actifs').innerText=actifs; 
+document.getElementById('expire').innerText=expire; 
+document.getElementById('municipalites').innerText=municipalites.size; 
+if(bounds.length) map.fitBounds(bounds); 
+} 
+async function chargerSopfeu(){ 
+const r=await fetch('https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t='+Date.now()); 
+const d=await r.json(); 
+document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau; 
+document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur; 
+document.getElementById('alerteDanger').innerHTML='🔥 Danger incendie : '+d.mataneChicsChocs.niveau; 
+document.getElementById('alerteDanger').style.background=d.mataneChicsChocs.couleur; 
+document.getElementById('zonesDanger').innerHTML=''; 
+[d.rimouskiMatapedia,d.mataneChicsChocs].forEach(z=>{ 
+const e=document.createElement('div'); 
+e.className='danger-zone'; 
+e.style.background=z.couleur; 
+e.innerHTML='🔥 '+z.nom+'<br>'+z.niveau; 
+document.getElementById('zonesDanger').appendChild(e); 
+}); 
+} 
+chargerPermis(); 
+chargerSopfeu(); 
+setInterval(chargerPermis,60000); 
+setInterval(chargerSopfeu,60000); 
+</script> 
+</body></html> 
