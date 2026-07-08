@@ -4,69 +4,92 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>Portail Prévention Incendie - MRC de La Matanie</title> 
+ 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
+ 
 <style> 
-:root{--bleu:#003E6B;--bleu2:#005A93;--vert:#5A9E3A;--jaune:#D7A937;--rouge:#C0392B;--gris:#f4f6f8;} 
+:root{ 
+--bleu:#003E6B; 
+--bleu2:#005A93; 
+--vert:#5A9E3A; 
+--jaune:#D7A937; 
+--rouge:#C0392B; 
+--gris:#F4F6F8; 
+} 
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)} 
-.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;padding:40px;text-align:center} 
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;text-align:center;padding:40px} 
 .logo{max-height:140px} 
-.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap}.card{flex:1;min-width:200px;background:#fff;padding:20px;border-radius:16px} 
-.layout{display:flex;gap:20px;padding:20px}.sidebar{width:320px;background:#fff;border-radius:16px;padding:15px}.layer{padding:8px;background:#f5f7fa;border-radius:8px;margin-bottom:8px} 
-#map{flex:1;height:75vh;border-radius:16px}.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
+.card{background:#fff;border-radius:16px;padding:20px;flex:1;min-width:200px} 
+.layout{display:flex;gap:20px;padding:20px} 
+.sidebar{width:320px;background:#fff;border-radius:16px;padding:15px} 
+.layer{padding:10px;margin-bottom:8px;background:#f5f7fa;border-radius:8px} 
+#map{flex:1;height:75vh;border-radius:16px} 
+.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
 </style> 
 </head> 
 <body> 
+ 
 <div class="header"> 
 <img src="Logo-SPI-Transparent.png" class="logo"> 
 <h1>Portail Prévention Incendie</h1> 
 <p>MRC de La Matanie</p> 
 </div> 
+ 
 <div class="stats"> 
 <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
 <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
 <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
-<div class="card"><h2 id="danger">--</h2><p>Danger incendie</p></div> 
+<div class="card"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div> 
 </div> 
+ 
 <div class="layout"> 
 <div class="sidebar"> 
 <h3>Couches</h3> 
-<div class="layer">☑ Permis de brûlage</div> 
-<div class="layer">☑ Danger incendie SOPFEU</div> 
-<div class="layer">☐ Casernes</div> 
+<label><input type="checkbox" id="layerPermis" checked> Permis de brûlage</label><br> 
+<label><input type="checkbox" id="layerDanger" checked> Danger incendie SOPFEU</label> 
+ 
 <h3>Permis actifs</h3> 
 <div id="listePermis"></div> 
+ 
+<h3>Zones SOPFEU</h3> 
+<div id="zonesDanger"></div> 
 </div> 
+ 
 <div id="map"></div> 
 </div> 
+ 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
 <script> 
 const map=L.map('map').setView([48.85,-67.53],9); 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
-let markers=L.layerGroup().addTo(map); 
-async function chargerPermis(){ 
-markers.clearLayers(); 
-document.getElementById('listePermis').innerHTML=''; 
-let actifs=0,expire=0;const municipalites=new Set();const bounds=[]; 
-const r=await fetch('https://permis-brulage.oussama-refas.workers.dev?t='+Date.now()); 
-const permis=await r.json(); 
-permis.forEach(p=>{ 
-if(!p.latitude||!p.longitude)return; 
-let couleur='#5A9E3A'; 
-const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
-if(h<=48&&h>0){couleur='#D7A937';expire++;} 
-if(h<=0){couleur='#C0392B';}else{actifs++;} 
-const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude); 
-bounds.push([lat,lon]); 
-const marker=L.circleMarker([lat,lon],{radius:12,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(markers); 
-marker.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration: '+p.Data.EndDate); 
-const item=document.createElement('div');item.className='permis-item';item.innerHTML='<b>#'+p.RecordID+'</b><br>'+p.adresseComplete;item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();};document.getElementById('listePermis').appendChild(item); 
-const ville=p.adresseComplete?.split(',')[1]?.trim();if(ville)municipalites.add(ville); 
-}); 
-document.getElementById('actifs').innerText=actifs; 
-document.getElementById('expire').innerText=expire; 
-document.getElementById('municipalites').innerText=municipalites.size; 
-if(bounds.length)map.fitBounds(bounds); 
+ 
+let permisLayer=L.layerGroup().addTo(map); 
+let dangerLayer=L.layerGroup().addTo(map); 
+ 
+async function chargerSopfeu(){ 
+const r=await fetch('https://sopfeu-danger.YOUR-WORKER.workers.dev?t='+Date.now()); 
+const data=await r.json(); 
+ 
+document.getElementById('dangerGlobal').innerText=data.mataneChicsChocs.niveau; 
+ 
+document.getElementById('zonesDanger').innerHTML=` 
+<div class="layer" style="border-left:8px solid ${data.rimouskiMatapedia.couleur}"> 
+${data.rimouskiMatapedia.nom}<br>${data.rimouskiMatapedia.niveau} 
+</div> 
+<div class="layer" style="border-left:8px solid ${data.mataneChicsChocs.couleur}"> 
+${data.mataneChicsChocs.nom}<br>${data.mataneChicsChocs.niveau} 
+</div>`; 
 } 
-chargerPermis();setInterval(chargerPermis,60000); 
+ 
+async function chargerPermis(){ 
+permisLayer.clearLayers(); 
+} 
+ 
+chargerPermis(); 
+chargerSopfeu(); 
+setInterval(chargerPermis,60000); 
+setInterval(chargerSopfeu,60000); 
 </script> 
-</body></html> 
+</body> 
+</html> 
