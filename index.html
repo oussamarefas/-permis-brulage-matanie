@@ -6,14 +6,19 @@
 <title>Portail Prévention Incendie - MRC de La Matanie</title> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
 <style> 
-:root{--bleu:#003E6B;--bleu2:#005A93;--vert:#5A9E3A;--jaune:#D7A937;--orange:#ee7c22;--rouge:#C0392B;--gris:#f4f6f8} 
+:root{--bleu:#003E6B;--bleu2:#005A93;--gris:#F4F6F8;} 
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)} 
-.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;text-align:center;padding:40px} 
-.logo{max-height:140px}.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
-.card{background:#fff;border-radius:16px;padding:20px;flex:1;min-width:180px} 
-.layout{display:flex;gap:20px;padding:20px}.sidebar{width:320px;background:#fff;border-radius:16px;padding:15px} 
-#map{flex:1;height:75vh;border-radius:16px}.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
-.layer{padding:8px;margin-bottom:8px;background:#f5f7fa;border-radius:8px} 
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:white;text-align:center;padding:40px} 
+.logo{max-height:140px} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
+.card{background:white;border-radius:16px;padding:20px;flex:1;min-width:180px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
+#dangerCard{color:white} 
+.layout{display:flex;gap:20px;padding:20px} 
+.sidebar{width:340px;background:white;border-radius:16px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
+#map{flex:1;height:75vh;border-radius:16px;overflow:hidden} 
+.permis-item{padding:10px;margin-bottom:8px;border-radius:8px;background:#f8fafc;cursor:pointer} 
+.danger-zone{padding:12px;border-radius:10px;color:white;margin-bottom:10px;font-weight:bold} 
+.alert{margin:20px;background:#ee7c22;color:white;padding:15px;border-radius:12px;text-align:center;font-size:22px;font-weight:bold} 
 </style> 
 </head> 
 <body> 
@@ -22,19 +27,19 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)}
 <h1>Portail Prévention Incendie</h1> 
 <p>MRC de La Matanie</p> 
 </div> 
+<div id="alerteDanger" class="alert">Chargement du danger SOPFEU...</div> 
 <div class="stats"> 
 <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
 <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
 <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
-<div class="card"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div> 
+<div class="card" id="dangerCard"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div> 
 </div> 
 <div class="layout"> 
 <div class="sidebar"> 
-<h3>Couches</h3> 
-<label><input type="checkbox" id="layerPermis" checked> Permis de brûlage</label><br> 
-<label><input type="checkbox" id="layerDanger" checked> Danger incendie SOPFEU</label> 
-<h3>Zones SOPFEU</h3><div id="zonesDanger"></div> 
-<h3>Permis actifs</h3><div id="listePermis"></div> 
+<h3>Zones SOPFEU</h3> 
+<div id="zonesDanger"></div> 
+<h3>Permis actifs</h3> 
+<div id="listePermis"></div> 
 </div> 
 <div id="map"></div> 
 </div> 
@@ -43,7 +48,6 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)}
 const map=L.map('map').setView([48.85,-67.53],9); 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
 const permisLayer=L.layerGroup().addTo(map); 
-const dangerLayer=L.layerGroup().addTo(map); 
 async function chargerPermis(){ 
 permisLayer.clearLayers(); 
 document.getElementById('listePermis').innerHTML=''; 
@@ -52,15 +56,21 @@ const r=await fetch('https://permis-brulage.oussama-refas.workers.dev/?t='+Date.
 const permis=await r.json(); 
 permis.forEach(p=>{ 
 if(!p.latitude||!p.longitude)return; 
-let couleur='#5A9E3A'; const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
+let couleur='#5A9E3A'; 
+const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
 if(h<=48&&h>0){couleur='#D7A937';expire++;} 
 if(h<=0){couleur='#C0392B';}else{actifs++;} 
 const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude); 
 bounds.push([lat,lon]); 
-const m=L.circleMarker([lat,lon],{radius:10,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(permisLayer); 
-m.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate); 
-const item=document.createElement('div'); item.className='permis-item'; item.innerHTML='<b>#'+p.RecordID+'</b><br>'+p.adresseComplete; item.onclick=()=>{map.setView([lat,lon],15);m.openPopup();}; document.getElementById('listePermis').appendChild(item); 
-const ville=p.adresseComplete?.split(',')[1]?.trim(); if(ville) municipalites.add(ville); 
+const marker=L.circleMarker([lat,lon],{radius:12,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(permisLayer); 
+marker.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration : '+p.Data.EndDate); 
+const item=document.createElement('div'); 
+item.className='permis-item'; 
+item.style.borderLeft='6px solid '+couleur; 
+item.innerHTML='<b>#'+p.RecordID+'</b><br>'+p.adresseComplete; 
+item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();}; 
+document.getElementById('listePermis').appendChild(item); 
+const ville=p.adresseComplete?.split(',')[1]?.trim(); if(ville)municipalites.add(ville); 
 }); 
 document.getElementById('actifs').innerText=actifs; 
 document.getElementById('expire').innerText=expire; 
@@ -71,9 +81,21 @@ async function chargerSopfeu(){
 const r=await fetch('https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t='+Date.now()); 
 const d=await r.json(); 
 document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau; 
-document.getElementById('zonesDanger').innerHTML='<div class="layer">'+d.rimouskiMatapedia.nom+' : '+d.rimouskiMatapedia.niveau+'</div><div class="layer">'+d.mataneChicsChocs.nom+' : '+d.mataneChicsChocs.niveau+'</div>'; 
+document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur; 
+document.getElementById('alerteDanger').innerHTML='🔥 Danger incendie : '+d.mataneChicsChocs.niveau; 
+document.getElementById('alerteDanger').style.background=d.mataneChicsChocs.couleur; 
+document.getElementById('zonesDanger').innerHTML=''; 
+[d.rimouskiMatapedia,d.mataneChicsChocs].forEach(z=>{ 
+const e=document.createElement('div'); 
+e.className='danger-zone'; 
+e.style.background=z.couleur; 
+e.innerHTML='🔥 '+z.nom+'<br>'+z.niveau; 
+document.getElementById('zonesDanger').appendChild(e); 
+}); 
 } 
-chargerPermis(); chargerSopfeu(); 
-setInterval(chargerPermis,60000); setInterval(chargerSopfeu,60000); 
+chargerPermis(); 
+chargerSopfeu(); 
+setInterval(chargerPermis,60000); 
+setInterval(chargerSopfeu,60000); 
 </script> 
 </body></html> 
