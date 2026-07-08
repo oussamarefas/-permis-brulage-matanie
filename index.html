@@ -3,39 +3,36 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Portail des permis de brûlage</title> 
+<title>Portail Prévention Incendie - MRC de La Matanie</title> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
 <style> 
 :root{--bleu:#003E6B;--bleu2:#005A93;--vert:#5A9E3A;--jaune:#D7A937;--rouge:#C0392B;--gris:#f4f6f8;} 
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)} 
-.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:white;padding:30px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)} 
-.logo{height:120px;margin-bottom:15px} 
-.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
-.card{flex:1;min-width:220px;background:white;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
-.card h2{margin:0;color:#003E6B;font-size:36px} 
-.legend{padding:0 20px 15px} 
-.layout{display:flex;gap:20px;padding:0 20px 20px} 
-.sidebar{width:320px;background:white;border-radius:16px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:70vh;overflow:auto} 
-#map{flex:1;height:70vh;border-radius:18px;overflow:hidden} 
-.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
-.permis-item:hover{background:#f7fafc} 
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;padding:40px;text-align:center} 
+.logo{max-height:140px} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap}.card{flex:1;min-width:200px;background:#fff;padding:20px;border-radius:16px} 
+.layout{display:flex;gap:20px;padding:20px}.sidebar{width:320px;background:#fff;border-radius:16px;padding:15px}.layer{padding:8px;background:#f5f7fa;border-radius:8px;margin-bottom:8px} 
+#map{flex:1;height:75vh;border-radius:16px}.permis-item{padding:10px;border-bottom:1px solid #eee;cursor:pointer} 
 </style> 
 </head> 
 <body> 
 <div class="header"> 
-<img src="Logo-SPI-Transparent.png" class="logo" alt="Prévention incendie"> 
-<h1>Carte des permis de brûlage</h1> 
+<img src="Logo-SPI-Transparent.png" class="logo"> 
+<h1>Portail Prévention Incendie</h1> 
 <p>MRC de La Matanie</p> 
-<p>Synchronisation automatique toutes les 60 secondes</p> 
 </div> 
 <div class="stats"> 
 <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
 <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
 <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
+<div class="card"><h2 id="danger">--</h2><p>Danger incendie</p></div> 
 </div> 
-<div class="legend">🟢 Actif &nbsp;&nbsp; 🟡 Expire bientôt &nbsp;&nbsp; 🔴 Expiré</div> 
 <div class="layout"> 
 <div class="sidebar"> 
+<h3>Couches</h3> 
+<div class="layer">☑ Permis de brûlage</div> 
+<div class="layer">☑ Danger incendie SOPFEU</div> 
+<div class="layer">☐ Casernes</div> 
 <h3>Permis actifs</h3> 
 <div id="listePermis"></div> 
 </div> 
@@ -57,21 +54,19 @@ if(!p.latitude||!p.longitude)return;
 let couleur='#5A9E3A'; 
 const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
 if(h<=48&&h>0){couleur='#D7A937';expire++;} 
-if(h<=0){couleur='#C0392B';} else {actifs++;} 
+if(h<=0){couleur='#C0392B';}else{actifs++;} 
 const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude); 
 bounds.push([lat,lon]); 
-const marker=L.circleMarker([lat,lon],{radius:10,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(markers); 
-marker.bindPopup('<div><strong>Permis #'+p.RecordID+'</strong><br><br>'+p.adresseComplete+'<br><br>Expiration : '+p.Data.EndDate+'</div>'); 
-const ville=p.adresseComplete?.split(',')[1]?.trim(); if(ville) municipalites.add(ville); 
-const item=document.createElement('div'); item.className='permis-item'; item.innerHTML='<strong>#'+p.RecordID+'</strong><br>'+p.adresseComplete; item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();}; document.getElementById('listePermis').appendChild(item); 
+const marker=L.circleMarker([lat,lon],{radius:12,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(markers); 
+marker.bindPopup('<b>Permis #'+p.RecordID+'</b><br>'+p.adresseComplete+'<br>Expiration: '+p.Data.EndDate); 
+const item=document.createElement('div');item.className='permis-item';item.innerHTML='<b>#'+p.RecordID+'</b><br>'+p.adresseComplete;item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();};document.getElementById('listePermis').appendChild(item); 
+const ville=p.adresseComplete?.split(',')[1]?.trim();if(ville)municipalites.add(ville); 
 }); 
 document.getElementById('actifs').innerText=actifs; 
 document.getElementById('expire').innerText=expire; 
 document.getElementById('municipalites').innerText=municipalites.size; 
-if(bounds.length) map.fitBounds(bounds); 
+if(bounds.length)map.fitBounds(bounds); 
 } 
-chargerPermis(); 
-setInterval(chargerPermis,60000); 
+chargerPermis();setInterval(chargerPermis,60000); 
 </script> 
-</body> 
-</html> 
+</body></html> 
