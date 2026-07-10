@@ -53,8 +53,6 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .popup-header{color:white;padding:11px;border-radius:10px;font-weight:700;margin-bottom:10px;}
 .popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
 .leaflet-control-layers{border-radius:12px !important;box-shadow:0 4px 12px rgba(0,0,0,.15) !important;}
-.sopfeu-label{background:transparent;border:none;}
-.sopfeu-label div{background:rgba(255,255,255,.92);border:2px solid #111;border-radius:10px;padding:6px 9px;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap;}
 
 @media(max-width:768px){
     body{overflow-x:hidden;}
@@ -110,7 +108,6 @@ setTimeout(()=>map.invalidateSize(),500);
 window.addEventListener('resize',()=>setTimeout(()=>map.invalidateSize(),300));
 
 const permisLayer = L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMaxZoom:true,maxClusterRadius:45});
-const dangerZoneLayer = L.layerGroup().addTo(map);
 map.addLayer(permisLayer);
 
 L.control.layers(
@@ -120,8 +117,7 @@ L.control.layers(
         '🛰️ Satellite':satellite
     },
     {
-        '🚒 Permis de brûlage':permisLayer,
-        '🔥 Danger incendie SOPFEU':dangerZoneLayer
+        '🚒 Permis de brûlage':permisLayer
     },
     {collapsed:false}
 ).addTo(map);
@@ -137,67 +133,6 @@ function creerIconePermis(couleur, taille=24){
 
 function lireMunicipalite(adresse){
     return adresse?.split(',')[1]?.trim() || '';
-}
-
-function afficherZoneSopfeu(zone, coords){
-    const polygon = L.polygon(coords,{
-        color:'#111',
-        weight:2,
-        dashArray:'6,6',
-        fillColor:zone.couleur,
-        fillOpacity:.28
-    }).addTo(dangerZoneLayer);
-
-    polygon.bindPopup(`
-        <div class="popup-card">
-            <div class="popup-header" style="background:${zone.couleur};">
-                🔥 Zone SOPFEU
-            </div>
-            <div class="popup-section">Zone</div>
-            ${zone.nom}
-            <div class="popup-section">Indice de danger</div>
-            ${zone.niveau}
-        </div>
-    `);
-
-    const center = L.latLngBounds(coords).getCenter();
-    L.marker(center,{
-        icon:L.divIcon({
-            className:'sopfeu-label',
-            html:`<div>${zone.nom}<br>${zone.niveau}</div>`
-        }),
-        interactive:false
-    }).addTo(dangerZoneLayer);
-}
-
-function dessinerZonesSopfeu(data){
-    dangerZoneLayer.clearLayers();
-
-    /* Polygones simplifiés inspirés des divisions visuelles SOPFEU.
-       Ils ne sont pas des limites officielles cadastrales, mais permettent une lecture rapide du risque. */
-    const zoneRimouskiMatapedia = [
-        [48.70,-69.10],
-        [48.78,-68.55],
-        [48.63,-67.90],
-        [48.35,-67.30],
-        [47.95,-67.25],
-        [47.88,-68.15],
-        [48.12,-68.85]
-    ];
-
-    const zoneMataneChicsChocs = [
-        [49.08,-67.55],
-        [49.15,-66.70],
-        [49.08,-65.65],
-        [48.88,-64.70],
-        [48.55,-64.35],
-        [48.18,-65.05],
-        [48.18,-66.25],
-        [48.40,-67.15]
-    ];
-
-    afficherZoneSopfeu(data.rimouskiMatapedia,zoneRimouskiMatapedia);
-    afficherZoneSopfeu(data.mataneChicsChocs,zoneMataneChicsChocs);
 }
 
 async function chargerPermis(){
@@ -252,12 +187,10 @@ async function chargerPermis(){
                 <div class="permis-adresse">📍 ${p.adresseComplete}</div>
                 <div class="permis-date">📅 Expiration : ${p.Data.EndDate}</div>
             `;
-
             item.onclick=()=>{
                 map.flyTo([lat,lon],16,{duration:1.2});
                 setTimeout(()=>marker.openPopup(),500);
             };
-
             document.getElementById('listePermis').appendChild(item);
 
             const ville=lireMunicipalite(p.adresseComplete);
@@ -294,8 +227,6 @@ async function chargerSopfeu(){
             e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;
             document.getElementById('zonesDanger').appendChild(e);
         });
-
-        dessinerZonesSopfeu(d);
     }
     catch(error){
         console.error('Erreur lors du chargement SOPFEU :',error);
