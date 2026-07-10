@@ -133,6 +133,7 @@ body{
 #map{
     flex:1;
     height:75vh;
+    min-height:520px;
     border-radius:16px;
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,.08);
@@ -232,34 +233,58 @@ body{
 }
 
 @media(max-width:768px){
+    body{
+        overflow-x:hidden;
+    }
+
     .header{
         padding:25px 15px;
     }
 
     .header h1{
-        font-size:30px;
+        font-size:28px;
+        line-height:1.2;
     }
 
     .logo{
-        max-height:100px;
+        max-height:95px;
     }
 
-    .stats,
-    .layout{
+    .stats{
         flex-direction:column;
         padding:15px;
+        gap:12px;
     }
 
-    .sidebar{
-        width:100%;
-        order:2;
-        max-height:none;
+    .layout{
+        display:flex;
+        flex-direction:column;
+        padding:15px;
+        gap:15px;
     }
 
     #map{
-        width:100%;
-        height:60vh;
         order:1;
+        width:100%;
+        height:65vh;
+        min-height:420px;
+        border-radius:14px;
+        flex:none;
+    }
+
+    .sidebar{
+        order:2;
+        width:100%;
+        max-height:none;
+        box-sizing:border-box;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .permis-item{
+        font-size:14px;
     }
 }
 </style>
@@ -335,6 +360,16 @@ const satellite = L.tileLayer(
 const map = L.map('map', {
     layers:[osm]
 }).setView([48.85,-67.53],9);
+
+setTimeout(() => {
+    map.invalidateSize();
+}, 500);
+
+window.addEventListener('resize', () => {
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
+});
 
 L.control.layers(
     {
@@ -460,6 +495,10 @@ async function chargerPermis(){
         if(bounds.length){
             map.fitBounds(bounds,{padding:[30,30]});
         }
+
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 300);
 
         document.getElementById('maj').innerText =
             'Dernière synchronisation : ' + new Date().toLocaleTimeString('fr-CA');
