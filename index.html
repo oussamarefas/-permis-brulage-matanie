@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Portail Prévention Incendie - MRC de La Matanie</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -15,638 +13,315 @@
 :root{
     --bleu:#003E6B;
     --bleu2:#005A93;
+    --bleu3:#0074B8;
     --gris:#F4F6F8;
     --vert:#5A9E3A;
     --jaune:#D7A937;
     --rouge:#C0392B;
+    --orange:#ee7c22;
     --texte:#1f2937;
+    --muted:#64748b;
+    --white:#ffffff;
 }
-
-*{
-    box-sizing:border-box;
+*{box-sizing:border-box;}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color:var(--texte);}
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;text-align:center;padding:38px 20px 28px;box-shadow:0 4px 20px rgba(0,0,0,.18);}
+.logo{max-height:130px;max-width:90%;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));}
+.header h1{margin:14px 0 6px;font-size:38px;letter-spacing:.3px;}
+.header p{margin:0;font-size:18px;opacity:.92;}
+#maj{margin-top:12px;display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);font-size:13px;}
+.navbar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:16px 20px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:800;}
+.nav-btn{border:none;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer;background:#e8eef4;color:var(--bleu);transition:.2s;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.12);}
+.nav-btn.active{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;}
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap;}
+.card{background:#fff;border-radius:16px;padding:20px;flex:1;min-width:180px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:all .25s ease;}
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.card h2{margin:0;font-size:34px;color:var(--bleu);}
+.card p{margin:8px 0 0;color:#5b6472;}
+#dangerCard{color:#fff;}
+#dangerCard h2,#dangerCard p{color:#fff;}
+.view{display:none;}
+.view.active{display:block;}
+.layout{display:flex;gap:20px;padding:20px;padding-top:0;}
+.sidebar{width:350px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:75vh;overflow:auto;}
+.sidebar h3{margin:8px 0 12px;color:var(--bleu);}
+#map{flex:1;height:75vh;min-height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.permis-item{padding:15px;margin-bottom:12px;border-radius:14px;background:#fff;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.2s;}
+.permis-item:hover{transform:translateX(5px);box-shadow:0 8px 18px rgba(0,0,0,.12);}
+.permis-numero{font-size:18px;font-weight:700;color:var(--bleu);margin-bottom:8px;}
+.permis-adresse{line-height:1.4;font-size:14px;}
+.permis-date{margin-top:10px;color:#666;font-size:12px;}
+.danger-zone{padding:14px;border-radius:12px;color:white;margin-bottom:10px;font-weight:bold;transition:.25s;box-shadow:0 4px 12px rgba(0,0,0,.10);}
+.danger-zone:hover{transform:scale(1.03);}
+.danger-zone .zone-name{font-size:14px;opacity:.95;}
+.danger-zone .zone-level{font-size:21px;margin-top:4px;}
+.permit-icon{width:24px;height:24px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);}
+.leaflet-popup-content{margin:12px;}
+.popup-card{min-width:260px;font-family:Segoe UI,Arial,sans-serif;}
+.popup-header{color:white;padding:11px;border-radius:10px;font-weight:700;margin-bottom:10px;}
+.popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
+.leaflet-control-layers{border-radius:12px !important;box-shadow:0 4px 12px rgba(0,0,0,.15) !important;}
+/* Statistique */
+.stats-page{padding:20px;}
+.stats-header{background:#fff;border-radius:18px;padding:22px;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;}
+.stats-header h2{margin:0;color:var(--bleu);font-size:30px;}
+.stats-header p{margin:6px 0 0;color:var(--muted);}
+.stats-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.small-btn{border:none;border-radius:12px;padding:10px 14px;background:var(--bleu);color:#fff;font-weight:700;cursor:pointer;transition:.2s;}
+.small-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18);}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:15px;margin-bottom:20px;}
+.kpi{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.kpi .label{color:var(--muted);font-size:13px;margin-bottom:8px;}
+.kpi .value{font-size:28px;font-weight:800;color:var(--bleu);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.panel{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.panel h3{margin:0 0 14px;color:var(--bleu);}
+.chart-box{height:340px;position:relative;}
+.rank-list{display:flex;flex-direction:column;gap:10px;}
+.rank-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-radius:12px;padding:12px;border-left:6px solid var(--bleu2);}
+.rank-left{font-weight:700;color:#1f2937;}
+.rank-right{font-weight:800;color:var(--bleu);}
+.rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}
+.rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
+#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.note{color:var(--muted);font-size:13px;line-height:1.45;}
+.empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
+@media(max-width:900px){
+    .kpi-grid{grid-template-columns:1fr 1fr;}
+    .grid-2{grid-template-columns:1fr;}
 }
-
-body{
-    margin:0;
-    font-family:Segoe UI, Arial, sans-serif;
-    background:var(--gris);
-    color:var(--texte);
-}
-
-.header{
-    background:linear-gradient(135deg,var(--bleu),var(--bleu2));
-    color:#fff;
-    text-align:center;
-    padding:40px 20px;
-    box-shadow:0 4px 20px rgba(0,0,0,.18);
-}
-
-.logo{
-    max-height:140px;
-    max-width:90%;
-    filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));
-}
-
-.header h1{
-    margin:18px 0 6px;
-    font-size:38px;
-    letter-spacing:.3px;
-}
-
-.header p{
-    margin:0;
-    font-size:18px;
-    opacity:.92;
-}
-
-#maj{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.14);
-    font-size:13px;
-}
-
-.stats{
-    display:flex;
-    gap:15px;
-    padding:20px;
-    flex-wrap:wrap;
-}
-
-.card{
-    background:#fff;
-    border-radius:16px;
-    padding:20px;
-    flex:1;
-    min-width:180px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-    transition:all .25s ease;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-
-.card h2{
-    margin:0;
-    font-size:34px;
-    color:var(--bleu);
-}
-
-.card p{
-    margin:8px 0 0;
-    color:#5b6472;
-}
-
-#dangerCard{
-    color:#fff;
-}
-
-#dangerCard h2,
-#dangerCard p{
-    color:#fff;
-}
-
-.layout{
-    display:flex;
-    gap:20px;
-    padding:20px;
-    padding-top:0;
-}
-
-.sidebar{
-    width:350px;
-    background:#fff;
-    border-radius:16px;
-    padding:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-    max-height:75vh;
-    overflow:auto;
-}
-
-.sidebar h3{
-    margin:8px 0 12px;
-    color:var(--bleu);
-}
-
-#map{
-    flex:1;
-    height:75vh;
-    min-height:520px;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-
-.permis-item{
-    padding:15px;
-    margin-bottom:12px;
-    border-radius:14px;
-    background:#fff;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-    transition:.2s;
-}
-
-.permis-item:hover{
-    transform:translateX(5px);
-    box-shadow:0 8px 18px rgba(0,0,0,.12);
-}
-
-.permis-numero{
-    font-size:18px;
-    font-weight:700;
-    color:var(--bleu);
-    margin-bottom:8px;
-}
-
-.permis-adresse{
-    line-height:1.4;
-    font-size:14px;
-}
-
-.permis-date{
-    margin-top:10px;
-    color:#666;
-    font-size:12px;
-}
-
-.danger-zone{
-    padding:14px;
-    border-radius:12px;
-    color:white;
-    margin-bottom:10px;
-    font-weight:bold;
-    transition:.25s;
-    box-shadow:0 4px 12px rgba(0,0,0,.10);
-}
-
-.danger-zone:hover{
-    transform:scale(1.03);
-}
-
-.danger-zone .zone-name{
-    font-size:14px;
-    opacity:.95;
-}
-
-.danger-zone .zone-level{
-    font-size:21px;
-    margin-top:4px;
-}
-
-.permit-icon{
-    width:24px;
-    height:24px;
-    border-radius:50%;
-    border:3px solid #fff;
-    box-shadow:0 2px 8px rgba(0,0,0,.35);
-}
-
-.leaflet-popup-content{
-    margin:12px;
-}
-
-.popup-card{
-    min-width:260px;
-    font-family:Segoe UI, Arial, sans-serif;
-}
-
-.popup-header{
-    color:white;
-    padding:11px;
-    border-radius:10px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.popup-section{
-    font-weight:700;
-    color:var(--bleu);
-    margin-top:10px;
-}
-
-.leaflet-control-layers{
-    border-radius:12px !important;
-    box-shadow:0 4px 12px rgba(0,0,0,.15) !important;
-}
-
-/* MOBILE */
 @media(max-width:768px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .header{
-        padding:25px 15px;
-    }
-
-    .header h1{
-        font-size:28px;
-        line-height:1.2;
-    }
-
-    .logo{
-        max-height:95px;
-    }
-
-    .stats{
-        flex-direction:column;
-        padding:15px;
-        gap:12px;
-    }
-
-    .layout{
-        display:flex;
-        flex-direction:column;
-        padding:15px;
-        gap:15px;
-    }
-
-    #map{
-        order:1;
-        width:100%;
-        height:65vh;
-        min-height:420px;
-        border-radius:14px;
-        flex:none;
-    }
-
-    .sidebar{
-        order:2;
-        width:100%;
-        max-height:none;
-        box-sizing:border-box;
-    }
-
-    .card{
-        width:100%;
-    }
-
-    .permis-item{
-        font-size:14px;
-    }
+    body{overflow-x:hidden;}
+    .header{padding:25px 15px;}
+    .header h1{font-size:28px;line-height:1.2;}
+    .logo{max-height:95px;}
+    .navbar{position:static;}
+    .stats{flex-direction:column;padding:15px;gap:12px;}
+    .layout{display:flex;flex-direction:column;padding:15px;gap:15px;}
+    #map{order:1;width:100%;height:65vh;min-height:420px;border-radius:14px;flex:none;}
+    .sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}
+    .card{width:100%;}
+    .permis-item{font-size:14px;}
+    .stats-page{padding:15px;}
+    .kpi-grid{grid-template-columns:1fr;}
+    .chart-box{height:300px;}
+    #heatmap{height:420px;}
 }
 </style>
 </head>
-
 <body>
-
 <div class="header">
     <img src="Logo-SPI-Transparent.png" class="logo" alt="Prévention incendie">
     <h1>Portail Prévention Incendie</h1>
     <p>MRC de La Matanie</p>
     <div id="maj">Dernière synchronisation : --</div>
 </div>
-
-<div class="stats">
-
-    <div class="card">
-        <h2 id="actifs">0</h2>
-        <p>Permis actifs</p>
+<nav class="navbar">
+    <button id="btnCarte" class="nav-btn active" onclick="afficherVue('carte')">🗺️ Carte</button>
+    <button id="btnStats" class="nav-btn" onclick="afficherVue('stats')">📊 Statistiques</button>
+</nav>
+<section id="vueCarte" class="view active">
+    <div class="stats">
+        <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div>
+        <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div>
+        <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div>
+        <div class="card" id="dangerCard"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div>
     </div>
-
-    <div class="card">
-        <h2 id="expire">0</h2>
-        <p>Expire bientôt</p>
+    <div class="layout">
+        <div class="sidebar">
+            <h3>Zones SOPFEU</h3>
+            <div id="zonesDanger"></div>
+            <h3>Permis actifs</h3>
+            <div id="listePermis"></div>
+        </div>
+        <div id="map"></div>
     </div>
-
-    <div class="card">
-        <h2 id="municipalites">0</h2>
-        <p>Municipalités concernées</p>
+</section>
+<section id="vueStats" class="view">
+    <div class="stats-page">
+        <div class="stats-header">
+            <div>
+                <h2>Statistiques des permis de brûlage</h2>
+                <p>Analyse des zones les plus actives, périodes fortes, classement des municipalités et carte thermique.</p>
+            </div>
+            <div class="stats-actions">
+                <button class="small-btn" onclick="chargerPermis(true)">🔄 Actualiser les statistiques</button>
+                <button class="small-btn" onclick="afficherVue('carte')">🗺️ Retour à la carte</button>
+            </div>
+        </div>
+        <div class="kpi-grid">
+            <div class="kpi"><div class="label">Total des permis analysés</div><div class="value" id="kpiTotal">0</div></div>
+            <div class="kpi"><div class="label">Municipalité la plus active</div><div class="value" id="kpiTopMunicipalite">--</div></div>
+            <div class="kpi"><div class="label">Mois le plus fort</div><div class="value" id="kpiMoisFort">--</div></div>
+            <div class="kpi"><div class="label">Permis expirés</div><div class="value" id="kpiExpires">0</div></div>
+        </div>
+        <div class="grid-2">
+            <div class="panel"><h3>Histogramme par municipalité</h3><div class="chart-box"><canvas id="chartMunicipalites"></canvas></div></div>
+            <div class="panel"><h3>Demandes par mois de l'année</h3><div class="chart-box"><canvas id="chartMois"></canvas></div></div>
+        </div>
+        <div class="grid-2">
+            <div class="panel"><h3>Classement Top 10 - Plus de permis</h3><div id="topMunicipalites" class="rank-list"></div></div>
+            <div class="panel"><h3>Classement - Moins de permis</h3><div id="bottomMunicipalites" class="rank-list"></div></div>
+        </div>
+        <div class="grid-2">
+            <div class="panel"><h3>Répartition des statuts</h3><div class="chart-box"><canvas id="chartStatuts"></canvas></div></div>
+            <div class="panel"><h3>Analyse opérationnelle</h3><div id="analyseTexte" class="note"></div></div>
+        </div>
+        <div class="panel">
+            <h3>Carte thermique des permis</h3>
+            <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés.</p>
+            <div id="heatmap"></div>
+        </div>
     </div>
-
-    <div class="card" id="dangerCard">
-        <h2 id="dangerGlobal">--</h2>
-        <p>Danger SOPFEU</p>
-    </div>
-
-</div>
-
-<div class="layout">
-
-    <div class="sidebar">
-
-        <h3>Zones SOPFEU</h3>
-        <div id="zonesDanger"></div>
-
-        <h3>Permis actifs</h3>
-        <div id="listePermis"></div>
-
-    </div>
-
-    <div id="map"></div>
-
-</div>
-
+</section>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-
-/* FONDS DE CARTE */
-
-const osm = L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution:'© OpenStreetMap'
-    }
-);
-
-const topo = L.tileLayer(
-    'https://tile.opentopomap.org/{z}/{x}/{y}.png',
-    {
-        attribution:'© OpenTopoMap'
-    }
-);
-
-const satellite = L.tileLayer(
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {
-        attribution:'© Esri'
-    }
-);
-
-const map = L.map(
-    'map',
-    {
-        layers:[osm]
-    }
-).setView([48.85,-67.53],9);
-
-/* Correction affichage mobile Leaflet */
-setTimeout(() => {
-    map.invalidateSize();
-}, 500);
-
-window.addEventListener('resize', () => {
-    setTimeout(() => {
-        map.invalidateSize();
-    }, 300);
-});
-
-/* Choix du fond de carte seulement */
-L.control.layers(
-    {
-        '🗺️ Standard':osm,
-        '⛰️ Topographique':topo,
-        '🛰️ Satellite':satellite
-    },
-    null,
-    {
-        collapsed:false
-    }
-).addTo(map);
-
-/* Couche des permis, toujours visible */
-const permisLayer = L.markerClusterGroup({
-    showCoverageOnHover:false,
-    spiderfyOnMaxZoom:true,
-    maxClusterRadius:45
-});
-
+let permisCache=[];
+let charts=[];
+let heatMapInstance=null;
+let heatLayer=null;
+const moisNoms=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
+const topo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png',{attribution:'© OpenTopoMap'});
+const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'© Esri'});
+const map = L.map('map',{layers:[osm]}).setView([48.85,-67.53],9);
+setTimeout(()=>map.invalidateSize(),500);
+window.addEventListener('resize',()=>setTimeout(()=>{map.invalidateSize(); if(heatMapInstance) heatMapInstance.invalidateSize();},300));
+L.control.layers({'🗺️ Standard':osm,'⛰️ Topographique':topo,'🛰️ Satellite':satellite},null,{collapsed:false}).addTo(map);
+const permisLayer = L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMaxZoom:true,maxClusterRadius:45});
 map.addLayer(permisLayer);
-
-/* Création icône permis */
-function creerIconePermis(couleur, taille=24){
-    return L.divIcon({
-        className:'',
-        html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,
-        iconSize:[taille,taille],
-        iconAnchor:[taille/2,taille/2]
-    });
+function afficherVue(vue){
+    document.getElementById('vueCarte').classList.toggle('active',vue==='carte');
+    document.getElementById('vueStats').classList.toggle('active',vue==='stats');
+    document.getElementById('btnCarte').classList.toggle('active',vue==='carte');
+    document.getElementById('btnStats').classList.toggle('active',vue==='stats');
+    if(vue==='carte') setTimeout(()=>map.invalidateSize(),250);
+    if(vue==='stats') setTimeout(()=>{genererStatistiques(); if(heatMapInstance) heatMapInstance.invalidateSize();},250);
 }
-
-/* Extraction municipalité depuis adresse complète */
-function lireMunicipalite(adresse){
-    return adresse?.split(',')[1]?.trim() || '';
+function creerIconePermis(couleur, taille=24){return L.divIcon({className:'',html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,iconSize:[taille,taille],iconAnchor:[taille/2,taille/2]});}
+function lireMunicipalite(adresse){return adresse?.split(',')[1]?.trim() || 'Non précisée';}
+function dateReference(p){return p.Data?.ApprovalDate || p.Data?.CreateDate || p.Data?.StartDate || p.Data?.EndDate || null;}
+function statutPermis(p){
+    const h=(new Date(p.Data.EndDate)-new Date())/3600000;
+    if(h<=0) return {nom:'Expiré',couleur:'#C0392B'};
+    if(h<=48) return {nom:'Expire bientôt',couleur:'#D7A937'};
+    return {nom:'Actif',couleur:'#5A9E3A'};
 }
-
-/* Chargement des permis */
-async function chargerPermis(){
-
+async function chargerPermis(recalculStats=false){
     permisLayer.clearLayers();
     document.getElementById('listePermis').innerHTML='';
-
-    let actifs=0;
-    let expire=0;
-
-    const municipalites = new Set();
-    const bounds = [];
-
+    let actifs=0,expire=0;
+    const municipalites=new Set();
+    const bounds=[];
     try{
-
-        const r = await fetch(
-            'https://permis-brulage.oussama-refas.workers.dev/?t=' +
-            Date.now()
-        );
-
-        const permis = await r.json();
-
-        permis.forEach(p => {
-
-            if(!p.latitude || !p.longitude){
-                return;
-            }
-
-            let couleur = '#5A9E3A';
-            let statut = 'Actif';
-
-            const h =
-                (new Date(p.Data.EndDate) - new Date()) / 3600000;
-
-            if(h <= 48 && h > 0){
-                couleur = '#D7A937';
-                statut = 'Expire bientôt';
-                expire++;
-            }
-
-            if(h <= 0){
-                couleur = '#C0392B';
-                statut = 'Expiré';
-            }else{
-                actifs++;
-            }
-
-            const lat = parseFloat(p.latitude);
-            const lon = parseFloat(p.longitude);
-
+        const r=await fetch('https://permis-brulage.oussama-refas.workers.dev/?t='+Date.now());
+        const permis=await r.json();
+        permisCache=Array.isArray(permis)?permis:[];
+        permisCache.forEach(p=>{
+            if(!p.latitude||!p.longitude)return;
+            const st=statutPermis(p);
+            if(st.nom==='Expire bientôt') expire++;
+            if(st.nom!=='Expiré') actifs++;
+            const lat=parseFloat(p.latitude), lon=parseFloat(p.longitude);
             bounds.push([lat,lon]);
-
-            const marker = L.marker(
-                [lat,lon],
-                {
-                    icon:creerIconePermis(couleur,24)
-                }
-            ).addTo(permisLayer);
-
-            marker.bindPopup(`
-                <div class="popup-card">
-
-                    <div class="popup-header" style="background:${couleur};">
-                        🚒 Permis #${p.RecordID}<br>
-                        ${statut}
-                    </div>
-
-                    <div class="popup-section">📍 Adresse</div>
-                    ${p.adresseComplete}
-
-                    <div class="popup-section">📅 Expiration</div>
-                    ${p.Data.EndDate}
-
-                    <div class="popup-section">🏘️ Municipalité</div>
-                    ${lireMunicipalite(p.adresseComplete)}
-
-                </div>
-            `);
-
-            marker.on('mouseover', () => {
-                marker.setIcon(creerIconePermis(couleur,32));
-            });
-
-            marker.on('mouseout', () => {
-                marker.setIcon(creerIconePermis(couleur,24));
-            });
-
-            const item = document.createElement('div');
-
-            item.className = 'permis-item';
-            item.style.borderLeft = '6px solid ' + couleur;
-
-            item.innerHTML = `
-                <div class="permis-numero">
-                    🚒 Permis #${p.RecordID}
-                </div>
-
-                <div class="permis-adresse">
-                    📍 ${p.adresseComplete}
-                </div>
-
-                <div class="permis-date">
-                    📅 Expiration : ${p.Data.EndDate}
-                </div>
-            `;
-
-            item.onclick = () => {
-                map.flyTo([lat,lon],16,{duration:1.2});
-                setTimeout(() => marker.openPopup(),500);
-            };
-
-            document
-            .getElementById('listePermis')
-            .appendChild(item);
-
-            const ville =
-                lireMunicipalite(p.adresseComplete);
-
-            if(ville){
-                municipalites.add(ville);
-            }
-
+            const marker=L.marker([lat,lon],{icon:creerIconePermis(st.couleur,24)}).addTo(permisLayer);
+            marker.bindPopup(`<div class="popup-card"><div class="popup-header" style="background:${st.couleur};">🚒 Permis #${p.RecordID}<br>${st.nom}</div><div class="popup-section">📍 Adresse</div>${p.adresseComplete}<div class="popup-section">📅 Expiration</div>${p.Data.EndDate}<div class="popup-section">🏘️ Municipalité</div>${lireMunicipalite(p.adresseComplete)}</div>`);
+            marker.on('mouseover',()=>marker.setIcon(creerIconePermis(st.couleur,32)));
+            marker.on('mouseout',()=>marker.setIcon(creerIconePermis(st.couleur,24)));
+            const item=document.createElement('div');
+            item.className='permis-item';
+            item.style.borderLeft='6px solid '+st.couleur;
+            item.innerHTML=`<div class="permis-numero">🚒 Permis #${p.RecordID}</div><div class="permis-adresse">📍 ${p.adresseComplete}</div><div class="permis-date">📅 Expiration : ${p.Data.EndDate}</div>`;
+            item.onclick=()=>{map.flyTo([lat,lon],16,{duration:1.2});setTimeout(()=>marker.openPopup(),500);};
+            document.getElementById('listePermis').appendChild(item);
+            municipalites.add(lireMunicipalite(p.adresseComplete));
         });
-
-        document.getElementById('actifs').innerText =
-            actifs;
-
-        document.getElementById('expire').innerText =
-            expire;
-
-        document.getElementById('municipalites').innerText =
-            municipalites.size;
-
-        if(bounds.length){
-            map.fitBounds(bounds,{padding:[30,30]});
-        }
-
-        setTimeout(() => {
-            map.invalidateSize();
-        }, 300);
-
-        document.getElementById('maj').innerText =
-            'Dernière synchronisation : ' +
-            new Date().toLocaleTimeString('fr-CA');
-
-    }
-    catch(error){
-
-        console.error(
-            'Erreur lors du chargement des permis :',
-            error
-        );
-
-    }
-
+        document.getElementById('actifs').innerText=actifs;
+        document.getElementById('expire').innerText=expire;
+        document.getElementById('municipalites').innerText=municipalites.size;
+        if(bounds.length) map.fitBounds(bounds,{padding:[30,30]});
+        setTimeout(()=>map.invalidateSize(),300);
+        document.getElementById('maj').innerText='Dernière synchronisation : '+new Date().toLocaleTimeString('fr-CA');
+        if(recalculStats || document.getElementById('vueStats').classList.contains('active')) genererStatistiques();
+    }catch(error){console.error('Erreur lors du chargement des permis :',error);}
 }
-
-/* Chargement SOPFEU */
 async function chargerSopfeu(){
-
     try{
-
-        const r = await fetch(
-            'https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t=' +
-            Date.now()
-        );
-
-        const d = await r.json();
-
-        document.getElementById('dangerGlobal').innerText =
-            d.mataneChicsChocs.niveau;
-
-        document.getElementById('dangerCard').style.background =
-            d.mataneChicsChocs.couleur;
-
-        document.getElementById('zonesDanger').innerHTML = '';
-
-        [
-            d.rimouskiMatapedia,
-            d.mataneChicsChocs
-        ].forEach(z => {
-
-            const e = document.createElement('div');
-
-            e.className = 'danger-zone';
-            e.style.background = z.couleur;
-
-            e.innerHTML = `
-                <div class="zone-name">
-                    🔥 ${z.nom}
-                </div>
-
-                <div class="zone-level">
-                    ${z.niveau}
-                </div>
-            `;
-
-            document
-            .getElementById('zonesDanger')
-            .appendChild(e);
-
+        const r=await fetch('https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t='+Date.now());
+        const d=await r.json();
+        document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;
+        document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur;
+        document.getElementById('zonesDanger').innerHTML='';
+        [d.rimouskiMatapedia,d.mataneChicsChocs].forEach(z=>{
+            const e=document.createElement('div');
+            e.className='danger-zone';
+            e.style.background=z.couleur;
+            e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;
+            document.getElementById('zonesDanger').appendChild(e);
         });
-
-    }
-    catch(error){
-
-        console.error(
-            'Erreur lors du chargement SOPFEU :',
-            error
-        );
-
-    }
-
+    }catch(error){console.error('Erreur lors du chargement SOPFEU :',error);}
 }
-
+function compterParMunicipalite(){const c={};permisCache.forEach(p=>{const m=lireMunicipalite(p.adresseComplete);c[m]=(c[m]||0)+1;});return c;}
+function compterParMois(){const c=Array(12).fill(0);permisCache.forEach(p=>{const d=dateReference(p);if(!d)return;const dt=new Date(d);if(!isNaN(dt))c[dt.getMonth()]++;});return c;}
+function compterParStatut(){const c={'Actif':0,'Expire bientôt':0,'Expiré':0};permisCache.forEach(p=>{c[statutPermis(p).nom]++;});return c;}
+function detruireCharts(){charts.forEach(ch=>ch.destroy());charts=[];}
+function rankHtml(containerId,entries,max){
+    const el=document.getElementById(containerId);el.innerHTML='';
+    if(!entries.length){el.innerHTML='<div class="empty-state">Aucune donnée disponible.</div>';return;}
+    entries.forEach(([nom,val],i)=>{
+        const pct=max?Math.round((val/max)*100):0;
+        const div=document.createElement('div');
+        div.className='rank-item';
+        div.innerHTML=`<div style="flex:1"><div class="rank-left">${i+1}. ${nom}</div><div class="rank-bar"><div style="width:${pct}%"></div></div></div><div class="rank-right">${val}</div>`;
+        el.appendChild(div);
+    });
+}
+function genererStatistiques(){
+    detruireCharts();
+    const total=permisCache.length;
+    const municip=compterParMunicipalite();
+    const entries=Object.entries(municip).sort((a,b)=>b[1]-a[1]);
+    const topTen=entries.slice(0,10);
+    const bottom=Object.entries(municip).sort((a,b)=>a[1]-b[1]).slice(0,10);
+    const mois=compterParMois();
+    const statuts=compterParStatut();
+    const maxMunicip=entries.length?entries[0][1]:0;
+    const maxMois=Math.max(...mois,0);
+    const indexMoisFort=mois.indexOf(maxMois);
+    document.getElementById('kpiTotal').innerText=total;
+    document.getElementById('kpiTopMunicipalite').innerText=entries.length?entries[0][0]:'--';
+    document.getElementById('kpiMoisFort').innerText=maxMois>0?moisNoms[indexMoisFort]:'--';
+    document.getElementById('kpiExpires').innerText=statuts['Expiré'];
+    rankHtml('topMunicipalites',topTen,maxMunicip);
+    rankHtml('bottomMunicipalites',bottom,maxMunicip);
+    charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
+    charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
+    charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B']}]},options:{responsive:true,maintainAspectRatio:false}}));
+    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles dans les permis, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Lecture opérationnelle :</b> les secteurs avec le plus grand nombre de demandes peuvent servir à orienter les actions de prévention, les rappels citoyens et la planification des suivis terrain.`;
+    genererHeatmap();
+}
+function genererHeatmap(){
+    const points=permisCache.filter(p=>p.latitude&&p.longitude).map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75]);
+    if(!heatMapInstance){
+        const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
+        heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);
+    }
+    if(heatLayer) heatMapInstance.removeLayer(heatLayer);
+    heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);
+    if(points.length){
+        const b=points.map(p=>[p[0],p[1]]);
+        heatMapInstance.fitBounds(b,{padding:[30,30]});
+    }
+    setTimeout(()=>heatMapInstance.invalidateSize(),300);
+}
 chargerPermis();
 chargerSopfeu();
-
 setInterval(chargerPermis,60000);
 setInterval(chargerSopfeu,60000);
-
 </script>
-
 </body>
 </html>
