@@ -1,329 +1,83 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portail Prévention Incendie - MRC de La Matanie</title>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-
-<style>
-:root{
-    --bleu:#003E6B;
-    --bleu2:#005A93;
-    --gris:#F4F6F8;
-    --vert:#5A9E3A;
-    --jaune:#D7A937;
-    --rouge:#C0392B;
-    --texte:#1f2937;
-}
-
-*{box-sizing:border-box;}
-body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color:var(--texte);}
-.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;text-align:center;padding:40px 20px;box-shadow:0 4px 20px rgba(0,0,0,.18);}
-.logo{max-height:140px;max-width:90%;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));}
-.header h1{margin:18px 0 6px;font-size:38px;letter-spacing:.3px;}
-.header p{margin:0;font-size:18px;opacity:.92;}
-#maj{margin-top:12px;display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);font-size:13px;}
-.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap;}
-.card{background:#fff;border-radius:16px;padding:20px;flex:1;min-width:180px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:all .25s ease;}
-.card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.15);}
-.card h2{margin:0;font-size:34px;color:var(--bleu);}
-.card p{margin:8px 0 0;color:#5b6472;}
-#dangerCard{color:#fff;}
-#dangerCard h2,#dangerCard p{color:#fff;}
-.layout{display:flex;gap:20px;padding:20px;padding-top:0;}
-.sidebar{width:350px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:75vh;overflow:auto;}
-.sidebar h3{margin:8px 0 12px;color:var(--bleu);}
-#map{flex:1;height:75vh;min-height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);}
-.permis-item{padding:15px;margin-bottom:12px;border-radius:14px;background:#fff;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.2s;}
-.permis-item:hover{transform:translateX(5px);box-shadow:0 8px 18px rgba(0,0,0,.12);}
-.permis-numero{font-size:18px;font-weight:700;color:var(--bleu);margin-bottom:8px;}
-.permis-adresse{line-height:1.4;font-size:14px;}
-.permis-date{margin-top:10px;color:#666;font-size:12px;}
-.danger-zone{padding:14px;border-radius:12px;color:white;margin-bottom:10px;font-weight:bold;transition:.25s;box-shadow:0 4px 12px rgba(0,0,0,.10);}
-.danger-zone:hover{transform:scale(1.03);}
-.danger-zone .zone-name{font-size:14px;opacity:.95;}
-.danger-zone .zone-level{font-size:21px;margin-top:4px;}
-.permit-icon{width:24px;height:24px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);}
-.leaflet-popup-content{margin:12px;}
-.popup-card{min-width:260px;font-family:Segoe UI,Arial,sans-serif;}
-.popup-header{color:white;padding:11px;border-radius:10px;font-weight:700;margin-bottom:10px;}
-.popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
-.leaflet-control-layers{border-radius:12px !important;box-shadow:0 4px 12px rgba(0,0,0,.15) !important;}
-.sopfeu-label{background:transparent;border:none;}
-.sopfeu-label div{background:rgba(255,255,255,.94);border:2px solid #111;border-radius:10px;padding:6px 9px;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap;}
-.leaflet-control-custom-note{background:white;padding:8px 10px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,.18);font-size:12px;line-height:1.35;}
-
-@media(max-width:768px){
-    body{overflow-x:hidden;}
-    .header{padding:25px 15px;}
-    .header h1{font-size:28px;line-height:1.2;}
-    .logo{max-height:95px;}
-    .stats{flex-direction:column;padding:15px;gap:12px;}
-    .layout{display:flex;flex-direction:column;padding:15px;gap:15px;}
-    #map{order:1;width:100%;height:65vh;min-height:420px;border-radius:14px;flex:none;}
-    .sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}
-    .card{width:100%;}
-    .permis-item{font-size:14px;}
-}
-</style>
-</head>
-
-<body>
-<div class="header">
-    <img src="Logo-SPI-Transparent.png" class="logo" alt="Prévention incendie">
-    <h1>Portail Prévention Incendie</h1>
-    <p>MRC de La Matanie</p>
-    <div id="maj">Dernière synchronisation : --</div>
-</div>
-
-<div class="stats">
-    <div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div>
-    <div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div>
-    <div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div>
-    <div class="card" id="dangerCard"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div>
-</div>
-
-<div class="layout">
-    <div class="sidebar">
-        <h3>Zones SOPFEU</h3>
-        <div id="zonesDanger"></div>
-        <h3>Permis actifs</h3>
-        <div id="listePermis"></div>
-    </div>
-    <div id="map"></div>
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-
-<script>
-const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
-const topo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png',{attribution:'© OpenTopoMap'});
-const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'© Esri'});
-
-const map = L.map('map',{layers:[osm]}).setView([48.85,-67.53],9);
-setTimeout(()=>map.invalidateSize(),500);
-window.addEventListener('resize',()=>setTimeout(()=>map.invalidateSize(),300));
-
-const permisLayer = L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMaxZoom:true,maxClusterRadius:45});
-const dangerZoneLayer = L.layerGroup().addTo(map);
-map.addLayer(permisLayer);
-
-L.control.layers(
-    {
-        '🗺️ Standard':osm,
-        '⛰️ Topographique':topo,
-        '🛰️ Satellite':satellite
-    },
-    {
-        '🔥 Danger incendie SOPFEU':dangerZoneLayer,
-        '🚒 Permis de brûlage':permisLayer
-    },
-    {collapsed:false}
-).addTo(map);
-
-const infoControl = L.control({position:'bottomright'});
-infoControl.onAdd = function(){
-    const div = L.DomUtil.create('div','leaflet-control-custom-note');
-    div.innerHTML = '<b>Couche SOPFEU</b><br>Zones simplifiées, inspirées des divisions SOPFEU.<br>À utiliser pour lecture opérationnelle rapide.';
-    return div;
-};
-infoControl.addTo(map);
-
-function creerIconePermis(couleur, taille=24){
-    return L.divIcon({
-        className:'',
-        html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,
-        iconSize:[taille,taille],
-        iconAnchor:[taille/2,taille/2]
-    });
-}
-
-function lireMunicipalite(adresse){
-    return adresse?.split(',')[1]?.trim() || '';
-}
-
-function afficherZoneSopfeu(zone, coords){
-    const polygon = L.polygon(coords,{
-        color:'#111',
-        weight:2,
-        dashArray:'7,5',
-        fillColor:zone.couleur,
-        fillOpacity:.30
-    }).addTo(dangerZoneLayer);
-
-    polygon.bindPopup(`
-        <div class="popup-card">
-            <div class="popup-header" style="background:${zone.couleur};">🔥 Zone SOPFEU</div>
-            <div class="popup-section">Zone</div>
-            ${zone.nom}
-            <div class="popup-section">Indice de danger</div>
-            ${zone.niveau}
-        </div>
-    `);
-
-    const center = L.latLngBounds(coords).getCenter();
-    L.marker(center,{
-        icon:L.divIcon({
-            className:'sopfeu-label',
-            html:`<div>${zone.nom}<br>${zone.niveau}</div>`
-        }),
-        interactive:false
-    }).addTo(dangerZoneLayer);
-}
-
-function dessinerZonesSopfeu(data){
-    dangerZoneLayer.clearLayers();
-
-    // Zones simplifiées adaptées au bord du fleuve et aux grandes divisions visibles sur la carte SOPFEU.
-    // Les contours suivent approximativement la côte nord du Bas-Saint-Laurent et de la Gaspésie.
-    const zoneRimouskiMatapedia = [
-        [48.55,-69.05], // ouest de Rimouski / fleuve
-        [48.48,-68.78],
-        [48.45,-68.55],
-        [48.38,-68.32],
-        [48.45,-68.05],
-        [48.55,-67.88], // vers Mont-Joli / limite Est de la zone côtière
-        [48.34,-67.70],
-        [48.14,-67.48],
-        [47.98,-67.18],
-        [47.82,-67.34],
-        [47.73,-67.82],
-        [47.86,-68.38],
-        [48.08,-68.78],
-        [48.28,-69.02]
-    ];
-
-    const zoneMataneChicsChocs = [
-        [48.68,-67.78], // côte vers Matane
-        [48.75,-67.45],
-        [48.83,-67.10],
-        [49.02,-66.68],
-        [49.10,-66.20],
-        [49.06,-65.75],
-        [48.98,-65.36],
-        [48.88,-64.95],
-        [48.78,-64.62],
-        [48.62,-64.42], // secteur Gaspé simplifié
-        [48.40,-64.55],
-        [48.22,-64.98],
-        [48.17,-65.48],
-        [48.18,-66.05],
-        [48.25,-66.55],
-        [48.42,-67.05]
-    ];
-
-    afficherZoneSopfeu(data.rimouskiMatapedia,zoneRimouskiMatapedia);
-    afficherZoneSopfeu(data.mataneChicsChocs,zoneMataneChicsChocs);
-}
-
-async function chargerPermis(){
-    permisLayer.clearLayers();
-    document.getElementById('listePermis').innerHTML='';
-
-    let actifs=0;
-    let expire=0;
-    const municipalites=new Set();
-    const bounds=[];
-
-    try{
-        const r=await fetch('https://permis-brulage.oussama-refas.workers.dev/?t='+Date.now());
-        const permis=await r.json();
-
-        permis.forEach(p=>{
-            if(!p.latitude || !p.longitude) return;
-
-            let couleur='#5A9E3A';
-            let statut='Actif';
-            const h=(new Date(p.Data.EndDate)-new Date())/3600000;
-
-            if(h<=48 && h>0){couleur='#D7A937';statut='Expire bientôt';expire++;}
-            if(h<=0){couleur='#C0392B';statut='Expiré';}else{actifs++;}
-
-            const lat=parseFloat(p.latitude);
-            const lon=parseFloat(p.longitude);
-            bounds.push([lat,lon]);
-
-            const marker=L.marker([lat,lon],{icon:creerIconePermis(couleur,24)}).addTo(permisLayer);
-            marker.bindPopup(`
-                <div class="popup-card">
-                    <div class="popup-header" style="background:${couleur};">🚒 Permis #${p.RecordID}<br>${statut}</div>
-                    <div class="popup-section">📍 Adresse</div>
-                    ${p.adresseComplete}
-                    <div class="popup-section">📅 Expiration</div>
-                    ${p.Data.EndDate}
-                    <div class="popup-section">🏘️ Municipalité</div>
-                    ${lireMunicipalite(p.adresseComplete)}
-                </div>
-            `);
-
-            marker.on('mouseover',()=>marker.setIcon(creerIconePermis(couleur,32)));
-            marker.on('mouseout',()=>marker.setIcon(creerIconePermis(couleur,24)));
-
-            const item=document.createElement('div');
-            item.className='permis-item';
-            item.style.borderLeft='6px solid '+couleur;
-            item.innerHTML=`
-                <div class="permis-numero">🚒 Permis #${p.RecordID}</div>
-                <div class="permis-adresse">📍 ${p.adresseComplete}</div>
-                <div class="permis-date">📅 Expiration : ${p.Data.EndDate}</div>
-            `;
-            item.onclick=()=>{
-                map.flyTo([lat,lon],16,{duration:1.2});
-                setTimeout(()=>marker.openPopup(),500);
-            };
-            document.getElementById('listePermis').appendChild(item);
-
-            const ville=lireMunicipalite(p.adresseComplete);
-            if(ville) municipalites.add(ville);
-        });
-
-        document.getElementById('actifs').innerText=actifs;
-        document.getElementById('expire').innerText=expire;
-        document.getElementById('municipalites').innerText=municipalites.size;
-
-        if(bounds.length) map.fitBounds(bounds,{padding:[30,30]});
-        setTimeout(()=>map.invalidateSize(),300);
-
-        document.getElementById('maj').innerText='Dernière synchronisation : '+new Date().toLocaleTimeString('fr-CA');
-    }
-    catch(error){
-        console.error('Erreur lors du chargement des permis :',error);
-    }
-}
-
-async function chargerSopfeu(){
-    try{
-        const r=await fetch('https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t='+Date.now());
-        const d=await r.json();
-
-        document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;
-        document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur;
-        document.getElementById('zonesDanger').innerHTML='';
-
-        [d.rimouskiMatapedia,d.mataneChicsChocs].forEach(z=>{
-            const e=document.createElement('div');
-            e.className='danger-zone';
-            e.style.background=z.couleur;
-            e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;
-            document.getElementById('zonesDanger').appendChild(e);
-        });
-
-        dessinerZonesSopfeu(d);
-    }
-    catch(error){
-        console.error('Erreur lors du chargement SOPFEU :',error);
-    }
-}
-
-chargerPermis();
-chargerSopfeu();
-setInterval(chargerPermis,60000);
-setInterval(chargerSopfeu,60000);
-</script>
-</body>
-</html>
+<!DOCTYPE html> 
+<html lang="fr"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Portail Prévention Incendie - MRC de La Matanie</title> 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
+<style> 
+:root{--bleu:#003E6B;--bleu2:#005A93;--gris:#F4F6F8;} 
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris)} 
+.header{background:linear-gradient(135deg,var(--bleu),var(--bleu2));color:#fff;text-align:center;padding:40px} 
+.logo{max-height:140px} 
+.stats{display:flex;gap:15px;padding:20px;flex-wrap:wrap} 
+.card{background:#fff;border-radius:16px;padding:20px;flex:1;min-width:180px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:all .25s ease} 
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.15)} 
+#dangerCard{color:#fff} 
+.layout{display:flex;gap:20px;padding:20px} 
+.sidebar{width:340px;background:#fff;border-radius:16px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.08)} 
+#map{flex:1;height:75vh;border-radius:16px;overflow:hidden} 
+.permis-item{padding:15px;margin-bottom:12px;border-radius:14px;background:#fff;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.2s} 
+.permis-item:hover{transform:translateX(5px);box-shadow:0 8px 18px rgba(0,0,0,.12)} 
+.permis-numero{font-size:18px;font-weight:700;color:#003E6B;margin-bottom:8px} 
+.permis-date{margin-top:10px;color:#666;font-size:12px} 
+.danger-zone{padding:12px;border-radius:10px;color:white;margin-bottom:10px;font-weight:bold;transition:.25s} 
+.danger-zone:hover{transform:scale(1.03)} 
+@media(max-width:768px){.stats,.layout{flex-direction:column}.sidebar{width:100%;order:2}#map{height:60vh;order:1}.logo{max-height:100px}} 
+</style> 
+</head> 
+<body> 
+<div class="header"> 
+<img src="Logo-SPI-Transparent.png" class="logo"> 
+<h1>Portail Prévention Incendie</h1> 
+<p>MRC de La Matanie</p> 
+</div> 
+<div class="stats"> 
+<div class="card"><h2 id="actifs">0</h2><p>Permis actifs</p></div> 
+<div class="card"><h2 id="expire">0</h2><p>Expire bientôt</p></div> 
+<div class="card"><h2 id="municipalites">0</h2><p>Municipalités concernées</p></div> 
+<div class="card" id="dangerCard"><h2 id="dangerGlobal">--</h2><p>Danger SOPFEU</p></div> 
+</div> 
+<div class="layout"> 
+<div class="sidebar"> 
+<h3>Zones SOPFEU</h3><div id="zonesDanger"></div> 
+<h3>Permis actifs</h3><div id="listePermis"></div> 
+</div> 
+<div id="map"></div> 
+</div> 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+<script> 
+const map=L.map('map').setView([48.85,-67.53],9); 
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); 
+const permisLayer=L.layerGroup().addTo(map); 
+async function chargerPermis(){ 
+permisLayer.clearLayers();document.getElementById('listePermis').innerHTML=''; 
+let actifs=0,expire=0;const municipalites=new Set();const bounds=[]; 
+const r=await fetch('https://permis-brulage.oussama-refas.workers.dev/?t='+Date.now()); 
+const permis=await r.json(); 
+permis.forEach(p=>{ 
+if(!p.latitude||!p.longitude)return; 
+let couleur='#5A9E3A';const h=(new Date(p.Data.EndDate)-new Date())/3600000; 
+if(h<=48&&h>0){couleur='#D7A937';expire++;} 
+if(h<=0){couleur='#C0392B';}else{actifs++;} 
+const lat=parseFloat(p.latitude),lon=parseFloat(p.longitude);bounds.push([lat,lon]); 
+const marker=L.circleMarker([lat,lon],{radius:12,color:'#fff',weight:3,fillColor:couleur,fillOpacity:1}).addTo(permisLayer); 
+marker.bindPopup(`<div style="min-width:260px"><div style="background:${couleur};color:#fff;padding:10px;border-radius:8px;margin-bottom:10px">🚒 Permis #${p.RecordID}</div><b>📍 Adresse</b><br>${p.adresseComplete}<br><br><b>📅 Expiration</b><br>${p.Data.EndDate}</div>`); 
+const item=document.createElement('div');item.className='permis-item';item.style.borderLeft='6px solid '+couleur; 
+item.innerHTML=`<div class="permis-numero">🚒 Permis #${p.RecordID}</div><div>📍 ${p.adresseComplete}</div><div class="permis-date">📅 Expiration : ${p.Data.EndDate}</div>`; 
+item.onclick=()=>{map.setView([lat,lon],15);marker.openPopup();};document.getElementById('listePermis').appendChild(item); 
+const ville=p.adresseComplete?.split(',')[1]?.trim();if(ville)municipalites.add(ville); 
+}); 
+document.getElementById('actifs').innerText=actifs;document.getElementById('expire').innerText=expire;document.getElementById('municipalites').innerText=municipalites.size; 
+if(bounds.length)map.fitBounds(bounds); 
+} 
+async function chargerSopfeu(){ 
+const r=await fetch('https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/?t='+Date.now()); 
+const d=await r.json(); 
+document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau; 
+document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur; 
+document.getElementById('zonesDanger').innerHTML=''; 
+[d.rimouskiMatapedia,d.mataneChicsChocs].forEach(z=>{const e=document.createElement('div');e.className='danger-zone';e.style.background=z.couleur;e.innerHTML='🔥 '+z.nom+'<br>'+z.niveau;document.getElementById('zonesDanger').appendChild(e);}); 
+} 
+chargerPermis();chargerSopfeu();setInterval(chargerPermis,60000);setInterval(chargerSopfeu,60000); 
+</script></body></html> 
