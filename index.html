@@ -54,7 +54,8 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
 .leaflet-control-layers{border-radius:12px !important;box-shadow:0 4px 12px rgba(0,0,0,.15) !important;}
 .sopfeu-label{background:transparent;border:none;}
-.sopfeu-label div{background:rgba(255,255,255,.92);border:2px solid #111;border-radius:10px;padding:6px 9px;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap;}
+.sopfeu-label div{background:rgba(255,255,255,.94);border:2px solid #111;border-radius:10px;padding:6px 9px;font-size:12px;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap;}
+.leaflet-control-custom-note{background:white;padding:8px 10px;border-radius:10px;box-shadow:0 3px 8px rgba(0,0,0,.18);font-size:12px;line-height:1.35;}
 
 @media(max-width:768px){
     body{overflow-x:hidden;}
@@ -105,7 +106,6 @@ const topo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png',{attribu
 const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'© Esri'});
 
 const map = L.map('map',{layers:[osm]}).setView([48.85,-67.53],9);
-
 setTimeout(()=>map.invalidateSize(),500);
 window.addEventListener('resize',()=>setTimeout(()=>map.invalidateSize(),300));
 
@@ -120,11 +120,19 @@ L.control.layers(
         '🛰️ Satellite':satellite
     },
     {
-        '🚒 Permis de brûlage':permisLayer,
-        '🔥 Danger incendie SOPFEU':dangerZoneLayer
+        '🔥 Danger incendie SOPFEU':dangerZoneLayer,
+        '🚒 Permis de brûlage':permisLayer
     },
     {collapsed:false}
 ).addTo(map);
+
+const infoControl = L.control({position:'bottomright'});
+infoControl.onAdd = function(){
+    const div = L.DomUtil.create('div','leaflet-control-custom-note');
+    div.innerHTML = '<b>Couche SOPFEU</b><br>Zones simplifiées, inspirées des divisions SOPFEU.<br>À utiliser pour lecture opérationnelle rapide.';
+    return div;
+};
+infoControl.addTo(map);
 
 function creerIconePermis(couleur, taille=24){
     return L.divIcon({
@@ -143,16 +151,14 @@ function afficherZoneSopfeu(zone, coords){
     const polygon = L.polygon(coords,{
         color:'#111',
         weight:2,
-        dashArray:'6,6',
+        dashArray:'7,5',
         fillColor:zone.couleur,
-        fillOpacity:.28
+        fillOpacity:.30
     }).addTo(dangerZoneLayer);
 
     polygon.bindPopup(`
         <div class="popup-card">
-            <div class="popup-header" style="background:${zone.couleur};">
-                🔥 Zone SOPFEU
-            </div>
+            <div class="popup-header" style="background:${zone.couleur};">🔥 Zone SOPFEU</div>
             <div class="popup-section">Zone</div>
             ${zone.nom}
             <div class="popup-section">Indice de danger</div>
@@ -173,27 +179,42 @@ function afficherZoneSopfeu(zone, coords){
 function dessinerZonesSopfeu(data){
     dangerZoneLayer.clearLayers();
 
-    /* Polygones simplifiés inspirés des divisions visuelles SOPFEU.
-       Ils ne sont pas des limites officielles cadastrales, mais permettent une lecture rapide du risque. */
+    // Zones simplifiées adaptées au bord du fleuve et aux grandes divisions visibles sur la carte SOPFEU.
+    // Les contours suivent approximativement la côte nord du Bas-Saint-Laurent et de la Gaspésie.
     const zoneRimouskiMatapedia = [
-        [48.70,-69.10],
-        [48.78,-68.55],
-        [48.63,-67.90],
-        [48.35,-67.30],
-        [47.95,-67.25],
-        [47.88,-68.15],
-        [48.12,-68.85]
+        [48.55,-69.05], // ouest de Rimouski / fleuve
+        [48.48,-68.78],
+        [48.45,-68.55],
+        [48.38,-68.32],
+        [48.45,-68.05],
+        [48.55,-67.88], // vers Mont-Joli / limite Est de la zone côtière
+        [48.34,-67.70],
+        [48.14,-67.48],
+        [47.98,-67.18],
+        [47.82,-67.34],
+        [47.73,-67.82],
+        [47.86,-68.38],
+        [48.08,-68.78],
+        [48.28,-69.02]
     ];
 
     const zoneMataneChicsChocs = [
-        [49.08,-67.55],
-        [49.15,-66.70],
-        [49.08,-65.65],
-        [48.88,-64.70],
-        [48.55,-64.35],
-        [48.18,-65.05],
-        [48.18,-66.25],
-        [48.40,-67.15]
+        [48.68,-67.78], // côte vers Matane
+        [48.75,-67.45],
+        [48.83,-67.10],
+        [49.02,-66.68],
+        [49.10,-66.20],
+        [49.06,-65.75],
+        [48.98,-65.36],
+        [48.88,-64.95],
+        [48.78,-64.62],
+        [48.62,-64.42], // secteur Gaspé simplifié
+        [48.40,-64.55],
+        [48.22,-64.98],
+        [48.17,-65.48],
+        [48.18,-66.05],
+        [48.25,-66.55],
+        [48.42,-67.05]
     ];
 
     afficherZoneSopfeu(data.rimouskiMatapedia,zoneRimouskiMatapedia);
@@ -228,7 +249,6 @@ async function chargerPermis(){
             bounds.push([lat,lon]);
 
             const marker=L.marker([lat,lon],{icon:creerIconePermis(couleur,24)}).addTo(permisLayer);
-
             marker.bindPopup(`
                 <div class="popup-card">
                     <div class="popup-header" style="background:${couleur};">🚒 Permis #${p.RecordID}<br>${statut}</div>
@@ -252,12 +272,10 @@ async function chargerPermis(){
                 <div class="permis-adresse">📍 ${p.adresseComplete}</div>
                 <div class="permis-date">📅 Expiration : ${p.Data.EndDate}</div>
             `;
-
             item.onclick=()=>{
                 map.flyTo([lat,lon],16,{duration:1.2});
                 setTimeout(()=>marker.openPopup(),500);
             };
-
             document.getElementById('listePermis').appendChild(item);
 
             const ville=lireMunicipalite(p.adresseComplete);
