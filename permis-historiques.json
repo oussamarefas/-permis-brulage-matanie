@@ -1,0 +1,257 @@
+[
+  {
+    "RecordID": "PDF-2026-07-07-001",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "7 chemin de la Réserve-Faunique, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-07-08",
+      "EndDate": "2026-08-05",
+      "ApprovalDate": "2026-07-07",
+      "FireType": "Ciel-ouvert",
+      "CityName": "Non précisée",
+      "OriginalFile": "7 chemin de la RÉSERVE-FAUNIQUE-20260707.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-07-07-002",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-07-07",
+      "EndDate": "2026-08-03",
+      "ApprovalDate": "2026-07-07",
+      "FireType": "Aménagement",
+      "CityName": "Matane",
+      "OriginalFile": "290_ROUTE_HARISON_MATANE-07-07-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-07-03-003",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "44 route de la Montagne, Saint-René-de-Matane, Québec, Canada",
+    "ville": "Saint-René-de-Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-07-04",
+      "EndDate": "2026-08-08",
+      "ApprovalDate": "2026-07-03",
+      "FireType": "Aménagement",
+      "CityName": "Saint-René-de-Matane",
+      "OriginalFile": "44 route de la MONTAGNE-20260703.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-30-004",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3014 6E Rang, Saint-Léandre, Québec, Canada",
+    "ville": "Saint-Léandre",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-30",
+      "EndDate": "2026-07-27",
+      "ApprovalDate": "2026-06-30",
+      "FireType": "Aménagement",
+      "CityName": "Saint-Léandre",
+      "OriginalFile": "3014_6E_RANG-20260630.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-07-02-005",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3074 route des Érables, Saint-Léandre, Québec, Canada",
+    "ville": "Saint-Léandre",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-07-03",
+      "EndDate": "2026-07-10",
+      "ApprovalDate": "2026-07-02",
+      "FireType": "Aménagement",
+      "CityName": "Saint-Léandre",
+      "OriginalFile": "3074_Rte_des_Érables-20260702.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-07-02-006",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "ville": "Saint-Ulric",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-07-03",
+      "EndDate": "2026-08-06",
+      "ApprovalDate": "2026-07-02",
+      "FireType": "Aménagement",
+      "CityName": "Saint-Ulric",
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-02-07-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-30-007",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "141 chemin des Berges, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-30",
+      "EndDate": "2026-07-27",
+      "ApprovalDate": "2026-06-30",
+      "FireType": "Aménagement",
+      "CityName": "Non précisée",
+      "OriginalFile": "141 chemin des BERGES-20260630.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-24-008",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "129 route du Ruisseau-à-la-Loutre, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-24",
+      "EndDate": "2026-07-22",
+      "ApprovalDate": "2026-06-24",
+      "FireType": "Aménagement",
+      "CityName": "Non précisée",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-24-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-24-009",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-24",
+      "EndDate": "2026-07-01",
+      "ApprovalDate": "2026-06-24",
+      "FireType": "Aménagement",
+      "CityName": "Non précisée",
+      "OriginalFile": "3333_chemin_du_CHÔMAGE-2026-06-24.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-18-010",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-18",
+      "EndDate": "2026-06-25",
+      "ApprovalDate": "2026-06-18",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "290_ROUTE_HARISON_MATANE-18-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-24-011",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "ville": "Saint-Ulric",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-24",
+      "EndDate": "2026-07-01",
+      "ApprovalDate": "2026-06-24",
+      "FireType": "Aménagement",
+      "CityName": "Saint-Ulric",
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-24-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-20-012",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "165 route du Ruisseau-à-la-Loutre, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-20",
+      "EndDate": "2026-06-27",
+      "ApprovalDate": "2026-06-20",
+      "FireType": "Aménagement",
+      "CityName": "Non précisée",
+      "OriginalFile": "165-route-du-RUISSEAU-À-LA-LOUTRE_20260620.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-18-013",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-18",
+      "EndDate": "2026-06-25",
+      "ApprovalDate": "2026-06-18",
+      "FireType": "Branches",
+      "CityName": "Non précisée",
+      "OriginalFile": "3333_chemin_du_CHÔMAGE-2026-06-18.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-16-014",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "362 route de Saint-Luc, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-16",
+      "EndDate": "2026-06-23",
+      "ApprovalDate": "2026-06-16",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "362_ROUTE_ST_LUC-16-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-19-015",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "1402 route du Grand Détour, Québec, Canada",
+    "ville": "Non précisée",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-19",
+      "EndDate": "2026-06-26",
+      "ApprovalDate": "2026-06-19",
+      "FireType": "Branches",
+      "CityName": "Non précisée",
+      "OriginalFile": "1402_rte_du_Grand-Detour-19-06-2026.pdf"
+    }
+  }
+]
