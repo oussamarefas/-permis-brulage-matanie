@@ -212,7 +212,162 @@ function lireMunicipaliteDepuisPermis(p){
     if (p.Data?.CityName && p.Data.CityName !== "Non précisée") {
         return p.Data.CityName;
     }
+const CACHE_GEOCODE_HISTORIQUES = "cache_geocode_permis_historiques_v1";
 
+function pause(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function lireCacheGeocode(){
+    try {
+        return JSON.parse(
+            localStorage.getItem(CACHE_GEOCODE_HISTORIQUES) || "{}"
+        );
+    } catch(e) {
+        return {};
+    }
+}
+
+function sauvegarderCacheGeocode(cache){
+    localStorage.setItem(
+        CACHE_GEOCODE_HISTORIQUES,
+        JSON.stringify(cache)
+    );
+}
+
+function normaliserAdresseGeocode(adresse){
+    return String(adresse || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+async function geocoderAdresse(adresse){
+
+    if (!adresse) {
+        return null;
+    }
+
+    const cache = lireCacheGeocode();
+    const cle = normaliserAdresseGeocode(adresse);
+
+    if (cache[cle]) {
+        return cache[cle];
+    }
+
+    const url =
+        "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+        encodeURIComponent(adresse);
+
+    try {
+
+        const r = await fetch(url, {
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        const data = await r.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+
+            const coords = {
+                latitude: data[0].lat,
+                longitude: data[0].lon
+            };
+
+            cache[cle] = coords;
+            sauvegarderCacheGeocode(cache);
+
+            return coords;
+        }
+
+    } catch (e) {
+        console.warn("Erreur de géocodage pour :", adresse, e);
+    }
+
+    return null;
+}
+
+async function geocoderEtTelechargerHistoriques(){
+
+    const r = await fetch("permis-historiques.json?t=" + Date.now());
+
+    if (!r.ok) {
+        alert("Impossible de lire permis-historiques.json");
+        return;
+    }
+
+    const historiques = await r.json();
+
+    let ajoutes = 0;
+    let dejaPresents = 0;
+    let echecs = 0;
+
+    for (const p of historiques) {
+
+        if (p.latitude && p.longitude) {
+            dejaPresents++;
+            continue;
+        }
+
+        const adresse = p.adresseComplete;
+
+        console.log("Géocodage :", adresse);
+
+        const coords = await geocoderAdresse(adresse);
+
+        if (coords) {
+
+            p.latitude = coords.latitude;
+            p.longitude = coords.longitude;
+
+            ajoutes++;
+
+        } else {
+
+            console.warn("Coordonnées introuvables pour :", adresse);
+            echecs++;
+        }
+
+        // Important : éviter d'envoyer trop de requêtes trop vite.
+        await pause(1200);
+    }
+
+    telechargerJson("permis-historiques.json", historiques);
+
+    alert(
+        "Géocodage terminé.\n\n" +
+        "Coordonnées ajoutées : " + ajoutes + "\n" +
+        "Déjà présentes : " + dejaPresents + "\n" +
+        "Échecs : " + echecs + "\n\n" +
+        "Un nouveau fichier permis-historiques.json a été téléchargé."
+    );
+}
+
+function telechargerJson(nomFichier, data){
+
+    const blob = new Blob(
+        [JSON.stringify(data, null, 2)],
+        {
+            type: "application/json"
+        }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = nomFichier;
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
     const adresse =
         p.adresseComplete || "";
 
