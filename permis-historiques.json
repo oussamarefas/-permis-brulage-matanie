@@ -4,7 +4,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "7 chemin de la Réserve-Faunique, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -12,7 +12,7 @@
       "EndDate": "2026-08-05",
       "ApprovalDate": "2026-07-07",
       "FireType": "Ciel-ouvert",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "7 chemin de la RÉSERVE-FAUNIQUE-20260707.pdf"
     }
   },
@@ -106,7 +106,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "141 chemin des Berges, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -114,7 +114,7 @@
       "EndDate": "2026-07-27",
       "ApprovalDate": "2026-06-30",
       "FireType": "Aménagement",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "141 chemin des BERGES-20260630.pdf"
     }
   },
@@ -123,7 +123,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "129 route du Ruisseau-à-la-Loutre, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -131,7 +131,7 @@
       "EndDate": "2026-07-22",
       "ApprovalDate": "2026-06-24",
       "FireType": "Aménagement",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-24-06-2026.pdf"
     }
   },
@@ -140,7 +140,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -148,7 +148,7 @@
       "EndDate": "2026-07-01",
       "ApprovalDate": "2026-06-24",
       "FireType": "Aménagement",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "3333_chemin_du_CHÔMAGE-2026-06-24.pdf"
     }
   },
@@ -191,7 +191,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "165 route du Ruisseau-à-la-Loutre, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -199,8 +199,8 @@
       "EndDate": "2026-06-27",
       "ApprovalDate": "2026-06-20",
       "FireType": "Aménagement",
-      "CityName": "Non précisée",
-      "OriginalFile": "165-route-du-RUISSEAU-À-LA-LOUTRE_20260620.pdf"
+      "CityName": "Matane",
+      "OriginalFile": "165-route-du_RUISSEAU-À-LA-LOUTRE_20260620.pdf"
     }
   },
   {
@@ -208,7 +208,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -216,7 +216,7 @@
       "EndDate": "2026-06-25",
       "ApprovalDate": "2026-06-18",
       "FireType": "Branches",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "3333_chemin_du_CHÔMAGE-2026-06-18.pdf"
     }
   },
@@ -242,7 +242,7 @@
     "source": "PDF historique",
     "historique": true,
     "adresseComplete": "1402 route du Grand Détour, Québec, Canada",
-    "ville": "Non précisée",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -250,7 +250,7 @@
       "EndDate": "2026-06-26",
       "ApprovalDate": "2026-06-19",
       "FireType": "Branches",
-      "CityName": "Non précisée",
+      "CityName": "Matane",
       "OriginalFile": "1402_rte_du_Grand-Detour-19-06-2026.pdf"
     }
   }
