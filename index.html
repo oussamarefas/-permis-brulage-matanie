@@ -11,17 +11,7 @@
 
 <style>
 :root{
-    --bleu:#003E6B;
-    --bleu2:#005A93;
-    --bleu3:#0074B8;
-    --gris:#F4F6F8;
-    --vert:#5A9E3A;
-    --jaune:#D7A937;
-    --rouge:#C0392B;
-    --orange:#ee7c22;
-    --texte:#1f2937;
-    --muted:#64748b;
-    --white:#ffffff;
+    --bleu:#003E6B;--bleu2:#005A93;--bleu3:#0074B8;--gris:#F4F6F8;--vert:#5A9E3A;--jaune:#D7A937;--rouge:#C0392B;--orange:#ee7c22;--texte:#1f2937;--muted:#64748b;--white:#ffffff;
 }
 *{box-sizing:border-box;}
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color:var(--texte);}
@@ -41,8 +31,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .card p{margin:8px 0 0;color:#5b6472;}
 #dangerCard{color:#fff;}
 #dangerCard h2,#dangerCard p{color:#fff;}
-.view{display:none;}
-.view.active{display:block;}
+.view{display:none;}.view.active{display:block;}
 .layout{display:flex;gap:20px;padding:20px;padding-top:0;}
 .sidebar{width:350px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:75vh;overflow:auto;}
 .sidebar h3{margin:8px 0 12px;color:var(--bleu);}
@@ -53,43 +42,16 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .permis-adresse{line-height:1.4;font-size:14px;}
 .permis-date{margin-top:10px;color:#666;font-size:12px;}
 .danger-zone{padding:14px;border-radius:12px;color:white;margin-bottom:10px;font-weight:bold;transition:.25s;box-shadow:0 4px 12px rgba(0,0,0,.10);}
-.danger-zone:hover{transform:scale(1.03);}
-.danger-zone .zone-name{font-size:14px;opacity:.95;}
-.danger-zone .zone-level{font-size:21px;margin-top:4px;}
+.danger-zone:hover{transform:scale(1.03);}.danger-zone .zone-name{font-size:14px;opacity:.95;}.danger-zone .zone-level{font-size:21px;margin-top:4px;}
 .permit-icon{width:24px;height:24px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);}
-.leaflet-popup-content{margin:12px;}
-.popup-card{min-width:260px;font-family:Segoe UI,Arial,sans-serif;}
-.popup-header{color:white;padding:11px;border-radius:10px;font-weight:700;margin-bottom:10px;}
-.popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
-.leaflet-control-layers{border-radius:12px !important;box-shadow:0 4px 12px rgba(0,0,0,.15) !important;}
-.stats-page{padding:20px;}
-.stats-header{background:#fff;border-radius:18px;padding:22px;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;}
-.stats-header h2{margin:0;color:var(--bleu);font-size:30px;}
-.stats-header p{margin:6px 0 0;color:var(--muted);}
-.stats-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.small-btn{border:none;border-radius:12px;padding:10px 14px;background:var(--bleu);color:#fff;font-weight:700;cursor:pointer;transition:.2s;}
-.small-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18);}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:15px;margin-bottom:20px;}
-.kpi{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
-.kpi .label{color:var(--muted);font-size:13px;margin-bottom:8px;}
-.kpi .value{font-size:28px;font-weight:800;color:var(--bleu);}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
-.panel{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
-.panel h3{margin:0 0 14px;color:var(--bleu);}
-.chart-box{height:340px;position:relative;}
-.rank-list{display:flex;flex-direction:column;gap:10px;}
-.rank-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-radius:12px;padding:12px;border-left:6px solid var(--bleu2);}
-.rank-left{font-weight:700;color:#1f2937;}
-.rank-right{font-weight:800;color:var(--bleu);}
-.rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}
-.rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
-#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;}
-.note{color:var(--muted);font-size:13px;line-height:1.45;}
-.empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
+.popup-card{min-width:260px;font-family:Segoe UI,Arial,sans-serif;}.popup-header{color:white;padding:11px;border-radius:10px;font-weight:700;margin-bottom:10px;}.popup-section{font-weight:700;color:var(--bleu);margin-top:10px;}
+.stats-page{padding:20px;}.stats-header{background:#fff;border-radius:18px;padding:22px;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;}.stats-header h2{margin:0;color:var(--bleu);font-size:30px;}.stats-header p{margin:6px 0 0;color:var(--muted);}.stats-actions{display:flex;gap:10px;flex-wrap:wrap;}.small-btn{border:none;border-radius:12px;padding:10px 14px;background:var(--bleu);color:#fff;font-weight:700;cursor:pointer;transition:.2s;}.small-btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18);}.small-btn.secondary{background:var(--bleu3);}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:15px;margin-bottom:20px;}.kpi{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}.kpi .label{color:var(--muted);font-size:13px;margin-bottom:8px;}.kpi .value{font-size:28px;font-weight:800;color:var(--bleu);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}.panel{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}.panel h3{margin:0 0 14px;color:var(--bleu);}.chart-box{height:340px;position:relative;}
+.rank-list{display:flex;flex-direction:column;gap:10px;}.rank-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-radius:12px;padding:12px;border-left:6px solid var(--bleu2);}.rank-left{font-weight:700;color:#1f2937;}.rank-right{font-weight:800;color:var(--bleu);}.rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}.rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
+#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;}.note{color:var(--muted);font-size:13px;line-height:1.45;}.empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
-@media(max-width:768px){
-    body{overflow-x:hidden;}.header{padding:25px 15px;}.header h1{font-size:28px;line-height:1.2;}.logo{max-height:95px;}.navbar{position:static;}.stats{flex-direction:column;padding:15px;gap:12px;}.layout{display:flex;flex-direction:column;padding:15px;gap:15px;}#map{order:1;width:100%;height:65vh;min-height:420px;border-radius:14px;flex:none;}.sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}.card{width:100%;}.permis-item{font-size:14px;}.stats-page{padding:15px;}.kpi-grid{grid-template-columns:1fr;}.chart-box{height:300px;}#heatmap{height:420px;}
-}
+@media(max-width:768px){body{overflow-x:hidden;}.header{padding:25px 15px;}.header h1{font-size:28px;line-height:1.2;}.logo{max-height:95px;}.navbar{position:static;}.stats{flex-direction:column;padding:15px;gap:12px;}.layout{display:flex;flex-direction:column;padding:15px;gap:15px;}#map{order:1;width:100%;height:65vh;min-height:420px;border-radius:14px;flex:none;}.sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}.card{width:100%;}.permis-item{font-size:14px;}.stats-page{padding:15px;}.kpi-grid{grid-template-columns:1fr;}.chart-box{height:300px;}#heatmap{height:420px;}}
 </style>
 </head>
 <body>
@@ -114,7 +76,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
         <div class="sidebar">
             <h3>Zones SOPFEU</h3>
             <div id="zonesDanger"></div>
-            <h3>Permis en cours</h3>
+            <h3>Permis non expirés avec coordonnées</h3>
             <div id="listePermis"></div>
         </div>
         <div id="map"></div>
@@ -129,6 +91,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
             </div>
             <div class="stats-actions">
                 <button class="small-btn" onclick="chargerPermis(true)">🔄 Actualiser les statistiques</button>
+                <button class="small-btn secondary" onclick="geocoderEtTelechargerHistoriques()">📍 Ajouter latitude/longitude</button>
                 <button class="small-btn" onclick="afficherVue('carte')">🗺️ Retour à la carte</button>
             </div>
         </div>
@@ -167,6 +130,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 const API_PERMIS = 'https://permis-brulage.oussama-refas.workers.dev/';
 const API_SOPFEU = 'https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/';
 const FICHIER_HISTORIQUES = './permis-historiques.json';
+const CACHE_GEOCODE_HISTORIQUES = 'cache_geocode_permis_historiques_v3';
 let permisCache=[];
 let charts=[];
 let heatMapInstance=null;
@@ -191,22 +155,15 @@ function afficherVue(vue){
     if(vue==='carte') setTimeout(()=>map.invalidateSize(),250);
     if(vue==='stats') setTimeout(()=>{genererStatistiques(); if(heatMapInstance) heatMapInstance.invalidateSize();},250);
 }
-
-function creerIconePermis(couleur, taille=24){
-    return L.divIcon({className:'',html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,iconSize:[taille,taille],iconAnchor:[taille/2,taille/2]});
-}
-
+function creerIconePermis(couleur, taille=24){return L.divIcon({className:'',html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,iconSize:[taille,taille],iconAnchor:[taille/2,taille/2]});}
 function lireMunicipaliteDepuisPermis(p){
     if (p.ville && p.ville !== 'Non précisée') return p.ville;
     if (p.Data?.CityName && p.Data.CityName !== 'Non précisée') return p.Data.CityName;
     const adresse = String(p.adresseComplete || '').toLowerCase();
     const municipalites = ['Matane','Saint-Ulric','Saint-Léandre','Saint-René-de-Matane','Les Méchins','Saint-Adelme','Sainte-Félicité','Grosses-Roches','Baie-des-Sables','Métis-sur-Mer','Sainte-Paule','Saint-Jean-de-Cherbourg','Notre-Dame-des-Neiges'];
-    for (const m of municipalites) {
-        if (adresse.includes(m.toLowerCase())) return m;
-    }
+    for (const m of municipalites) { if (adresse.includes(m.toLowerCase())) return m; }
     return 'Matane';
 }
-
 function convertirDate(valeur){
     if(!valeur) return null;
     const d1 = new Date(valeur);
@@ -215,11 +172,7 @@ function convertirDate(valeur){
     if(match) return new Date(parseInt(match[3],10), parseInt(match[2],10)-1, parseInt(match[1],10));
     return null;
 }
-
-function dateReference(p){
-    return p.Data?.ApprovalDate || p.Data?.CreateDate || p.Data?.StartDate || p.Data?.EndDate || p.dateReception || null;
-}
-
+function dateReference(p){return p.Data?.ApprovalDate || p.Data?.CreateDate || p.Data?.StartDate || p.Data?.EndDate || p.dateReception || null;}
 function statutPermis(p){
     const end = convertirDate(p.Data?.EndDate);
     if(!end) return {nom:'À vérifier',couleur:'#005A93'};
@@ -228,22 +181,14 @@ function statutPermis(p){
     if(h<=48) return {nom:'Expire bientôt',couleur:'#D7A937'};
     return {nom:'Actif',couleur:'#5A9E3A'};
 }
-
 async function lireJson(url, fallback=[]){
     try{
         const r = await fetch(url);
-        if(!r.ok){
-            console.warn('Lecture impossible:', url, 'statut:', r.status);
-            return fallback;
-        }
+        if(!r.ok){console.warn('Lecture impossible:', url, 'statut:', r.status);return fallback;}
         const data = await r.json();
         return Array.isArray(data) ? data : fallback;
-    }catch(e){
-        console.warn('Erreur lecture JSON:', url, e);
-        return fallback;
-    }
+    }catch(e){console.warn('Erreur lecture JSON:', url, e);return fallback;}
 }
-
 async function chargerPermis(recalculStats=false){
     permisLayer.clearLayers();
     document.getElementById('listePermis').innerHTML='';
@@ -257,8 +202,7 @@ async function chargerPermis(recalculStats=false){
         console.log('Permis actifs Cloudflare:', permisActifs.length);
         console.log('Permis historiques JSON:', permisHistoriques.length);
         console.log('Total permis analysés:', permisCache.length);
-
-        // Carte opérationnelle: compte uniquement les permis non expirés.
+        console.log('Coordonnées manquantes:', permisCache.filter(p=>!p.latitude||!p.longitude).length);
         permisCache.forEach(p=>{
             const st=statutPermis(p);
             if(st.nom==='Expiré') return;
@@ -266,9 +210,6 @@ async function chargerPermis(recalculStats=false){
             actifs++;
             municipalites.add(lireMunicipaliteDepuisPermis(p));
         });
-
-        // Carte principale et liste: affiche seulement les permis non expirés avec coordonnées.
-        // Les permis expirés restent dans les statistiques et dans la carte thermique.
         permisCache.forEach(p=>{
             const st=statutPermis(p);
             if(st.nom==='Expiré') return;
@@ -287,7 +228,6 @@ async function chargerPermis(recalculStats=false){
             item.onclick=()=>{map.flyTo([lat,lon],16,{duration:1.2});setTimeout(()=>marker.openPopup(),500);};
             document.getElementById('listePermis').appendChild(item);
         });
-
         document.getElementById('actifs').innerText=actifs;
         document.getElementById('expire').innerText=expire;
         document.getElementById('municipalites').innerText=municipalites.size;
@@ -297,26 +237,17 @@ async function chargerPermis(recalculStats=false){
         if(recalculStats || document.getElementById('vueStats').classList.contains('active')) genererStatistiques();
     }catch(error){console.error('Erreur lors du chargement des permis :',error);}
 }
-
 async function chargerSopfeu(){
     try{
         const r=await fetch(API_SOPFEU + '?t=' + Date.now());
         const d=await r.json();
-        if(d.mataneChicsChocs){
-            document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;
-            document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur;
-        }
+        if(d.mataneChicsChocs){document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur;}
         document.getElementById('zonesDanger').innerHTML='';
         [d.rimouskiMatapedia,d.mataneChicsChocs].filter(Boolean).forEach(z=>{
-            const e=document.createElement('div');
-            e.className='danger-zone';
-            e.style.background=z.couleur;
-            e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;
-            document.getElementById('zonesDanger').appendChild(e);
+            const e=document.createElement('div');e.className='danger-zone';e.style.background=z.couleur;e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;document.getElementById('zonesDanger').appendChild(e);
         });
     }catch(error){console.error('Erreur lors du chargement SOPFEU :',error);}
 }
-
 function compterParMunicipalite(){const c={};permisCache.forEach(p=>{const m=lireMunicipaliteDepuisPermis(p);c[m]=(c[m]||0)+1;});return c;}
 function compterParMois(){const c=Array(12).fill(0);permisCache.forEach(p=>{const dt=convertirDate(dateReference(p));if(dt)c[dt.getMonth()]++;});return c;}
 function compterParStatut(){const c={'Actif':0,'Expire bientôt':0,'Expiré':0,'À vérifier':0};permisCache.forEach(p=>{const s=statutPermis(p).nom;c[s]=(c[s]||0)+1;});return c;}
@@ -326,62 +257,93 @@ function rankHtml(containerId,entries,max){
     if(!entries.length){el.innerHTML='<div class="empty-state">Aucune donnée disponible.</div>';return;}
     entries.forEach(([nom,val],i)=>{
         const pct=max?Math.round((val/max)*100):0;
-        const div=document.createElement('div');
-        div.className='rank-item';
-        div.innerHTML=`<div style="flex:1"><div class="rank-left">${i+1}. ${nom}</div><div class="rank-bar"><div style="width:${pct}%"></div></div></div><div class="rank-right">${val}</div>`;
-        el.appendChild(div);
+        const div=document.createElement('div');div.className='rank-item';div.innerHTML=`<div style="flex:1"><div class="rank-left">${i+1}. ${nom}</div><div class="rank-bar"><div style="width:${pct}%"></div></div></div><div class="rank-right">${val}</div>`;el.appendChild(div);
     });
 }
-
 function genererStatistiques(){
     detruireCharts();
-    const total=permisCache.length;
-    const municip=compterParMunicipalite();
-    const entries=Object.entries(municip).sort((a,b)=>b[1]-a[1]);
-    const topTen=entries.slice(0,10);
-    const bottom=Object.entries(municip).sort((a,b)=>a[1]-b[1]).slice(0,10);
-    const mois=compterParMois();
-    const statuts=compterParStatut();
-    const maxMunicip=entries.length?entries[0][1]:0;
-    const maxMois=Math.max(...mois,0);
-    const indexMoisFort=mois.indexOf(maxMois);
+    const total=permisCache.length, municip=compterParMunicipalite(), entries=Object.entries(municip).sort((a,b)=>b[1]-a[1]), topTen=entries.slice(0,10), bottom=Object.entries(municip).sort((a,b)=>a[1]-b[1]).slice(0,10), mois=compterParMois(), statuts=compterParStatut(), maxMunicip=entries.length?entries[0][1]:0, maxMois=Math.max(...mois,0), indexMoisFort=mois.indexOf(maxMois);
     document.getElementById('kpiTotal').innerText=total;
     document.getElementById('kpiTopMunicipalite').innerText=entries.length?entries[0][0]:'--';
     document.getElementById('kpiMoisFort').innerText=maxMois>0?moisNoms[indexMoisFort]:'--';
     document.getElementById('kpiExpires').innerText=statuts['Expiré'] || 0;
-    rankHtml('topMunicipalites',topTen,maxMunicip);
-    rankHtml('bottomMunicipalites',bottom,maxMunicip);
-    charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
-    charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
-    charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B','#005A93']}]},options:{responsive:true,maintainAspectRatio:false}}));
-    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Contrôle :</b> Les statistiques incluent les permis actifs et expirés. La carte principale affiche seulement les permis non expirés. La carte thermique inclut tout l'historique avec coordonnées.`;
+    rankHtml('topMunicipalites',topTen,maxMunicip);rankHtml('bottomMunicipalites',bottom,maxMunicip);
+    if(window.Chart){
+        charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
+        charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
+        charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B','#005A93']}]},options:{responsive:true,maintainAspectRatio:false}}));
+    }
+    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Coordonnées :</b> ${permisCache.filter(p=>!p.latitude||!p.longitude).length} permis n'ont pas encore de latitude/longitude.`;
     genererHeatmap();
 }
-
 function genererHeatmap(){
     if(!window.L || !L.heatLayer){console.error('Leaflet Heat non chargé.');return;}
     if(!document.getElementById('vueStats').classList.contains('active')) return;
-    const points=permisCache
-        .filter(p=>p.latitude&&p.longitude)
-        .map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75])
-        .filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
-    if(!heatMapInstance){
-        const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
-        heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);
+    const points=permisCache.filter(p=>p.latitude&&p.longitude).map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75]).filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
+    if(!heatMapInstance){const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);}
+    if(heatLayer){heatMapInstance.removeLayer(heatLayer);heatLayer=null;}
+    if(!points.length){setTimeout(()=>heatMapInstance.invalidateSize(),300);return;}
+    setTimeout(()=>{heatMapInstance.invalidateSize();heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});},300);
+}
+
+function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+function lireCacheGeocode(){try{return JSON.parse(localStorage.getItem(CACHE_GEOCODE_HISTORIQUES)||'{}');}catch(e){return {};}}
+function sauvegarderCacheGeocode(cache){localStorage.setItem(CACHE_GEOCODE_HISTORIQUES,JSON.stringify(cache));}
+function normaliserAdresseGeocode(adresse){return String(adresse||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+function nettoyerAdresseGeocode(adresse){return String(adresse||'').replace(/,\s*Québec,\s*Canada,\s*Québec,\s*Canada/gi,', Québec, Canada').replace(/,\s*Canada,\s*Québec,\s*Canada/gi,', Québec, Canada').replace(/\s+/g,' ').trim();}
+function variantesAdresseGeocode(p){
+    const adresse=nettoyerAdresseGeocode(p.adresseComplete);
+    const ville=p.ville||p.Data?.CityName||'';
+    const variantes=[];
+    if(adresse) variantes.push(adresse);
+    if(adresse&&ville&&!adresse.toLowerCase().includes(ville.toLowerCase())) variantes.push(`${adresse}, ${ville}, Québec, Canada`);
+    variantes.push(adresse.replace(/\b[A-Z]\d[A-Z]\s?\d[A-Z]\d\b/gi,'').replace(/\s+/g,' ').trim());
+    variantes.push(adresse.replace(/,\s*Québec,\s*Canada/gi,'').replace(/,\s*Canada/gi,'').trim()+', Québec, Canada');
+    return [...new Set(variantes.filter(Boolean))];
+}
+async function geocoderAdresse(adresse,cache){
+    const cle=normaliserAdresseGeocode(adresse);
+    if(cache[cle]) return cache[cle];
+    const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=ca&q='+encodeURIComponent(adresse);
+    try{
+        const r=await fetch(url,{headers:{'Accept':'application/json'}});
+        const data=await r.json();
+        if(Array.isArray(data)&&data.length>0){
+            const coords={latitude:data[0].lat,longitude:data[0].lon};
+            cache[cle]=coords;
+            sauvegarderCacheGeocode(cache);
+            return coords;
+        }
+    }catch(e){console.warn('Erreur de géocodage pour :',adresse,e);}
+    return null;
+}
+async function geocoderEtTelechargerHistoriques(){
+    const historiques=await lireJson(FICHIER_HISTORIQUES+'?t='+Date.now(),[]);
+    if(!historiques.length){alert('Impossible de lire permis-historiques.json ou fichier vide.');return;}
+    const cache=lireCacheGeocode();
+    let deja=0,ajoutes=0,echecs=0;
+    const echecsListe=[];
+    const aCompleter=historiques.filter(p=>!p.latitude||!p.longitude).length;
+    if(!confirm(`Coordonnées manquantes : ${aCompleter}\n\nLe traitement peut prendre plusieurs minutes. Continuer ?`)) return;
+    for(const p of historiques){
+        if(p.latitude&&p.longitude){deja++;continue;}
+        let coords=null;
+        for(const adresse of variantesAdresseGeocode(p)){
+            console.log('Géocodage :',adresse);
+            coords=await geocoderAdresse(adresse,cache);
+            await pause(1200);
+            if(coords) break;
+        }
+        if(coords){p.latitude=coords.latitude;p.longitude=coords.longitude;ajoutes++;console.log('Coordonnées ajoutées :',p.RecordID,p.latitude,p.longitude);}else{echecs++;echecsListe.push({RecordID:p.RecordID,adresseComplete:p.adresseComplete});console.warn('Coordonnées introuvables :',p.RecordID,p.adresseComplete);}
     }
-    if(heatLayer){
-        heatMapInstance.removeLayer(heatLayer);
-        heatLayer=null;
-    }
-    if(!points.length){
-        setTimeout(()=>heatMapInstance.invalidateSize(),300);
-        return;
-    }
-    setTimeout(()=>{
-        heatMapInstance.invalidateSize();
-        heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);
-        heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});
-    },300);
+    telechargerJson('permis-historiques.json',historiques);
+    console.table(echecsListe);
+    alert('Géocodage terminé.\n\nDéjà avec coordonnées : '+deja+'\nCoordonnées ajoutées : '+ajoutes+'\nÉchecs : '+echecs+'\n\nUn nouveau fichier permis-historiques.json a été téléchargé. Remplace-le dans GitHub.');
+}
+function telechargerJson(nomFichier,data){
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=nomFichier;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
 chargerPermis();
