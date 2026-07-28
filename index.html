@@ -114,7 +114,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
         <div class="sidebar">
             <h3>Zones SOPFEU</h3>
             <div id="zonesDanger"></div>
-            <h3>Permis avec coordonnées</h3>
+            <h3>Permis en cours</h3>
             <div id="listePermis"></div>
         </div>
         <div id="map"></div>
@@ -129,6 +129,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
             </div>
             <div class="stats-actions">
                 <button class="small-btn" onclick="chargerPermis(true)">🔄 Actualiser les statistiques</button>
+                <button class="small-btn" onclick="geocoderEtTelechargerHistoriques()">📍 Géocoder les historiques</button>
                 <button class="small-btn" onclick="afficherVue('carte')">🗺️ Retour à la carte</button>
             </div>
         </div>
@@ -152,7 +153,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
         </div>
         <div class="panel">
             <h3>Carte thermique des permis</h3>
-            <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés. Seuls les permis avec latitude/longitude sont affichés dans cette couche.</p>
+            <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés, incluant les permis expirés afin de conserver l'analyse historique.</p>
             <div id="heatmap"></div>
         </div>
     </div>
@@ -263,7 +264,7 @@ async function chargerPermis(recalculStats=false){
         console.log('Permis historiques JSON:', permisHistoriques.length);
         console.log('Total permis analysés:', permisCache.length);
 
-        // IMPORTANT: les statistiques de la carte du haut comptent tous les permis, même sans coordonnées.
+        // Les statistiques du haut comptent tous les permis, incluant les expirés.
         permisCache.forEach(p=>{
             const st=statutPermis(p);
             if(st.nom==='Expire bientôt') expire++;
@@ -271,12 +272,14 @@ async function chargerPermis(recalculStats=false){
             municipalites.add(lireMunicipaliteDepuisPermis(p));
         });
 
-        // Seule la carte ignore les permis sans coordonnées.
+        // Carte principale: affiche seulement les permis non expirés avec coordonnées.
+        // Les permis expirés restent dans permisCache pour les statistiques et la carte thermique.
         permisCache.forEach(p=>{
+            const st=statutPermis(p);
+            if(st.nom==='Expiré') return;
             if(!p.latitude || !p.longitude) return;
             const lat=parseFloat(p.latitude), lon=parseFloat(p.longitude);
             if(isNaN(lat) || isNaN(lon)) return;
-            const st=statutPermis(p);
             bounds.push([lat,lon]);
             const marker=L.marker([lat,lon],{icon:creerIconePermis(st.couleur,24)}).addTo(permisLayer);
             marker.bindPopup(`<div class="popup-card"><div class="popup-header" style="background:${st.couleur};">🚒 Permis #${p.RecordID}<br>${st.nom}</div><div class="popup-section">📍 Adresse</div>${p.adresseComplete || 'Adresse non précisée'}<div class="popup-section">📅 Expiration</div>${p.Data?.EndDate || 'Non précisée'}<div class="popup-section">🏘️ Municipalité</div>${lireMunicipaliteDepuisPermis(p)}</div>`);
@@ -356,22 +359,33 @@ function genererStatistiques(){
     charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
     charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
     charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B','#005A93']}]},options:{responsive:true,maintainAspectRatio:false}}));
-    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Contrôle :</b> vérifie la console du navigateur pour confirmer le nombre de permis actifs, historiques et totaux chargés.`;
+    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Contrôle :</b> les statistiques incluent les permis actifs et expirés. La carte principale affiche seulement les permis non expirés. La carte thermique inclut tous les permis avec coordonnées.`;
     genererHeatmap();
 }
 
 function genererHeatmap(){
     if(!window.L || !L.heatLayer){console.error('Leaflet Heat non chargé.');return;}
-    const points=permisCache.filter(p=>p.latitude&&p.longitude).map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75]).filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
+
+    // Carte thermique: inclut TOUS les permis avec coordonnées, incluant les expirés.
+    const points=permisCache
+        .filter(p=>p.latitude&&p.longitude)
+        .map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75])
+        .filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
+
     if(!heatMapInstance){
         const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
         heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);
     }
-    if(heatLayer) heatMapInstance.removeLayer(heatLayer);
-    if(points.length){
-        heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);
-        heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});
+    if(heatLayer){
+        heatMapInstance.removeLayer(heatLayer);
+        heatLayer=null;
     }
+    if(!points.length){
+        setTimeout(()=>heatMapInstance.invalidateSize(),300);
+        return;
+    }
+    heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);
+    heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});
     setTimeout(()=>heatMapInstance.invalidateSize(),300);
 }
 
@@ -380,7 +394,7 @@ const CACHE_GEOCODE_HISTORIQUES = 'cache_geocode_permis_historiques_v1';
 function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
 function lireCacheGeocode(){try{return JSON.parse(localStorage.getItem(CACHE_GEOCODE_HISTORIQUES)||'{}');}catch(e){return {};}}
 function sauvegarderCacheGeocode(cache){localStorage.setItem(CACHE_GEOCODE_HISTORIQUES,JSON.stringify(cache));}
-function normaliserAdresseGeocode(adresse){return String(adresse||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+function normaliserAdresseGeocode(adresse){return String(adresse||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();}
 async function geocoderAdresse(adresse){
     if(!adresse)return null;
     const cache=lireCacheGeocode();
@@ -409,7 +423,13 @@ async function geocoderEtTelechargerHistoriques(){
         await pause(1200);
     }
     telechargerJson('permis-historiques.json',historiques);
-    alert('Géocodage terminé.\n\nCoordonnées ajoutées : '+ajoutes+'\nDéjà présentes : '+dejaPresents+'\nÉchecs : '+echecs+'\n\nRemplace ensuite le JSON dans GitHub.');
+    alert('Géocodage terminé.
+
+Coordonnées ajoutées : '+ajoutes+'
+Déjà présentes : '+dejaPresents+'
+Échecs : '+echecs+'
+
+Remplace ensuite le JSON dans GitHub.');
 }
 function telechargerJson(nomFichier,data){
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
