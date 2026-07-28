@@ -3,10 +3,10 @@
     "RecordID": "PDF-2026-07-07-001",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "7 chemin de la Réserve-Faunique, Québec, Canada",
+    "adresseComplete": "7 chemin de la RÉSERVE-FAUNIQUE, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.6557840",
-    "longitude": "-67.3317750",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-07-08",
       "EndDate": "2026-08-05",
@@ -22,8 +22,8 @@
     "historique": true,
     "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.8360421",
-    "longitude": "-67.4643444",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-07-07",
       "EndDate": "2026-08-03",
@@ -37,44 +37,27 @@
     "RecordID": "PDF-2026-07-03-003",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "44 route de la Montagne, Saint-René-de-Matane, Québec, Canada",
-    "ville": "Saint-René-de-Matane",
-    "latitude": "48.6986956",
-    "longitude": "-67.4067560",
+    "adresseComplete": "44 route de la MONTAGNE, Saint-Renée, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-07-04",
       "EndDate": "2026-08-08",
       "ApprovalDate": "2026-07-03",
       "FireType": "Aménagement",
-      "CityName": "Saint-René-de-Matane",
+      "CityName": "Matane",
       "OriginalFile": "44 route de la MONTAGNE-20260703.pdf"
     }
   },
   {
-    "RecordID": "PDF-2026-06-30-004",
+    "RecordID": "PDF-2026-07-02-004",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "3014 6E Rang, Saint-Léandre, Québec, Canada",
+    "adresseComplete": "3074 route des Érables, Saint-Léandre, QC G0J 2V0, Québec, Canada",
     "ville": "Saint-Léandre",
-    "latitude": "48.7661991",
-    "longitude": "-67.5948735",
-    "Data": {
-      "StartDate": "2026-06-30",
-      "EndDate": "2026-07-27",
-      "ApprovalDate": "2026-06-30",
-      "FireType": "Aménagement",
-      "CityName": "Saint-Léandre",
-      "OriginalFile": "3014_6E_RANG-20260630.pdf"
-    }
-  },
-  {
-    "RecordID": "PDF-2026-07-02-005",
-    "source": "PDF historique",
-    "historique": true,
-    "adresseComplete": "3074 route des Érables, Saint-Léandre, Québec, Canada",
-    "ville": "Saint-Léandre",
-    "latitude": "48.7218430",
-    "longitude": "-67.5945430",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-07-03",
       "EndDate": "2026-07-10",
@@ -85,13 +68,13 @@
     }
   },
   {
-    "RecordID": "PDF-2026-07-02-006",
+    "RecordID": "PDF-2026-07-02-005",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Canada, Québec, Canada",
     "ville": "Saint-Ulric",
-    "latitude": "48.7912825",
-    "longitude": "-67.6146230",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-07-03",
       "EndDate": "2026-08-06",
@@ -102,13 +85,30 @@
     }
   },
   {
+    "RecordID": "PDF-2026-06-30-006",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3014 6e Rang, Saint-Léandre, Québec, Canada",
+    "ville": "Saint-Léandre",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-30",
+      "EndDate": "2026-07-27",
+      "ApprovalDate": "2026-06-30",
+      "FireType": "Aménagement",
+      "CityName": "Saint-Léandre",
+      "OriginalFile": "3014_6E_RANG-20260630.pdf"
+    }
+  },
+  {
     "RecordID": "PDF-2026-06-30-007",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "141 chemin des Berges, Québec, Canada",
+    "adresseComplete": "141 chemin des BERGES, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.8624940",
-    "longitude": "-67.4446350",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-06-30",
       "EndDate": "2026-07-27",
@@ -122,24 +122,7 @@
     "RecordID": "PDF-2026-06-24-008",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "129 route du Ruisseau-à-la-Loutre, Québec, Canada",
-    "ville": "Matane",
-    "latitude": "48.8583590",
-    "longitude": "-67.4303040",
-    "Data": {
-      "StartDate": "2026-06-24",
-      "EndDate": "2026-07-22",
-      "ApprovalDate": "2026-06-24",
-      "FireType": "Aménagement",
-      "CityName": "Matane",
-      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-24-06-2026.pdf"
-    }
-  },
-  {
-    "RecordID": "PDF-2026-06-24-009",
-    "source": "PDF historique",
-    "historique": true,
-    "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
+    "adresseComplete": "3333 chemin du CHÔMAGE, Matane, Québec, Canada",
     "ville": "Matane",
     "latitude": "",
     "longitude": "",
@@ -153,30 +136,13 @@
     }
   },
   {
-    "RecordID": "PDF-2026-06-18-010",
+    "RecordID": "PDF-2026-06-24-009",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
-    "ville": "Matane",
-    "latitude": "48.8360421",
-    "longitude": "-67.4643444",
-    "Data": {
-      "StartDate": "2026-06-18",
-      "EndDate": "2026-06-25",
-      "ApprovalDate": "2026-06-18",
-      "FireType": "Branches",
-      "CityName": "Matane",
-      "OriginalFile": "290_ROUTE_HARISON_MATANE-18-06-2026.pdf"
-    }
-  },
-  {
-    "RecordID": "PDF-2026-06-24-011",
-    "source": "PDF historique",
-    "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Québec, Canada",
     "ville": "Saint-Ulric",
-    "latitude": "48.7912825",
-    "longitude": "-67.6146230",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-06-24",
       "EndDate": "2026-07-01",
@@ -187,27 +153,61 @@
     }
   },
   {
-    "RecordID": "PDF-2026-06-20-012",
+    "RecordID": "PDF-2026-06-24-010",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "165 route du Ruisseau-à-la-Loutre, Québec, Canada",
+    "adresseComplete": "129 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.8515630",
-    "longitude": "-67.4196930",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-24",
+      "EndDate": "2026-07-22",
+      "ApprovalDate": "2026-06-24",
+      "FireType": "Aménagement",
+      "CityName": "Matane",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-24-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-20-011",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "165 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-06-20",
       "EndDate": "2026-06-27",
       "ApprovalDate": "2026-06-20",
       "FireType": "Aménagement",
       "CityName": "Matane",
-      "OriginalFile": "165-route-du_RUISSEAU-À-LA-LOUTRE_20260620.pdf"
+      "OriginalFile": "165-route-du-RUISSEAU-À-LA-LOUTRE_20260620.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-19-012",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "1402 route du Grand Detour, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-19",
+      "EndDate": "2026-06-26",
+      "ApprovalDate": "2026-06-19",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "1402_rte_du_Grand-Detour-19-06-2026.pdf"
     }
   },
   {
     "RecordID": "PDF-2026-06-18-013",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "3333 chemin du Chômage, Québec, Canada",
+    "adresseComplete": "3333 chemin du CHÔMAGE, Matane, Québec, Canada",
     "ville": "Matane",
     "latitude": "",
     "longitude": "",
@@ -221,13 +221,30 @@
     }
   },
   {
-    "RecordID": "PDF-2026-06-16-014",
+    "RecordID": "PDF-2026-06-18-014",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "362 route de Saint-Luc, Matane, Québec, Canada",
+    "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.8227662",
-    "longitude": "-67.5003600",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-18",
+      "EndDate": "2026-06-25",
+      "ApprovalDate": "2026-06-18",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "290_ROUTE_HARISON_MATANE-18-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-16-015",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "362 Route de Saint-Luc, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
     "Data": {
       "StartDate": "2026-06-16",
       "EndDate": "2026-06-23",
@@ -238,20 +255,530 @@
     }
   },
   {
-    "RecordID": "PDF-2026-06-19-015",
+    "RecordID": "PDF-2026-06-09-016",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "1402 route du Grand Détour, Québec, Canada",
+    "adresseComplete": "116 route BEAUSÉJOUR, Matane, Québec, Canada",
     "ville": "Matane",
-    "latitude": "48.8043330",
-    "longitude": "-67.5363670",
+    "latitude": "",
+    "longitude": "",
     "Data": {
-      "StartDate": "2026-06-19",
-      "EndDate": "2026-06-26",
-      "ApprovalDate": "2026-06-19",
+      "StartDate": "2026-06-10",
+      "EndDate": "2026-06-18",
+      "ApprovalDate": "2026-06-09",
       "FireType": "Branches",
       "CityName": "Matane",
-      "OriginalFile": "1402_rte_du_Grand-Detour-19-06-2026.pdf"
+      "OriginalFile": "116_route_BEAUSÉJOUR-09-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-08-017",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "129 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-08",
+      "EndDate": "2026-06-15",
+      "ApprovalDate": "2026-06-08",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-08-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-04-018",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2840 PETIT-2E RANG, SAINT-ULRIC, Québec, Canada",
+    "ville": "Saint-Ulric",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-04",
+      "EndDate": "2026-06-11",
+      "ApprovalDate": "2026-06-04",
+      "FireType": "Branches",
+      "CityName": "Saint-Ulric",
+      "OriginalFile": "2840_PETIT-2E_RANG-04-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-06-01-019",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "58 Rang du Lac, Matane, QC G4W 9B9, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-06-01",
+      "EndDate": "2026-06-08",
+      "ApprovalDate": "2026-06-01",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "58_Rang_du_Lac_Matane-01-06-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-30-020",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "580 5e Rang E, Saint-Adelme, QC G0J 2B0, Québec, Canada",
+    "ville": "Saint-Adelme",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-30",
+      "EndDate": "2026-06-02",
+      "ApprovalDate": "2026-05-30",
+      "FireType": "Branches",
+      "CityName": "Saint-Adelme",
+      "OriginalFile": "580_5e_Rang_E_Saint-Adelme-30-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-28-021",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "15 chemin LEBEL, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-28",
+      "EndDate": "2026-06-04",
+      "ApprovalDate": "2026-05-28",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "15_chemin_LEBEL-28-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-26-022",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "64 Rang De La Coulée, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-26",
+      "EndDate": "2026-06-02",
+      "ApprovalDate": "2026-05-26",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "64_Rang_De_La_Coulée-26-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-26-023",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, Québec, Canada",
+    "ville": "Saint-Ulric",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-26",
+      "EndDate": "2026-06-02",
+      "ApprovalDate": "2026-05-26",
+      "FireType": "Branches",
+      "CityName": "Saint-Ulric",
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-26-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-26-024",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "260 route James, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-26",
+      "EndDate": "2026-06-02",
+      "ApprovalDate": "2026-05-26",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "260_Route_James_26-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-26-025",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "129 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-26",
+      "EndDate": "2026-06-02",
+      "ApprovalDate": "2026-05-26",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-26-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2025-05-21-026",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "362 Route de Saint-Luc, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-21",
+      "EndDate": "2026-05-28",
+      "ApprovalDate": "2025-05-21",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "362_ROUTE_ST_LUC-21-05-2025.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-15-027",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "513 route Bellevue E, Les Méchins, Québec, Canada",
+    "ville": "Les Méchins",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-15",
+      "EndDate": "2026-05-22",
+      "ApprovalDate": "2026-05-15",
+      "FireType": "Branches",
+      "CityName": "Les Méchins",
+      "OriginalFile": "513_Rte_Bellevue_E_Les Méchins-15-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-13-028",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "129 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-13",
+      "EndDate": "2026-05-20",
+      "ApprovalDate": "2026-05-13",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-13-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-12-029",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "1309 route du Grand Détour, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-12",
+      "EndDate": "2026-05-19",
+      "ApprovalDate": "2026-05-12",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "1309_Rte_du_Grand_Détour_Matane-12-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-11-030",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3505, chemin du Chômage, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-11",
+      "EndDate": "2026-05-17",
+      "ApprovalDate": "2026-05-11",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "3505_chemin_du_Chômage-11-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-08-031",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "609 route ATHANASE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-08",
+      "EndDate": "2026-05-15",
+      "ApprovalDate": "2026-05-08",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "609_route_ATHANASE-08-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-08-032",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "246 route CENTRALE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-08",
+      "EndDate": "2026-05-15",
+      "ApprovalDate": "2026-05-08",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "246_route_CENTRALE.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-06-033",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2732 4e Rang, Saint-Ulric, Québec, Canada",
+    "ville": "Saint-Ulric",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-07",
+      "EndDate": "2026-05-14",
+      "ApprovalDate": "2026-05-06",
+      "FireType": "Branches",
+      "CityName": "Saint-Ulric",
+      "OriginalFile": "2732_4E_RANG-06-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-07-034",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "1584 rang des BOUFFARD, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-07",
+      "EndDate": "2026-05-14",
+      "ApprovalDate": "2026-05-07",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "1584_rang_des_BOUFFARD-07-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-07-035",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "129 route du RUISSEAU-À-LA-LOUTRE, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-07",
+      "EndDate": "2026-05-14",
+      "ApprovalDate": "2026-05-07",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "129_route_du_RUISSEAU-À-LA-LOUTRE-07-05-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-01-036",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "68 rang du LAC, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-01",
+      "EndDate": "2026-05-08",
+      "ApprovalDate": "2026-05-01",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "68_Rang_du_Lac_Matane.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-05-01-037",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2741 4e rang est, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-05-01",
+      "EndDate": "2026-05-08",
+      "ApprovalDate": "2026-05-01",
+      "FireType": "Bois",
+      "CityName": "Matane",
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-30-038",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "98 chemin SAINT-PAUL, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-30",
+      "EndDate": "2026-05-07",
+      "ApprovalDate": "2026-04-30",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "98_chemin_SAINT_PAUL-Matane.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-30-039",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2035 avenue du Phare O, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-30",
+      "EndDate": "2026-05-07",
+      "ApprovalDate": "2026-04-30",
+      "FireType": "Bois",
+      "CityName": "Matane",
+      "OriginalFile": "2035_avenue_du_PHARE_O-MATANE.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-30-040",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "1309 route du GRAND-DÉTOUR, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-30",
+      "EndDate": "2026-05-07",
+      "ApprovalDate": "2026-04-30",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "1309_route_du_GRAND-DÉTOUR-Matane.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2025-04-27-041",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "351 route de Saint-Luc, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-28",
+      "EndDate": "2026-05-05",
+      "ApprovalDate": "2025-04-27",
+      "FireType": "Bois",
+      "CityName": "Matane",
+      "OriginalFile": "351_ROUTE_ST_LUC-27-04-2025.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-28-042",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "290 route Harrisson, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-27",
+      "EndDate": "2026-05-05",
+      "ApprovalDate": "2026-04-28",
+      "FireType": "Bois",
+      "CityName": "Matane",
+      "OriginalFile": "290_ROUTE_HARISON_MATANE-28-04-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-27-043",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "2732 4e rang est, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-27",
+      "EndDate": "2026-05-04",
+      "ApprovalDate": "2026-04-27",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "2732_4E_RANG-27-04-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-04-24-044",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "3099 avenue du centenaire, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-04-24",
+      "EndDate": "2026-05-01",
+      "ApprovalDate": "2026-04-24",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "3099_DU_CENTENAIRE-ST-ULRIC.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-03-13-045",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "645 route Athanase, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-03-13",
+      "EndDate": "2026-04-11",
+      "ApprovalDate": "2026-03-13",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "645_RT_ATHANASE-13-03-2026.pdf"
+    }
+  },
+  {
+    "RecordID": "PDF-2026-03-06-046",
+    "source": "PDF historique",
+    "historique": true,
+    "adresseComplete": "228 4e Rang, Matane, Québec, Canada",
+    "ville": "Matane",
+    "latitude": "",
+    "longitude": "",
+    "Data": {
+      "StartDate": "2026-03-06",
+      "EndDate": "2026-04-03",
+      "ApprovalDate": "2026-03-06",
+      "FireType": "Branches",
+      "CityName": "Matane",
+      "OriginalFile": "228_4E_RANG-6-03-2026.pdf"
     }
   }
 ]
