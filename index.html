@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portail Prévention Incendie - MRC de La Matanie</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
 
 <style>
 :root{
@@ -46,7 +46,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .layout{display:flex;gap:20px;padding:20px;padding-top:0;}
 .sidebar{width:350px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);max-height:75vh;overflow:auto;}
 .sidebar h3{margin:8px 0 12px;color:var(--bleu);}
-#map{flex:1;height:75vh;min-height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+#map{flex:1;height:75vh;min-height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;}
 .permis-item{padding:15px;margin-bottom:12px;border-radius:14px;background:#fff;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.2s;}
 .permis-item:hover{transform:translateX(5px);box-shadow:0 8px 18px rgba(0,0,0,.12);}
 .permis-numero{font-size:18px;font-weight:700;color:var(--bleu);margin-bottom:8px;}
@@ -83,7 +83,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .rank-right{font-weight:800;color:var(--bleu);}
 .rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}
 .rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
-#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;}
 .note{color:var(--muted);font-size:13px;line-height:1.45;}
 .empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
@@ -114,7 +114,7 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
         <div class="sidebar">
             <h3>Zones SOPFEU</h3>
             <div id="zonesDanger"></div>
-            <h3>Permis avec coordonnées</h3>
+            <h3>Permis non expirés avec coordonnées</h3>
             <div id="listePermis"></div>
         </div>
         <div id="map"></div>
@@ -152,22 +152,21 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
         </div>
         <div class="panel">
             <h3>Carte thermique des permis</h3>
-            <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés. Seuls les permis avec latitude/longitude sont affichés dans cette couche.</p>
+            <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés, incluant les permis expirés afin de conserver l'analyse historique.</p>
             <div id="heatmap"></div>
         </div>
     </div>
 </section>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 
 <script>
 const API_PERMIS = 'https://permis-brulage.oussama-refas.workers.dev/';
 const API_SOPFEU = 'https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/';
 const FICHIER_HISTORIQUES = './permis-historiques.json';
-
 let permisCache=[];
 let charts=[];
 let heatMapInstance=null;
@@ -200,7 +199,6 @@ function creerIconePermis(couleur, taille=24){
 function lireMunicipaliteDepuisPermis(p){
     if (p.ville && p.ville !== 'Non précisée') return p.ville;
     if (p.Data?.CityName && p.Data.CityName !== 'Non précisée') return p.Data.CityName;
-
     const adresse = String(p.adresseComplete || '').toLowerCase();
     const municipalites = ['Matane','Saint-Ulric','Saint-Léandre','Saint-René-de-Matane','Les Méchins','Saint-Adelme','Sainte-Félicité','Grosses-Roches','Baie-des-Sables','Métis-sur-Mer','Sainte-Paule','Saint-Jean-de-Cherbourg','Notre-Dame-des-Neiges'];
     for (const m of municipalites) {
@@ -252,31 +250,31 @@ async function chargerPermis(recalculStats=false){
     let actifs=0, expire=0;
     const municipalites=new Set();
     const bounds=[];
-
     try{
         const permisActifs = await lireJson(API_PERMIS + '?t=' + Date.now(), []);
         const permisHistoriques = await lireJson(FICHIER_HISTORIQUES + '?t=' + Date.now(), []);
-
         permisCache = [...permisActifs, ...permisHistoriques];
-
         console.log('Permis actifs Cloudflare:', permisActifs.length);
         console.log('Permis historiques JSON:', permisHistoriques.length);
         console.log('Total permis analysés:', permisCache.length);
 
-        // IMPORTANT: les statistiques de la carte du haut comptent tous les permis, même sans coordonnées.
+        // Carte opérationnelle: compte uniquement les permis non expirés.
         permisCache.forEach(p=>{
             const st=statutPermis(p);
+            if(st.nom==='Expiré') return;
             if(st.nom==='Expire bientôt') expire++;
-            if(st.nom!=='Expiré') actifs++;
+            actifs++;
             municipalites.add(lireMunicipaliteDepuisPermis(p));
         });
 
-        // Seule la carte ignore les permis sans coordonnées.
+        // Carte principale et liste: affiche seulement les permis non expirés avec coordonnées.
+        // Les permis expirés restent dans les statistiques et dans la carte thermique.
         permisCache.forEach(p=>{
+            const st=statutPermis(p);
+            if(st.nom==='Expiré') return;
             if(!p.latitude || !p.longitude) return;
             const lat=parseFloat(p.latitude), lon=parseFloat(p.longitude);
             if(isNaN(lat) || isNaN(lon)) return;
-            const st=statutPermis(p);
             bounds.push([lat,lon]);
             const marker=L.marker([lat,lon],{icon:creerIconePermis(st.couleur,24)}).addTo(permisLayer);
             marker.bindPopup(`<div class="popup-card"><div class="popup-header" style="background:${st.couleur};">🚒 Permis #${p.RecordID}<br>${st.nom}</div><div class="popup-section">📍 Adresse</div>${p.adresseComplete || 'Adresse non précisée'}<div class="popup-section">📅 Expiration</div>${p.Data?.EndDate || 'Non précisée'}<div class="popup-section">🏘️ Municipalité</div>${lireMunicipaliteDepuisPermis(p)}</div>`);
@@ -356,71 +354,34 @@ function genererStatistiques(){
     charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
     charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
     charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B','#005A93']}]},options:{responsive:true,maintainAspectRatio:false}}));
-    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Contrôle :</b> vérifie la console du navigateur pour confirmer le nombre de permis actifs, historiques et totaux chargés.`;
+    document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Contrôle :</b> Les statistiques incluent les permis actifs et expirés. La carte principale affiche seulement les permis non expirés. La carte thermique inclut tout l'historique avec coordonnées.`;
     genererHeatmap();
 }
 
 function genererHeatmap(){
     if(!window.L || !L.heatLayer){console.error('Leaflet Heat non chargé.');return;}
-    const points=permisCache.filter(p=>p.latitude&&p.longitude).map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75]).filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
+    if(!document.getElementById('vueStats').classList.contains('active')) return;
+    const points=permisCache
+        .filter(p=>p.latitude&&p.longitude)
+        .map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75])
+        .filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
     if(!heatMapInstance){
         const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
         heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);
     }
-    if(heatLayer) heatMapInstance.removeLayer(heatLayer);
-    if(points.length){
+    if(heatLayer){
+        heatMapInstance.removeLayer(heatLayer);
+        heatLayer=null;
+    }
+    if(!points.length){
+        setTimeout(()=>heatMapInstance.invalidateSize(),300);
+        return;
+    }
+    setTimeout(()=>{
+        heatMapInstance.invalidateSize();
         heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);
         heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});
-    }
-    setTimeout(()=>heatMapInstance.invalidateSize(),300);
-}
-
-// Outil admin facultatif : géocoder les permis historiques puis télécharger un JSON à remettre dans GitHub.
-const CACHE_GEOCODE_HISTORIQUES = 'cache_geocode_permis_historiques_v1';
-function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
-function lireCacheGeocode(){try{return JSON.parse(localStorage.getItem(CACHE_GEOCODE_HISTORIQUES)||'{}');}catch(e){return {};}}
-function sauvegarderCacheGeocode(cache){localStorage.setItem(CACHE_GEOCODE_HISTORIQUES,JSON.stringify(cache));}
-function normaliserAdresseGeocode(adresse){return String(adresse||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
-async function geocoderAdresse(adresse){
-    if(!adresse)return null;
-    const cache=lireCacheGeocode();
-    const cle=normaliserAdresseGeocode(adresse);
-    if(cache[cle])return cache[cle];
-    const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(adresse);
-    try{
-        const r=await fetch(url,{headers:{'Accept':'application/json'}});
-        const data=await r.json();
-        if(Array.isArray(data)&&data.length>0){
-            const coords={latitude:data[0].lat,longitude:data[0].lon};
-            cache[cle]=coords;
-            sauvegarderCacheGeocode(cache);
-            return coords;
-        }
-    }catch(e){console.warn('Erreur de géocodage pour :',adresse,e);}
-    return null;
-}
-async function geocoderEtTelechargerHistoriques(){
-    const historiques=await lireJson(FICHIER_HISTORIQUES + '?t=' + Date.now(), []);
-    let ajoutes=0,dejaPresents=0,echecs=0;
-    for(const p of historiques){
-        if(p.latitude&&p.longitude){dejaPresents++;continue;}
-        const coords=await geocoderAdresse(p.adresseComplete);
-        if(coords){p.latitude=coords.latitude;p.longitude=coords.longitude;ajoutes++;}else{echecs++;console.warn('Coordonnées introuvables pour :',p.adresseComplete);}
-        await pause(1200);
-    }
-    telechargerJson('permis-historiques.json',historiques);
-    alert('Géocodage terminé.\n\nCoordonnées ajoutées : '+ajoutes+'\nDéjà présentes : '+dejaPresents+'\nÉchecs : '+echecs+'\n\nRemplace ensuite le JSON dans GitHub.');
-}
-function telechargerJson(nomFichier,data){
-    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;
-    a.download=nomFichier;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    },300);
 }
 
 chargerPermis();
