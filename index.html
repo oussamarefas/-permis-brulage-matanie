@@ -94,7 +94,6 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
             </div>
             <div class="stats-actions">
                 <button class="small-btn" onclick="chargerPermis(true)">🔄 Actualiser les statistiques</button>
-                <button class="small-btn secondary" onclick="geocoderEtTelechargerHistoriques()">📍 Ajouter latitude/longitude</button>
                 <button class="small-btn" onclick="afficherVue('carte')">🗺️ Retour à la carte</button>
             </div>
         </div>
@@ -104,6 +103,7 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
             <div class="kpi"><div class="label">Mois le plus fort</div><div class="value" id="kpiMoisFort">--</div></div>
             <div class="kpi"><div class="label">Permis expirés</div><div class="value" id="kpiExpires">0</div></div>
         </div>
+        <div id="alerteJson" class="empty-state" style="display:none;margin-bottom:20px;border-left:6px solid var(--rouge);"></div>
         <div class="grid-2">
             <div class="panel"><h3>Histogramme par municipalité</h3><div class="chart-box"><canvas id="chartMunicipalites"></canvas></div></div>
             <div class="panel"><h3>Demandes par mois de l'année</h3><div class="chart-box"><canvas id="chartMois"></canvas></div></div>
@@ -215,17 +215,18 @@ async function lireJson(url, fallback=[]){
 }
 
 async function chargerHistoriques(){
-    // Charge les donnees historiques du JSON local.
-    // Le premier nom est le nom officiel a garder dans GitHub.
-    // Les deux autres sont des secours si ton fichier porte encore le nom telecharge avec (7).
+    const alerte=document.getElementById('alerteJson');
+    if(alerte){alerte.style.display='none';alerte.innerHTML='';}
     for(const fichier of FICHIERS_HISTORIQUES){
         const data = await lireJson(fichier + '?t=' + Date.now(), null);
         if(Array.isArray(data) && data.length){
-            console.log('Fichier historique charge:', fichier, 'Nombre:', data.length);
+            console.log('Fichier historique chargé:', fichier, 'Nombre:', data.length);
             return data;
         }
     }
-    console.error('Aucun fichier historique charge. Verifie que permis-historiques.json est dans le meme dossier que index.html.');
+    const message='Les données historiques ne sont pas chargées. Vérifie que le fichier <b>permis-historiques.json</b> est bien dans le même dossier GitHub que <b>index.html</b>, avec exactement ce nom.';
+    console.error(message);
+    if(alerte){alerte.style.display='block';alerte.innerHTML=message;}
     return [];
 }
 async function chargerPermis(recalculStats=false){
@@ -416,6 +417,9 @@ function telechargerJson(nomFichier,data){
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');a.href=url;a.download=nomFichier;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+function verifierJsonHistorique(){
+    chargerHistoriques().then(data=>console.log('Vérification JSON historique:', data.length, 'permis'));
 }
 function demarrer(){
     initialiserCartePrincipale();
