@@ -133,6 +133,11 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
 const API_PERMIS = 'https://permis-brulage.oussama-refas.workers.dev/';
 const API_SOPFEU = 'https://quiet-darkness-3c04sopfeu-danger.oussama-refas.workers.dev/';
 const FICHIER_HISTORIQUES = './permis-historiques.json';
+const FICHIERS_HISTORIQUES = [
+    './permis-historiques.json',
+    './permis-historiques%20(7).json',
+    './permis-historiques (7).json'
+];
 const CACHE_GEOCODE_HISTORIQUES = 'cache_geocode_permis_historiques_v3';
 let permisCache=[];
 let charts=[];
@@ -208,6 +213,21 @@ async function lireJson(url, fallback=[]){
         return Array.isArray(data) ? data : fallback;
     }catch(e){console.warn('Erreur lecture JSON:', url, e);return fallback;}
 }
+
+async function chargerHistoriques(){
+    // Charge les donnees historiques du JSON local.
+    // Le premier nom est le nom officiel a garder dans GitHub.
+    // Les deux autres sont des secours si ton fichier porte encore le nom telecharge avec (7).
+    for(const fichier of FICHIERS_HISTORIQUES){
+        const data = await lireJson(fichier + '?t=' + Date.now(), null);
+        if(Array.isArray(data) && data.length){
+            console.log('Fichier historique charge:', fichier, 'Nombre:', data.length);
+            return data;
+        }
+    }
+    console.error('Aucun fichier historique charge. Verifie que permis-historiques.json est dans le meme dossier que index.html.');
+    return [];
+}
 async function chargerPermis(recalculStats=false){
     if(permisLayer)permisLayer.clearLayers();
     document.getElementById('listePermis').innerHTML='';
@@ -216,12 +236,15 @@ async function chargerPermis(recalculStats=false){
     const bounds=[];
     try{
         const permisActifs = await lireJson(API_PERMIS + '?t=' + Date.now(), []);
-        const permisHistoriques = await lireJson(FICHIER_HISTORIQUES + '?t=' + Date.now(), []);
+        const permisHistoriques = await chargerHistoriques();
         permisCache = [...permisActifs, ...permisHistoriques];
         console.log('Permis actifs Cloudflare:', permisActifs.length);
         console.log('Permis historiques JSON:', permisHistoriques.length);
         console.log('Total permis analysés:', permisCache.length);
         console.log('Coordonnées manquantes:', permisCache.filter(p=>!p.latitude||!p.longitude).length);
+        if(!permisHistoriques.length){
+            console.error('ATTENTION: les donnees historiques du JSON ne sont pas chargees. Nom attendu: permis-historiques.json');
+        }
         permisCache.forEach(p=>{
             const st=statutPermis(p);
             if(st.nom==='Expiré') return;
