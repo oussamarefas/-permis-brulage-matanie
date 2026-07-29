@@ -73,15 +73,18 @@
     "historique": true,
     "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Canada, Québec, Canada",
     "ville": "Saint-Ulric",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.7912825",
+    "longitude": "-67.6146230",
     "Data": {
       "StartDate": "2026-07-03",
       "EndDate": "2026-08-06",
       "ApprovalDate": "2026-07-02",
       "FireType": "Aménagement",
       "CityName": "Saint-Ulric",
-      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-02-07-2026.pdf"
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-02-07-2026.pdf",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "2741, 4e Rang Est, Saint-Ulric, La Matanie, Bas-Saint-Laurent, Québec, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -141,15 +144,18 @@
     "historique": true,
     "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Québec, Canada",
     "ville": "Saint-Ulric",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.7912825",
+    "longitude": "-67.6146230",
     "Data": {
       "StartDate": "2026-06-24",
       "EndDate": "2026-07-01",
       "ApprovalDate": "2026-06-24",
       "FireType": "Aménagement",
       "CityName": "Saint-Ulric",
-      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-24-06-2026.pdf"
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-24-06-2026.pdf",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "2741, 4e Rang Est, Saint-Ulric, La Matanie, Bas-Saint-Laurent, Québec, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -379,15 +385,18 @@
     "historique": true,
     "adresseComplete": "2741 Rang 4e E, Saint-Ulric, Québec, Canada",
     "ville": "Saint-Ulric",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.7912825",
+    "longitude": "-67.6146230",
     "Data": {
       "StartDate": "2026-05-26",
       "EndDate": "2026-06-02",
       "ApprovalDate": "2026-05-26",
       "FireType": "Branches",
       "CityName": "Saint-Ulric",
-      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-26-05-2026.pdf"
+      "OriginalFile": "2741_4E_RANG_E-ST-ULRIC-26-05-2026.pdf",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "2741, 4e Rang Est, Saint-Ulric, La Matanie, Bas-Saint-Laurent, Québec, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -813,8 +822,8 @@
     "historique": true,
     "adresseComplete": "163 route du Moulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9921533",
+    "longitude": "-66.9571466",
     "Data": {
       "StartDate": "2024-04-27",
       "EndDate": "2024-05-10",
@@ -824,7 +833,10 @@
       "Reason": "Amenagement forestier",
       "BurnLocation": "Au centre du terrain au secteur 2 de la residence",
       "Materials": "Branchage en tas de 1x1 métre maximum",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "163, Route du Moulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -833,8 +845,8 @@
     "historique": true,
     "adresseComplete": "132 route de Saint-Paulin, Les Méchins, G0J1T0, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9875271",
+    "longitude": "-66.9282630",
     "Data": {
       "StartDate": "2024-04-26",
       "EndDate": "2024-05-10",
@@ -844,7 +856,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "100m en arriére de la maison",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "132, Route de Saint-Paulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -853,8 +868,8 @@
     "historique": true,
     "adresseComplete": "333 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0161321",
+    "longitude": "-66.9431142",
     "Data": {
       "StartDate": "2024-05-20",
       "EndDate": "2024-05-27",
@@ -864,7 +879,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En arriere de la maison",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "333, Route Bellevue Est, Petits-Méchins, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -873,8 +891,8 @@
     "historique": true,
     "adresseComplete": "163 route du Moulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9921533",
+    "longitude": "-66.9571466",
     "Data": {
       "StartDate": "2024-05-15",
       "EndDate": "2024-05-22",
@@ -884,7 +902,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En avant de la maison sur une surface non combustible",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "163, Route du Moulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -936,8 +957,8 @@
     "historique": true,
     "adresseComplete": "543 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0330020",
+    "longitude": "-66.9084155",
     "Data": {
       "StartDate": "2024-06-13",
       "EndDate": "2024-06-16",
@@ -947,7 +968,10 @@
       "Reason": "Feu de greve et feu d'artifice",
       "BurnLocation": "Greve en face de la maison",
       "Materials": "Bois de greve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "543, Route Bellevue Est, Petits-Méchins, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -956,8 +980,8 @@
     "historique": true,
     "adresseComplete": "201 rue de la Mer, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9991564",
+    "longitude": "-66.9845841",
     "Data": {
       "StartDate": "2024-06-19",
       "EndDate": "2024-06-26",
@@ -967,7 +991,10 @@
       "Reason": "Feux de la saint-Jean",
       "BurnLocation": "Bord de la grève",
       "Materials": "Bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -999,8 +1026,8 @@
     "historique": true,
     "adresseComplete": "200 route du Moulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9884724",
+    "longitude": "-66.9561658",
     "Data": {
       "StartDate": "2024-06-20",
       "EndDate": "2024-06-27",
@@ -1010,7 +1037,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Milieu du secteur 3",
       "Materials": "branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "200, Route du Moulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1042,8 +1072,8 @@
     "historique": true,
     "adresseComplete": "381 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0185218",
+    "longitude": "-66.9350842",
     "Data": {
       "StartDate": "2024-07-18",
       "EndDate": "2024-07-25",
@@ -1053,7 +1083,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Bord de la greve",
       "Materials": "Bois de greve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "381, Route Bellevue Est, Petits-Méchins, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1085,8 +1118,8 @@
     "historique": true,
     "adresseComplete": "180 route de Saint-Paulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9584430",
+    "longitude": "-66.8991200",
     "Data": {
       "StartDate": "2024-07-27",
       "EndDate": "2024-08-03",
@@ -1096,7 +1129,10 @@
       "Reason": "Fête",
       "BurnLocation": "Dans le secteur 5 au centre de la colline",
       "Materials": "Feux d'artitifice",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "180, Route de Saint-Paulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1151,8 +1187,8 @@
     "historique": true,
     "adresseComplete": "381 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0185218",
+    "longitude": "-66.9350842",
     "Data": {
       "StartDate": "2024-08-17",
       "EndDate": "2024-08-20",
@@ -1162,7 +1198,10 @@
       "Reason": "Feu de greve",
       "BurnLocation": "Bord de la greve",
       "Materials": "Bois de greve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "381, Route Bellevue Est, Petits-Méchins, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1171,8 +1210,8 @@
     "historique": true,
     "adresseComplete": "201 rue de la Mer, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9991564",
+    "longitude": "-66.9845841",
     "Data": {
       "StartDate": "2024-08-25",
       "EndDate": "2024-08-27",
@@ -1182,7 +1221,10 @@
       "Reason": "Feux de joie",
       "BurnLocation": "Bord de la greve",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1214,8 +1256,8 @@
     "historique": true,
     "adresseComplete": "route de Saint-Paulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9914806",
+    "longitude": "-66.9270259",
     "Data": {
       "StartDate": "2024-08-30",
       "EndDate": "2024-09-06",
@@ -1225,7 +1267,10 @@
       "Reason": "Feux de joie",
       "BurnLocation": "Tobe au centre du terrain",
       "Materials": "Bois non traité",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route de Saint-Paulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1326,8 +1371,8 @@
     "historique": true,
     "adresseComplete": "route des Fonds, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9681998",
+    "longitude": "-66.9886556",
     "Data": {
       "StartDate": "2024-10-22",
       "EndDate": "2024-11-05",
@@ -1337,7 +1382,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "100 pied du chemin",
       "Materials": "Branche",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route des Fonds, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1461,8 +1509,8 @@
     "historique": true,
     "adresseComplete": "239 route Bellevue Ouest, Les Méchins, G0J 1T0, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9971624",
+    "longitude": "-66.9875510",
     "Data": {
       "StartDate": "2025-10-20",
       "EndDate": "2025-11-03",
@@ -1472,7 +1520,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "25m de dégagement du garage et de la végétation",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "239, Route Bellevue Ouest, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1481,8 +1532,8 @@
     "historique": true,
     "adresseComplete": "168 route de Saint-Paulin, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9657909",
+    "longitude": "-66.9100031",
     "Data": {
       "StartDate": "2025-10-20",
       "EndDate": "2025-11-03",
@@ -1492,7 +1543,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "25m de dégagement de la végétation et des installations",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "168, Route de Saint-Paulin, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1524,8 +1578,8 @@
     "historique": true,
     "adresseComplete": "536 route Bellevue Est, Les Méchins, G0J1T0, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0323317",
+    "longitude": "-66.9095433",
     "Data": {
       "StartDate": "2025-11-07",
       "EndDate": "2025-11-21",
@@ -1535,7 +1589,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Centre du champs",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "536, Route Bellevue Est, Petits-Méchins, Les Méchins, La Matanie, Bas-Saint-Laurent, Québec, G0J 1T0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1544,8 +1601,8 @@
     "historique": true,
     "adresseComplete": "53 route de Saint-Jean, Saint-Jean-de-Cherbourg, Québec, Canada",
     "ville": "Saint-Jean-de-Cherbourg",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.8714601",
+    "longitude": "-67.1196425",
     "Data": {
       "StartDate": "2024-10-29",
       "EndDate": "2024-11-13",
@@ -1555,7 +1612,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "100 pied en arriere du chalet",
       "Materials": "Branchage et buche",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route de Saint-Jean, Saint-Jean-de-Cherbourg, La Matanie, Bas-Saint-Laurent, Québec, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1584,8 +1644,8 @@
     "historique": true,
     "adresseComplete": "250 route 132 Ouest, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9335111",
+    "longitude": "-67.1910248",
     "Data": {
       "StartDate": "2024-03-06",
       "EndDate": "2024-04-03",
@@ -1595,7 +1655,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bas de la côte",
       "Materials": "Branchages",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "250, Route 132 Ouest, Jaco-Hughes, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1627,8 +1690,8 @@
     "historique": true,
     "adresseComplete": "289 route 132 Est, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9455650",
+    "longitude": "-67.1438840",
     "Data": {
       "StartDate": "2024-03-20",
       "EndDate": "2024-04-03",
@@ -1638,7 +1701,10 @@
       "Reason": "Aménagement forestier",
       "BurnLocation": "Champ au nord",
       "Materials": "Branchages",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "289, Route 132 Est, Ruisseau-à-la-Loutre, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1647,8 +1713,8 @@
     "historique": true,
     "adresseComplete": "route des Crapauds, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9413671",
+    "longitude": "-67.1216997",
     "Data": {
       "StartDate": "2024-06-20",
       "EndDate": "2024-06-27",
@@ -1658,7 +1724,10 @@
       "Reason": "Amenagement forestier",
       "BurnLocation": "Zone de non combustible de 50 pied carrée",
       "Materials": "Branchage et souche",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route des Crapauds, Ruisseau-à-la-Loutre, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1690,8 +1759,8 @@
     "historique": true,
     "adresseComplete": "123-A rue de la MER A, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9382206",
+    "longitude": "-67.1703669",
     "Data": {
       "StartDate": "2024-08-30",
       "EndDate": "2024-09-02",
@@ -1701,7 +1770,10 @@
       "Reason": "Feux de gréve",
       "BurnLocation": "Bord de la greve sur le bord de la jetée",
       "Materials": "Bois de gréve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1710,8 +1782,8 @@
     "historique": true,
     "adresseComplete": "192 rue de la Mer, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9382206",
+    "longitude": "-67.1703669",
     "Data": {
       "StartDate": "2024-10-14",
       "EndDate": "2024-10-21",
@@ -1721,7 +1793,10 @@
       "Reason": "Aménagement - Feux de gréve",
       "BurnLocation": "Bord de la gréve",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1730,8 +1805,8 @@
     "historique": true,
     "adresseComplete": "route Jaco-Hughes, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9247508",
+    "longitude": "-67.1974618",
     "Data": {
       "StartDate": "2024-10-30",
       "EndDate": "2024-11-13",
@@ -1741,7 +1816,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Sur le lot coté sud matricule: 2719-59-1463",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route Jaco-Hughes, Jaco-Hughes, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1796,8 +1874,8 @@
     "historique": true,
     "adresseComplete": "route des Grosses-Roches, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.8990469",
+    "longitude": "-67.1290624",
     "Data": {
       "StartDate": "2025-04-25",
       "EndDate": "2025-05-09",
@@ -1807,7 +1885,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "50 pied de dégagement",
       "Materials": "branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "Route des Grosses-Roches, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1816,8 +1897,8 @@
     "historique": true,
     "adresseComplete": "199 route 132 Ouest, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9357994",
+    "longitude": "-67.1842561",
     "Data": {
       "StartDate": "2025-08-11",
       "EndDate": "2025-08-18",
@@ -1827,7 +1908,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En arriere de la maison 25m de dégagement",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "199, Route 132 Ouest, Jaco-Hughes, Grosses-Roches, La Matanie, Bas-Saint-Laurent, Québec, G0J 1K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1836,8 +1920,8 @@
     "historique": true,
     "adresseComplete": "127 rue Veilleux, Sainte-Félicité, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.8949065",
+    "longitude": "-67.3348610",
     "Data": {
       "StartDate": "2024-01-08",
       "EndDate": "2024-02-05",
@@ -1847,7 +1931,10 @@
       "Reason": "Aménagement forestier",
       "BurnLocation": "Champs coté Est",
       "Materials": "Petit tas branchage coté Ouest",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "127, Rue Veilleux, Sainte-Félicité, La Matanie, Bas-Saint-Laurent, Québec, G0J 2K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
@@ -1971,8 +2058,8 @@
     "historique": true,
     "adresseComplete": "2 4e rang Lefrançois, Sainte-Félicité, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.8609415",
+    "longitude": "-67.3307660",
     "Data": {
       "StartDate": "2024-04-19",
       "EndDate": "2024-05-17",
@@ -1982,7 +2069,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En avant du chalet",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Nominatim",
+      "GeocodeDisplayName": "4e Rang Lefrançois, Petit-Matane, Sainte-Félicité, La Matanie, Bas-Saint-Laurent, Québec, G0J 2K0, Canada",
+      "GeocodeDate": "2026-07-29"
     }
   },
   {
