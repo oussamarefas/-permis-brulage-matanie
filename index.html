@@ -79,7 +79,7 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
         <div class="sidebar">
             <h3>Zones SOPFEU</h3>
             <div id="zonesDanger"></div>
-            <h3>Permis non expirés avec coordonnées</h3>
+            <h3>Permis en cours</h3>
             <div id="listePermis"></div>
         </div>
         <div id="map"></div>
@@ -110,7 +110,7 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
         </div>
         <div class="grid-2">
             <div class="panel"><h3>Classement Top 10 - Plus de permis</h3><div id="topMunicipalites" class="rank-list"></div></div>
-            <div class="panel"><h3>Classement - Moins de permis</h3><div id="bottomMunicipalites" class="rank-list"></div></div>
+            <div class="panel"><h3>Répartition des permis émis par jour de la semaine</h3><div class="chart-box"><canvas id="chartJourSemaine"></canvas></div></div>
         </div>
         <div class="grid-2">
             <div class="panel"><h3>Répartition des statuts</h3><div class="chart-box"><canvas id="chartStatuts"></canvas></div></div>
@@ -147,6 +147,7 @@ let map=null;
 let permisLayer=null;
 let heatmapResizeObserver=null;
 const moisNoms=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const joursSemaineNoms=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 function initialiserCartePrincipale(){
     const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});
     const topo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png',{attribution:'© OpenTopoMap'});
@@ -293,6 +294,7 @@ async function chargerSopfeu(){
 }
 function compterParMunicipalite(){const c={};permisCache.forEach(p=>{const m=lireMunicipaliteDepuisPermis(p);c[m]=(c[m]||0)+1;});return c;}
 function compterParMois(){const c=Array(12).fill(0);permisCache.forEach(p=>{const dt=convertirDate(dateReference(p));if(dt)c[dt.getMonth()]++;});return c;}
+function compterParJourSemaine(){const c=Array(7).fill(0);permisCache.forEach(p=>{const dt=convertirDate(dateReference(p));if(dt)c[dt.getDay()]++;});return c;}
 function compterParStatut(){const c={'Actif':0,'Expire bientôt':0,'Expiré':0,'À vérifier':0};permisCache.forEach(p=>{const s=statutPermis(p).nom;c[s]=(c[s]||0)+1;});return c;}
 function detruireCharts(){charts.forEach(ch=>ch.destroy());charts=[];}
 function rankHtml(containerId,entries,max){
@@ -306,15 +308,16 @@ function rankHtml(containerId,entries,max){
 function genererStatistiques(){
     if(!permisCache.length) return;
     detruireCharts();
-    const total=permisCache.length, municip=compterParMunicipalite(), entries=Object.entries(municip).sort((a,b)=>b[1]-a[1]), topTen=entries.slice(0,10), bottom=Object.entries(municip).sort((a,b)=>a[1]-b[1]).slice(0,10), mois=compterParMois(), statuts=compterParStatut(), maxMunicip=entries.length?entries[0][1]:0, maxMois=Math.max(...mois,0), indexMoisFort=mois.indexOf(maxMois);
+    const total=permisCache.length, municip=compterParMunicipalite(), entries=Object.entries(municip).sort((a,b)=>b[1]-a[1]), topTen=entries.slice(0,10), mois=compterParMois(), joursSemaine=compterParJourSemaine(), statuts=compterParStatut(), maxMunicip=entries.length?entries[0][1]:0, maxMois=Math.max(...mois,0), indexMoisFort=mois.indexOf(maxMois);
     document.getElementById('kpiTotal').innerText=total;
     document.getElementById('kpiTopMunicipalite').innerText=entries.length?entries[0][0]:'--';
     document.getElementById('kpiMoisFort').innerText=maxMois>0?moisNoms[indexMoisFort]:'--';
     document.getElementById('kpiExpires').innerText=statuts['Expiré'] || 0;
-    rankHtml('topMunicipalites',topTen,maxMunicip);rankHtml('bottomMunicipalites',bottom,maxMunicip);
+    rankHtml('topMunicipalites',topTen,maxMunicip);
     if(window.Chart){
         charts.push(new Chart(document.getElementById('chartMunicipalites'),{type:'bar',data:{labels:topTen.map(e=>e[0]),datasets:[{label:'Permis',data:topTen.map(e=>e[1]),backgroundColor:'#005A93'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
         charts.push(new Chart(document.getElementById('chartMois'),{type:'bar',data:{labels:moisNoms,datasets:[{label:'Demandes',data:mois,backgroundColor:'#5A9E3A'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}}));
+        charts.push(new Chart(document.getElementById('chartJourSemaine'),{type:'bar',data:{labels:joursSemaineNoms,datasets:[{label:'Permis émis',data:joursSemaine,backgroundColor:'#0074B8'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}}));
         charts.push(new Chart(document.getElementById('chartStatuts'),{type:'doughnut',data:{labels:Object.keys(statuts),datasets:[{data:Object.values(statuts),backgroundColor:['#5A9E3A','#D7A937','#C0392B','#005A93']}]},options:{responsive:true,maintainAspectRatio:false}}));
     }
     document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Coordonnées :</b> ${permisCache.filter(p=>!p.latitude||!p.longitude).length} permis n'ont pas encore de latitude/longitude.`;
