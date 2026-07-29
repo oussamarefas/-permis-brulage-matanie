@@ -49,7 +49,27 @@ body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--gris);color
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:15px;margin-bottom:20px;}.kpi{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}.kpi .label{color:var(--muted);font-size:13px;margin-bottom:8px;}.kpi .value{font-size:28px;font-weight:800;color:var(--bleu);}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}.panel{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}.panel h3{margin:0 0 14px;color:var(--bleu);}.chart-box{height:340px;position:relative;}
 .rank-list{display:flex;flex-direction:column;gap:10px;}.rank-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-radius:12px;padding:12px;border-left:6px solid var(--bleu2);}.rank-left{font-weight:700;color:#1f2937;}.rank-right{font-weight:800;color:var(--bleu);}.rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}.rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
-#heatmap{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;}.note{color:var(--muted);font-size:13px;line-height:1.45;}.empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
+#heatmap{
+    width:100%;
+    height:520px;
+    min-height:520px;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    background:#eef2f7;
+}
+@media(max-width:768px){
+    #heatmap{
+        width:100%;
+        height:65vh;
+        min-height:420px;
+        border-radius:14px;
+    }
+
+    .panel{
+        overflow:hidden;
+    }
+}
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
 @media(max-width:768px){body{overflow-x:hidden;}.header{padding:25px 15px;}.header h1{font-size:28px;line-height:1.2;}.logo{max-height:95px;}.navbar{position:static;}.stats{flex-direction:column;padding:15px;gap:12px;}.layout{display:flex;flex-direction:column;padding:15px;gap:15px;}#map{order:1;width:100%;height:65vh;min-height:420px;border-radius:14px;flex:none;}.sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}.card{width:100%;}.permis-item{font-size:14px;}.stats-page{padding:15px;}.kpi-grid{grid-template-columns:1fr;}.chart-box{height:300px;}#heatmap{height:420px;}}
 </style>
@@ -148,12 +168,32 @@ const permisLayer = L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMa
 map.addLayer(permisLayer);
 
 function afficherVue(vue){
-    document.getElementById('vueCarte').classList.toggle('active',vue==='carte');
-    document.getElementById('vueStats').classList.toggle('active',vue==='stats');
-    document.getElementById('btnCarte').classList.toggle('active',vue==='carte');
-    document.getElementById('btnStats').classList.toggle('active',vue==='stats');
-    if(vue==='carte') setTimeout(()=>map.invalidateSize(),250);
-    if(vue==='stats') setTimeout(()=>{genererStatistiques(); if(heatMapInstance) heatMapInstance.invalidateSize();},250);
+
+    document.getElementById('vueCarte').classList.toggle('active', vue === 'carte');
+    document.getElementById('vueStats').classList.toggle('active', vue === 'stats');
+
+    document.getElementById('btnCarte').classList.toggle('active', vue === 'carte');
+    document.getElementById('btnStats').classList.toggle('active', vue === 'stats');
+
+    if(vue === 'carte'){
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 300);
+    }
+
+    if(vue === 'stats'){
+
+        // Important sur téléphone :
+        // attendre que l'onglet Statistiques soit réellement visible.
+        setTimeout(() => {
+            genererStatistiques();
+        }, 350);
+
+        setTimeout(() => {
+            genererHeatmap(true);
+        }, 700);
+    }
+}
 }
 function creerIconePermis(couleur, taille=24){return L.divIcon({className:'',html:`<div class="permit-icon" style="background:${couleur};width:${taille}px;height:${taille}px;"></div>`,iconSize:[taille,taille],iconAnchor:[taille/2,taille/2]});}
 function lireMunicipaliteDepuisPermis(p){
@@ -276,14 +316,104 @@ function genererStatistiques(){
     document.getElementById('analyseTexte').innerHTML=`<b>Résumé :</b><br><br>La municipalité avec le plus de permis est <b>${entries.length?entries[0][0]:'--'}</b>. La période la plus forte, selon les dates disponibles, est <b>${maxMois>0?moisNoms[indexMoisFort]:'non déterminée'}</b>.<br><br><b>Coordonnées :</b> ${permisCache.filter(p=>!p.latitude||!p.longitude).length} permis n'ont pas encore de latitude/longitude.`;
     genererHeatmap();
 }
-function genererHeatmap(){
-    if(!window.L || !L.heatLayer){console.error('Leaflet Heat non chargé.');return;}
-    if(!document.getElementById('vueStats').classList.contains('active')) return;
-    const points=permisCache.filter(p=>p.latitude&&p.longitude).map(p=>[parseFloat(p.latitude),parseFloat(p.longitude),0.75]).filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
-    if(!heatMapInstance){const heatBase=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'});heatMapInstance=L.map('heatmap',{layers:[heatBase]}).setView([48.85,-67.53],9);}
-    if(heatLayer){heatMapInstance.removeLayer(heatLayer);heatLayer=null;}
-    if(!points.length){setTimeout(()=>heatMapInstance.invalidateSize(),300);return;}
-    setTimeout(()=>{heatMapInstance.invalidateSize();heatLayer=L.heatLayer(points,{radius:30,blur:22,maxZoom:13,gradient:{0.2:'#37a048',0.45:'#f4ed1f',0.7:'#ee7c22',1.0:'#c92127'}}).addTo(heatMapInstance);heatMapInstance.fitBounds(points.map(p=>[p[0],p[1]]),{padding:[30,30]});},300);
+function genererHeatmap(forceResize = false){
+
+    if(!window.L || !L.heatLayer){
+        console.error('Leaflet Heat non chargé.');
+        return;
+    }
+
+    const vueStats = document.getElementById('vueStats');
+    const heatElement = document.getElementById('heatmap');
+
+    if(!vueStats || !heatElement){
+        return;
+    }
+
+    // Ne pas créer la carte thermique si l'onglet Statistiques est caché.
+    if(!vueStats.classList.contains('active')){
+        return;
+    }
+
+    // Force une vraie hauteur sur mobile.
+    if(window.innerWidth <= 768){
+        heatElement.style.height = '65vh';
+        heatElement.style.minHeight = '420px';
+    } else {
+        heatElement.style.height = '520px';
+        heatElement.style.minHeight = '520px';
+    }
+
+    const points = permisCache
+        .filter(p => p.latitude && p.longitude)
+        .map(p => [
+            parseFloat(p.latitude),
+            parseFloat(p.longitude),
+            0.75
+        ])
+        .filter(p => !isNaN(p[0]) && !isNaN(p[1]));
+
+    if(!heatMapInstance){
+
+        const heatBase = L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '© OpenStreetMap'
+            }
+        );
+
+        heatMapInstance = L.map(
+            'heatmap',
+            {
+                layers: [heatBase],
+                preferCanvas: true,
+                zoomControl: true
+            }
+        ).setView([48.85, -67.53], 9);
+    }
+
+    // Très important sur mobile : recalculer la taille après l'affichage.
+    setTimeout(() => {
+
+        heatMapInstance.invalidateSize(true);
+
+        if(heatLayer){
+            heatMapInstance.removeLayer(heatLayer);
+            heatLayer = null;
+        }
+
+        if(!points.length){
+            console.warn('Aucun point disponible pour la carte thermique.');
+            return;
+        }
+
+        heatLayer = L.heatLayer(
+            points,
+            {
+                radius: window.innerWidth <= 768 ? 22 : 30,
+                blur: window.innerWidth <= 768 ? 18 : 22,
+                maxZoom: 13,
+                gradient: {
+                    0.2: '#37a048',
+                    0.45: '#f4ed1f',
+                    0.7: '#ee7c22',
+                    1.0: '#c92127'
+                }
+            }
+        ).addTo(heatMapInstance);
+
+        heatMapInstance.fitBounds(
+            points.map(p => [p[0], p[1]]),
+            {
+                padding: [30, 30]
+            }
+        );
+
+        setTimeout(() => {
+            heatMapInstance.invalidateSize(true);
+        }, 500);
+
+    }, forceResize ? 500 : 250);
 }
 
 function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
