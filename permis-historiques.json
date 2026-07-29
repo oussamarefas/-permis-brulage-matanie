@@ -37,8 +37,8 @@
     "RecordID": "PDF-2026-07-03-003",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "44 route de la Montagne, Saint-René-de-Matane, Québec, Canada",
-    "ville": "Saint-René-de-Matane",
+    "adresseComplete": "44 route de la MONTAGNE, Saint-Renée, Matane, Québec, Canada",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -46,7 +46,7 @@
       "EndDate": "2026-08-08",
       "ApprovalDate": "2026-07-03",
       "FireType": "Aménagement",
-      "CityName": "Saint-René-de-Matane",
+      "CityName": "Matane",
       "OriginalFile": "44 route de la MONTAGNE-20260703.pdf"
     }
   },
@@ -71,7 +71,7 @@
     "RecordID": "PDF-2026-07-02-005",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Canada, Québec, Canada",
     "ville": "Saint-Ulric",
     "latitude": "",
     "longitude": "",
@@ -139,7 +139,7 @@
     "RecordID": "PDF-2026-06-24-009",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, QC G0J 3H0, Québec, Canada",
     "ville": "Saint-Ulric",
     "latitude": "",
     "longitude": "",
@@ -292,7 +292,7 @@
     "RecordID": "PDF-2026-06-04-018",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2840 Petit-2e Rang, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2840 PETIT-2E RANG, SAINT-ULRIC, Québec, Canada",
     "ville": "Saint-Ulric",
     "latitude": "",
     "longitude": "",
@@ -377,7 +377,7 @@
     "RecordID": "PDF-2026-05-26-023",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
+    "adresseComplete": "2741 Rang 4e E, Saint-Ulric, Québec, Canada",
     "ville": "Saint-Ulric",
     "latitude": "",
     "longitude": "",
@@ -447,15 +447,18 @@
     "historique": true,
     "adresseComplete": "513 route Bellevue E, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0309720",
+    "longitude": "-66.9138357",
     "Data": {
       "StartDate": "2026-05-15",
       "EndDate": "2026-05-22",
       "ApprovalDate": "2026-05-15",
       "FireType": "Branches",
       "CityName": "Les Méchins",
-      "OriginalFile": "513_Rte_Bellevue_E_Les Méchins-15-05-2026.pdf"
+      "OriginalFile": "513_Rte_Bellevue_E_Les Méchins-15-05-2026.pdf",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-07-16-222",
+      "GeocodeCopiedFromAddress": "513 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -513,7 +516,7 @@
     "RecordID": "PDF-2026-05-08-031",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "609 route Athanase, Matane, Québec, Canada",
+    "adresseComplete": "609 route ATHANASE, Matane, Québec, Canada",
     "ville": "Matane",
     "latitude": "",
     "longitude": "",
@@ -530,7 +533,7 @@
     "RecordID": "PDF-2026-05-08-032",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "246 route Centrale, Matane, Québec, Canada",
+    "adresseComplete": "246 route CENTRALE, Matane, Québec, Canada",
     "ville": "Matane",
     "latitude": "",
     "longitude": "",
@@ -615,8 +618,8 @@
     "RecordID": "PDF-2026-05-01-037",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2741 rang 4e Est, Saint-Ulric, Québec, Canada",
-    "ville": "Saint-Ulric",
+    "adresseComplete": "2741 4e rang est, Matane, Québec, Canada",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -624,7 +627,7 @@
       "EndDate": "2026-05-08",
       "ApprovalDate": "2026-05-01",
       "FireType": "Bois",
-      "CityName": "Saint-Ulric",
+      "CityName": "Matane",
       "OriginalFile": "2741_4E_RANG_E-ST-ULRIC.pdf"
     }
   },
@@ -717,8 +720,8 @@
     "RecordID": "PDF-2026-04-27-043",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "2732 rang 4e Est, Saint-Ulric, Québec, Canada",
-    "ville": "Saint-Ulric",
+    "adresseComplete": "2732 4e rang est, Matane, Québec, Canada",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -726,7 +729,7 @@
       "EndDate": "2026-05-04",
       "ApprovalDate": "2026-04-27",
       "FireType": "Branches",
-      "CityName": "Saint-Ulric",
+      "CityName": "Matane",
       "OriginalFile": "2732_4E_RANG-27-04-2026.pdf"
     }
   },
@@ -734,8 +737,8 @@
     "RecordID": "PDF-2026-04-24-044",
     "source": "PDF historique",
     "historique": true,
-    "adresseComplete": "3099 avenue du Centenaire, Saint-Ulric, Québec, Canada",
-    "ville": "Saint-Ulric",
+    "adresseComplete": "3099 avenue du centenaire, Matane, Québec, Canada",
+    "ville": "Matane",
     "latitude": "",
     "longitude": "",
     "Data": {
@@ -743,7 +746,7 @@
       "EndDate": "2026-05-01",
       "ApprovalDate": "2026-04-24",
       "FireType": "Branches",
-      "CityName": "Saint-Ulric",
+      "CityName": "Matane",
       "OriginalFile": "3099_DU_CENTENAIRE-ST-ULRIC.pdf"
     }
   },
@@ -787,8 +790,8 @@
     "historique": true,
     "adresseComplete": "562 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-04-15",
       "EndDate": "2024-05-03",
@@ -798,7 +801,10 @@
       "Reason": "Travaux d'amenagenment berge",
       "BurnLocation": "Bord de la greve",
       "Materials": "Bois de greve et branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-22-193",
+      "GeocodeCopiedFromAddress": "562 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -825,7 +831,7 @@
     "RecordID": "TXT-2024-04-26-003",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "132 route de Saint-Paulin, Les Méchins, G0J 1T0, Québec, Canada",
+    "adresseComplete": "132 route de Saint-Paulin, Les Méchins, G0J1T0, Québec, Canada",
     "ville": "Les Méchins",
     "latitude": "",
     "longitude": "",
@@ -907,8 +913,8 @@
     "historique": true,
     "adresseComplete": "178 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0058976",
+    "longitude": "-66.9584735",
     "Data": {
       "StartDate": "2024-05-21",
       "EndDate": "2024-05-28",
@@ -918,7 +924,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Au milieu du champs seulement",
       "Materials": "Broussaile",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-06-18-202",
+      "GeocodeCopiedFromAddress": "178 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -967,8 +976,8 @@
     "historique": true,
     "adresseComplete": "119 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0177896",
+    "longitude": "-66.9390138",
     "Data": {
       "StartDate": "2024-06-21",
       "EndDate": "2024-06-25",
@@ -978,7 +987,10 @@
       "Reason": "Feux de Saint-Jean avec Feux d'artifice",
       "BurnLocation": "Bord de la grève",
       "Materials": "Bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-06-23-205",
+      "GeocodeCopiedFromAddress": "119 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1007,8 +1019,8 @@
     "historique": true,
     "adresseComplete": "484 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-06-27",
       "EndDate": "2024-07-04",
@@ -1018,7 +1030,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "secteur 3 près du bord de la grève",
       "Materials": "Branchage et bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-07-11-221",
+      "GeocodeCopiedFromAddress": "484 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1047,8 +1062,8 @@
     "historique": true,
     "adresseComplete": "148 rue de l' Anse, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0026951",
+    "longitude": "-66.9739562",
     "Data": {
       "StartDate": "2024-07-25",
       "EndDate": "2024-08-01",
@@ -1058,7 +1073,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bord de la grève",
       "Materials": "Bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-06-24-209",
+      "GeocodeCopiedFromAddress": "148 rue de l' Anse, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1087,8 +1105,8 @@
     "historique": true,
     "adresseComplete": "119 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0177896",
+    "longitude": "-66.9390138",
     "Data": {
       "StartDate": "2024-08-02",
       "EndDate": "2024-08-04",
@@ -1098,7 +1116,10 @@
       "Reason": "Feu de greve et feu d'artifice",
       "BurnLocation": "Sur le bord de la greve",
       "Materials": "Bois de greve et feu d'Artifice",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-06-23-205",
+      "GeocodeCopiedFromAddress": "119 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1107,8 +1128,8 @@
     "historique": true,
     "adresseComplete": "562 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-08-13",
       "EndDate": "2024-08-20",
@@ -1118,7 +1139,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bord de la grève",
       "Materials": "Bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-22-193",
+      "GeocodeCopiedFromAddress": "562 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1167,8 +1191,8 @@
     "historique": true,
     "adresseComplete": "119 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0177896",
+    "longitude": "-66.9390138",
     "Data": {
       "StartDate": "2024-08-24",
       "EndDate": "2024-08-25",
@@ -1178,7 +1202,10 @@
       "Reason": "Feux de joie - Feu d'artifice",
       "BurnLocation": "Sur le bord de la greve",
       "Materials": "Branchage et bois de greve - Feux d'artifice",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-06-23-205",
+      "GeocodeCopiedFromAddress": "119 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1207,8 +1234,8 @@
     "historique": true,
     "adresseComplete": "160 rue de la Mer, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9991564",
+    "longitude": "-66.9845841",
     "Data": {
       "StartDate": "2024-09-13",
       "EndDate": "2024-09-20",
@@ -1218,7 +1245,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En arriere de la maison au centre du terrain",
       "Materials": "Branchage et bois non traité seulement",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-08-30-152",
+      "GeocodeCopiedFromAddress": "160 rue de la Mer, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1227,8 +1257,8 @@
     "historique": true,
     "adresseComplete": "562 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-09-18",
       "EndDate": "2024-09-25",
@@ -1238,7 +1268,10 @@
       "Reason": "Feux de greve",
       "BurnLocation": "Bord de la gréve",
       "Materials": "Bois de gréve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-22-193",
+      "GeocodeCopiedFromAddress": "562 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1247,8 +1280,8 @@
     "historique": true,
     "adresseComplete": "513 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0309720",
+    "longitude": "-66.9138357",
     "Data": {
       "StartDate": "2024-09-19",
       "EndDate": "2024-09-26",
@@ -1258,7 +1291,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bord de la greve - vent moins de 25km/h",
       "Materials": "Branche de sapin",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-07-16-222",
+      "GeocodeCopiedFromAddress": "513 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1267,8 +1303,8 @@
     "historique": true,
     "adresseComplete": "603 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-10-10",
       "EndDate": "2024-10-17",
@@ -1278,7 +1314,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "25 pieds à l'arrière gauche de la maison",
       "Materials": "Branchages",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-21-190",
+      "GeocodeCopiedFromAddress": "603 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1307,8 +1346,8 @@
     "historique": true,
     "adresseComplete": "131 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0012777",
+    "longitude": "-66.9730103",
     "Data": {
       "StartDate": "2024-11-04",
       "EndDate": "2024-11-18",
@@ -1318,7 +1357,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "A 200 metre de la maison",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-11-05-245",
+      "GeocodeCopiedFromAddress": "131 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1327,8 +1369,8 @@
     "historique": true,
     "adresseComplete": "rue de la Villa, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9996556",
+    "longitude": "-66.9747754",
     "Data": {
       "StartDate": "2025-01-09",
       "EndDate": "2025-01-23",
@@ -1338,7 +1380,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "200 pied de la rue",
       "Materials": "Branchage seulement",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-12-18-162",
+      "GeocodeCopiedFromAddress": "rue de la Villa, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1347,8 +1392,8 @@
     "historique": true,
     "adresseComplete": "513 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0309720",
+    "longitude": "-66.9138357",
     "Data": {
       "StartDate": "2025-04-26",
       "EndDate": "2025-05-03",
@@ -1358,7 +1403,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bord de la greve",
       "Materials": "Branchage seulement",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-07-16-222",
+      "GeocodeCopiedFromAddress": "513 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1367,8 +1415,8 @@
     "historique": true,
     "adresseComplete": "537 route Bellevue Est, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "49.0326513",
+    "longitude": "-66.9095189",
     "Data": {
       "StartDate": "2025-08-16",
       "EndDate": "2025-08-18",
@@ -1378,7 +1426,10 @@
       "Reason": "Feux de joie",
       "BurnLocation": "Bord de gréve",
       "Materials": "Bois de gréve",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-09-26-237",
+      "GeocodeCopiedFromAddress": "537 route Bellevue Est, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1387,8 +1438,8 @@
     "historique": true,
     "adresseComplete": "484 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2025-08-24",
       "EndDate": "2025-08-31",
@@ -1398,7 +1449,10 @@
       "Reason": "Aménagement",
       "BurnLocation": "Secteur 3 pres du bord de la greve",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-07-11-221",
+      "GeocodeCopiedFromAddress": "484 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
@@ -1447,8 +1501,8 @@
     "historique": true,
     "adresseComplete": "603 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2025-10-24",
       "EndDate": "2025-11-07",
@@ -1458,14 +1512,17 @@
       "Reason": "Aménagement",
       "BurnLocation": "Cours arrière 25 minimum de la maison",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-21-190",
+      "GeocodeCopiedFromAddress": "603 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
     "RecordID": "TXT-2025-11-07-035",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "536 route Bellevue Est, Les Méchins, G0J 1T0, Québec, Canada",
+    "adresseComplete": "536 route Bellevue Est, Les Méchins, G0J1T0, Québec, Canada",
     "ville": "Les Méchins",
     "latitude": "",
     "longitude": "",
@@ -1547,8 +1604,8 @@
     "historique": true,
     "adresseComplete": "348 route 132 Est, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9547146",
+    "longitude": "-67.1287015",
     "Data": {
       "StartDate": "2024-04-09",
       "EndDate": "2024-05-07",
@@ -1558,7 +1615,10 @@
       "Reason": "Aménagment forestier",
       "BurnLocation": "Champ derrière maison",
       "Materials": "Branchages",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-01-172",
+      "GeocodeCopiedFromAddress": "348 route 132 Est, Grosses-Roches, Québec, Canada"
     }
   },
   {
@@ -1607,8 +1667,8 @@
     "historique": true,
     "adresseComplete": "562 route Bellevue Ouest, Les Méchins, Québec, Canada",
     "ville": "Les Méchins",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9972839",
+    "longitude": "-66.9881740",
     "Data": {
       "StartDate": "2024-07-24",
       "EndDate": "2024-07-31",
@@ -1618,14 +1678,17 @@
       "Reason": "Aménagement",
       "BurnLocation": "Bord de la grève",
       "Materials": "Bois de grève",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-22-193",
+      "GeocodeCopiedFromAddress": "562 route Bellevue Ouest, Les Méchins, Québec, Canada"
     }
   },
   {
     "RecordID": "TXT-2024-08-30-043",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "123-A rue de la Mer A, Grosses-Roches, Québec, Canada",
+    "adresseComplete": "123-A rue de la MER A, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
     "latitude": "",
     "longitude": "",
@@ -1687,8 +1750,8 @@
     "historique": true,
     "adresseComplete": "348 route 132 Est, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9547146",
+    "longitude": "-67.1287015",
     "Data": {
       "StartDate": "2025-01-27",
       "EndDate": "2025-02-24",
@@ -1698,7 +1761,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Terrain en arriere du 346",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-01-172",
+      "GeocodeCopiedFromAddress": "348 route 132 Est, Grosses-Roches, Québec, Canada"
     }
   },
   {
@@ -1707,8 +1773,8 @@
     "historique": true,
     "adresseComplete": "348 route 132 Est, Grosses-Roches, Québec, Canada",
     "ville": "Grosses-Roches",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9547146",
+    "longitude": "-67.1287015",
     "Data": {
       "StartDate": "2025-03-26",
       "EndDate": "2025-04-26",
@@ -1718,7 +1784,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "En arriere du 346",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-05-01-172",
+      "GeocodeCopiedFromAddress": "348 route 132 Est, Grosses-Roches, Québec, Canada"
     }
   },
   {
@@ -1785,10 +1854,10 @@
     "RecordID": "TXT-2024-01-25-051",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "27 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada",
+    "adresseComplete": "27 route 132 Est, Sainte-Félicité, G0J2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9025630",
+    "longitude": "-67.3182010",
     "Data": {
       "StartDate": "2024-01-25",
       "EndDate": "2024-02-29",
@@ -1798,7 +1867,10 @@
       "Reason": "Amenagement foresier",
       "BurnLocation": "Champ 4 en arriére de la résidence 3300pieds",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2025-02-15-082",
+      "GeocodeCopiedFromAddress": "27 route 132 EST, Sainte-Félicité, Québec, Canada"
     }
   },
   {
@@ -1807,8 +1879,8 @@
     "historique": true,
     "adresseComplete": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9039785",
+    "longitude": "-67.3113471",
     "Data": {
       "StartDate": "2024-02-08",
       "EndDate": "2024-03-07",
@@ -1818,7 +1890,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "tobe en arrierre",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-06-10-060",
+      "GeocodeCopiedFromAddress": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada"
     }
   },
   {
@@ -1827,8 +1902,8 @@
     "historique": true,
     "adresseComplete": "161 boulevard Tremblay, Sainte-Félicité, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9009350",
+    "longitude": "-67.3253530",
     "Data": {
       "StartDate": "2024-04-08",
       "EndDate": "2024-05-13",
@@ -1838,7 +1913,10 @@
       "Reason": "Amenagement forestier",
       "BurnLocation": "50 pieds en arriere de la maison",
       "Materials": "Branchage seulement",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2026-03-28-259",
+      "GeocodeCopiedFromAddress": "161 boulevard Tremblay, Sainte-Félicité, Québec, Canada"
     }
   },
   {
@@ -1847,8 +1925,8 @@
     "historique": true,
     "adresseComplete": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9039785",
+    "longitude": "-67.3113471",
     "Data": {
       "StartDate": "2024-04-11",
       "EndDate": "2024-05-08",
@@ -1858,7 +1936,10 @@
       "Reason": "Amenagement forestier",
       "BurnLocation": "En arriere de la grange",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-06-10-060",
+      "GeocodeCopiedFromAddress": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada"
     }
   },
   {
@@ -1867,8 +1948,8 @@
     "historique": true,
     "adresseComplete": "15 2e rang Normand, Sainte-Félicité, G0J 2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.8733947",
+    "longitude": "-67.3595763",
     "Data": {
       "StartDate": "2024-04-19",
       "EndDate": "2024-05-17",
@@ -1878,7 +1959,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Cours arriere de la maison",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2026-05-05-272",
+      "GeocodeCopiedFromAddress": "15 2e rang Normand, Sainte-Félicité, G0J 2K0, Québec, Canada"
     }
   },
   {
@@ -1907,8 +1991,8 @@
     "historique": true,
     "adresseComplete": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9039785",
+    "longitude": "-67.3113471",
     "Data": {
       "StartDate": "2024-05-10",
       "EndDate": "2024-05-24",
@@ -1918,7 +2002,10 @@
       "Reason": "Amenagement",
       "BurnLocation": "Tobe en arriére de la grange",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-06-10-060",
+      "GeocodeCopiedFromAddress": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada"
     }
   },
   {
@@ -1927,8 +2014,8 @@
     "historique": true,
     "adresseComplete": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
-    "latitude": "",
-    "longitude": "",
+    "latitude": "48.9039785",
+    "longitude": "-67.3113471",
     "Data": {
       "StartDate": "2024-05-27",
       "EndDate": "2024-06-03",
@@ -1938,14 +2025,17 @@
       "Reason": "Amenagement",
       "BurnLocation": "Taube au centre",
       "Materials": "Branchage",
-      "OriginalFile": "premiere ligne permis.TXT"
+      "OriginalFile": "premiere ligne permis.TXT",
+      "GeocodeSource": "Copie depuis adresse identique dans le JSON",
+      "GeocodeCopiedFromRecordID": "TXT-2024-06-10-060",
+      "GeocodeCopiedFromAddress": "47 route 132 Est, Sainte-Félicité, G0J 2K0, Québec, Canada"
     }
   },
   {
     "RecordID": "TXT-2024-05-28-059",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "194 rue Saint-Joseph, Sainte-Félicité, G0J 2K0, Québec, Canada",
+    "adresseComplete": "194 rue Saint-Joseph, Sainte-Félicité, GOJ-2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
     "latitude": "",
     "longitude": "",
@@ -2126,7 +2216,7 @@
     "RecordID": "TXT-2024-08-09-067",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "208 boulevard Perron, Sainte-Félicité, G0J 2K0, Québec, Canada",
+    "adresseComplete": "208 boulevard Perron, Sainte-Félicité, G0J2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
     "latitude": "48.9011156",
     "longitude": "-67.3368614",
@@ -2149,7 +2239,7 @@
     "RecordID": "TXT-2024-08-31-068",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "25 chemin Saint-Louis, Sainte-Félicité, G0J 2K0, Québec, Canada",
+    "adresseComplete": "25 chemin Saint-Louis, Sainte-Félicité, G0J2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
     "latitude": "48.9114040",
     "longitude": "-67.2813010",
@@ -2908,7 +2998,7 @@
     "RecordID": "TXT-2024-09-21-101",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "342 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "342 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8150448",
     "longitude": "-67.3005016",
@@ -3000,7 +3090,7 @@
     "RecordID": "TXT-2024-11-16-105",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "342 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "342 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8150448",
     "longitude": "-67.3005016",
@@ -3276,7 +3366,7 @@
     "RecordID": "TXT-2024-11-06-117",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "97 chemin de la Réserve-Faunique, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "97 chemin de la Réserve-Faunique, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6460723",
     "longitude": "-67.3119142",
@@ -3460,7 +3550,7 @@
     "RecordID": "TXT-2025-07-24-125",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "547 route 195, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "547 route 195, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6702430",
     "longitude": "-67.3536600",
@@ -3483,7 +3573,7 @@
     "RecordID": "TXT-2025-07-30-126",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "97 chemin de la Réserve-Faunique, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "97 chemin de la Réserve-Faunique, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6460723",
     "longitude": "-67.3119142",
@@ -4035,7 +4125,7 @@
     "RecordID": "TXT-2024-05-06-150",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "185 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "185 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8229031",
     "longitude": "-67.3184498",
@@ -4173,7 +4263,7 @@
     "RecordID": "TXT-2024-10-12-156",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "547 route 195, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "547 route 195, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6702430",
     "longitude": "-67.3536600",
@@ -4242,7 +4332,7 @@
     "RecordID": "TXT-2024-10-26-159",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "344 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "344 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8254654",
     "longitude": "-67.3218523",
@@ -4679,7 +4769,7 @@
     "RecordID": "TXT-2025-05-08-178",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "185 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "185 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8229031",
     "longitude": "-67.3184498",
@@ -4886,7 +4976,7 @@
     "RecordID": "TXT-2025-05-18-187",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "224 rang 4 (Dalibaire), Les Méchins, G4W 7H9, Québec, Canada",
+    "adresseComplete": "224 rang 4 (Dalibaire), Les Méchins, G4W7H9, Québec, Canada",
     "ville": "Les Méchins",
     "latitude": "",
     "longitude": "",
@@ -5090,7 +5180,7 @@
     "RecordID": "TXT-2025-05-24-196",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "50 route de la Montagne, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "50 route de la Montagne, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6986956",
     "longitude": "-67.4067560",
@@ -5889,7 +5979,7 @@
     "RecordID": "TXT-2025-08-29-231",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "25 chemin Saint-Louis, Sainte-Félicité, G0J 2K0, Québec, Canada",
+    "adresseComplete": "25 chemin Saint-Louis, Sainte-Félicité, G0J2K0, Québec, Canada",
     "ville": "Sainte-Félicité",
     "latitude": "48.9114040",
     "longitude": "-67.2813010",
@@ -6096,7 +6186,7 @@
     "RecordID": "TXT-2025-10-22-240",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "17 route Dufour, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "17 route Dufour, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.6530373",
     "longitude": "-67.3288266",
@@ -6165,7 +6255,7 @@
     "RecordID": "TXT-2025-10-29-243",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "344 rue Principale, Saint-Adelme, G0J 2B0, Québec, Canada",
+    "adresseComplete": "344 rue Principale, Saint-Adelme, G0J2B0, Québec, Canada",
     "ville": "Saint-Adelme",
     "latitude": "48.8254654",
     "longitude": "-67.3218523",
@@ -7030,7 +7120,7 @@
     "RecordID": "TXT-2026-05-08-281",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "2929 route des ÉRABLES, Saint-Léandre, G0J 2V0, Québec, Canada",
+    "adresseComplete": "2929 route des ÉRABLES, Saint-Léandre, G0J2V0, Québec, Canada",
     "ville": "Saint-Léandre",
     "latitude": "48.7169916",
     "longitude": "-67.5632650",
@@ -7099,7 +7189,7 @@
     "RecordID": "TXT-2026-05-11-284",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "530 route Bellevue Est, Les Méchins, G0J 1T0, Québec, Canada",
+    "adresseComplete": "530 route Bellevue Est, Les Méchins, G0J1T0, Québec, Canada",
     "ville": "Les Méchins",
     "latitude": "49.0319514",
     "longitude": "-66.9105522",
@@ -7145,7 +7235,7 @@
     "RecordID": "TXT-2026-05-08-286",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "224 rang 4 (Dalibaire), Les Méchins, G4W 7H9, Québec, Canada",
+    "adresseComplete": "224 rang 4 (Dalibaire), Les Méchins, G4W7H9, Québec, Canada",
     "ville": "Les Méchins",
     "latitude": "",
     "longitude": "",
@@ -7234,7 +7324,7 @@
     "RecordID": "TXT-2026-05-12-290",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "51 route du Ruisseau-Gagnon, Saint-René-de-Matane, G0J 3E0, Québec, Canada",
+    "adresseComplete": "51 route du Ruisseau-Gagnon, Saint-René-de-Matane, G0J3E0, Québec, Canada",
     "ville": "Saint-René-de-Matane",
     "latitude": "48.7327889",
     "longitude": "-67.4083038",
@@ -7372,7 +7462,7 @@
     "RecordID": "TXT-2026-05-15-296",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "265 chemin de la Coulée-Carrier, Sainte-Paule, G0J 3C0, Québec, Canada",
+    "adresseComplete": "265 chemin de la Coulée-Carrier, Sainte-Paule, G0J3C0, Québec, Canada",
     "ville": "Sainte-Paule",
     "latitude": "48.6762051",
     "longitude": "-67.5383423",
@@ -7395,7 +7485,7 @@
     "RecordID": "TXT-2026-06-23-297",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "101 rue BANVILLE, Sainte-Paule, G0J 3C0, Québec, Canada",
+    "adresseComplete": "101 rue BANVILLE, Sainte-Paule, G0J3C0, Québec, Canada",
     "ville": "Sainte-Paule",
     "latitude": "48.6595100",
     "longitude": "-67.5566010",
@@ -7602,7 +7692,7 @@
     "RecordID": "TXT-2026-05-21-306",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "132 chemin du Lac-du-Portage Est, Sainte-Paule, G0J 3C0, Québec, Canada",
+    "adresseComplete": "132 chemin du LAC-DU-PORTAGE EST, Sainte-Paule, G0J 3C0, Québec, Canada",
     "ville": "Sainte-Paule",
     "latitude": "",
     "longitude": "",
@@ -7622,7 +7712,7 @@
     "RecordID": "TXT-2026-05-21-307",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "310 chemin du Lac-du-Portage Ouest, Sainte-Paule, Québec, Canada",
+    "adresseComplete": "310 chemin du LAC-DU-PORTAGE OUEST, Sainte-Paule, Québec, Canada",
     "ville": "Sainte-Paule",
     "latitude": "",
     "longitude": "",
@@ -8056,7 +8146,7 @@
     "RecordID": "TXT-2026-06-23-326",
     "source": "TXT historique",
     "historique": true,
-    "adresseComplete": "268 chemin du Lac-du-Portage Ouest, Sainte-Paule, Québec, Canada",
+    "adresseComplete": "268 chemin du LAC-DU-PORTAGE OUEST, Sainte-Paule, Québec, Canada",
     "ville": "Sainte-Paule",
     "latitude": "",
     "longitude": "",
