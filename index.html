@@ -53,6 +53,35 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
 .rank-list{display:flex;flex-direction:column;gap:10px;}.rank-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-radius:12px;padding:12px;border-left:6px solid var(--bleu2);}.rank-left{font-weight:700;color:#1f2937;}.rank-right{font-weight:800;color:var(--bleu);}.rank-bar{height:8px;background:#dbeafe;border-radius:99px;margin-top:8px;overflow:hidden;}.rank-bar div{height:8px;background:linear-gradient(90deg,var(--bleu2),var(--bleu3));border-radius:99px;}
 #heatmap{width:100%;height:520px;min-height:520px;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);background:#eef2f7;position:relative;}
 .note{color:var(--muted);font-size:13px;line-height:1.45;}.empty-state{padding:18px;background:#f8fafc;border-radius:12px;color:var(--muted);}
+
+.intervention-page{padding:20px;}
+.intervention-header{background:#fff;border-radius:18px;padding:22px;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;}
+.intervention-header h2{margin:0;color:var(--bleu);font-size:30px;}
+.intervention-header p{margin:6px 0 0;color:var(--muted);}
+.intervention-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.intervention-panel{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.intervention-panel h3{margin:0 0 14px;color:var(--bleu);}
+.control-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.field label{display:block;font-size:13px;color:var(--muted);font-weight:700;margin-bottom:6px;}
+.field input,.field select,.field textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:10px;font-family:Segoe UI,Arial,sans-serif;font-size:14px;background:#fff;}
+.intervention-result{border-radius:14px;padding:14px;margin-top:12px;font-weight:700;line-height:1.45;}
+.result-ok{background:#dcfce7;color:#166534;border-left:6px solid var(--vert);}
+.result-warning{background:#fef9c3;color:#854d0e;border-left:6px solid var(--jaune);}
+.result-danger{background:#fee2e2;color:#991b1b;border-left:6px solid var(--rouge);}
+.checklist{display:flex;flex-direction:column;gap:8px;}
+.check-item{display:flex;gap:8px;align-items:flex-start;background:#f8fafc;border-radius:10px;padding:10px;line-height:1.35;}
+.check-item input{margin-top:3px;}
+.quick-badges{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:#e8eef4;color:var(--bleu);font-weight:800;font-size:13px;}
+.badge.danger{background:#fee2e2;color:#991b1b;}.badge.warning{background:#fef9c3;color:#854d0e;}.badge.success{background:#dcfce7;color:#166534;}
+.reglement-details details{background:#f8fafc;border-radius:12px;padding:12px;margin-bottom:10px;border-left:5px solid var(--bleu2);}
+.reglement-details summary{cursor:pointer;font-weight:800;color:var(--bleu);}
+.reglement-details ul{margin:10px 0 0;padding-left:20px;line-height:1.45;}
+.timer-box{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.timer-value{font-size:34px;font-weight:900;color:var(--bleu);min-width:130px;}
+@media(max-width:900px){.intervention-grid{grid-template-columns:1fr;}.control-row{grid-template-columns:1fr;}}
+@media(max-width:768px){.intervention-page{padding:15px;}.intervention-header h2{font-size:26px;}.timer-value{font-size:28px;}}
+
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
 @media(max-width:768px){body{overflow-x:hidden;}.header{padding:25px 15px;}.header h1{font-size:28px;line-height:1.2;}.logo{max-height:95px;}.navbar{position:static;}.stats{flex-direction:column;padding:15px;gap:12px;}.layout{display:flex;flex-direction:column;padding:15px;gap:15px;}#map{order:1;width:100%;height:65vh;height:65dvh;min-height:420px;border-radius:14px;flex:none;}.sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}.card{width:100%;}.permis-item{font-size:14px;}.stats-page{padding:15px;}.kpi-grid{grid-template-columns:1fr;}.chart-box{height:300px;}#heatmap{width:100%;height:65vh;height:65dvh;min-height:430px;border-radius:14px;}.panel{overflow:hidden;}}
 </style>
@@ -67,6 +96,7 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
 <nav class="navbar">
     <button id="btnCarte" class="nav-btn active" onclick="afficherVue('carte')">🗺️ Carte</button>
     <button id="btnStats" class="nav-btn" onclick="afficherVue('stats')">📊 Statistiques</button>
+    <button id="btnIntervention" class="nav-btn" onclick="afficherVue('intervention')">🚒 Intervention</button>
 </nav>
 <section id="vueCarte" class="view active">
     <div class="stats">
@@ -79,7 +109,7 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
         <div class="sidebar">
             <h3>Zones SOPFEU</h3>
             <div id="zonesDanger"></div>
-            <h3>Permis en cours</h3>
+            <h3>Permis non expirés avec coordonnées</h3>
             <div id="listePermis"></div>
         </div>
         <div id="map"></div>
@@ -120,6 +150,79 @@ html,body{margin:0;min-height:100%;font-family:Segoe UI,Arial,sans-serif;backgro
             <h3>Carte thermique des permis</h3>
             <p class="note">La carte thermique montre les secteurs où les permis de brûlage sont les plus concentrés, incluant les permis expirés afin de conserver l'analyse historique.</p>
             <div id="heatmap"></div>
+        </div>
+    </div>
+</section>
+<section id="vueIntervention" class="view">
+    <div class="intervention-page">
+        <div class="intervention-header">
+            <div>
+                <h2>Outils service incendie – feu extérieur</h2>
+                <p>Aide-mémoire opérationnel pour l'évaluation d'un feu de foyer extérieur, feu de grève, feu à ciel ouvert ou feu d'artifice.</p>
+            </div>
+            <div class="stats-actions">
+                <button class="small-btn" onclick="mettreAJourIntervention()">🔄 Mettre à jour</button>
+                <button class="small-btn" onclick="afficherVue('carte')">🗺️ Retour à la carte</button>
+            </div>
+        </div>
+        <div class="intervention-grid">
+            <div class="intervention-panel">
+                <h3>Évaluation rapide sur les lieux</h3>
+                <div class="quick-badges">
+                    <span class="badge" id="badgeDangerIntervention">🔥 SOPFEU : --</span>
+                    <span class="badge" id="badgeVentIntervention">💨 Vent : -- km/h</span>
+                    <span class="badge" id="badgeDecisionIntervention">📋 À évaluer</span>
+                </div>
+                <div class="control-row">
+                    <div class="field"><label>Type d'intervention</label><select id="typeIntervention"><option value="foyer">Feu de foyer extérieur</option><option value="greve">Feu de grève</option><option value="ciel">Feu à ciel ouvert</option><option value="artifice">Feu d'artifice domestique</option></select></div>
+                    <div class="field"><label>Vitesse du vent observée ou prévue (km/h)</label><input id="ventIntervention" type="number" min="0" step="1" placeholder="ex. 15"></div>
+                </div>
+                <div class="control-row">
+                    <div class="field"><label>Distance du bâtiment le plus proche (m)</label><input id="distanceBatiment" type="number" min="0" step="1" placeholder="ex. 30"></div>
+                    <div class="field"><label>Distance de la végétation sèche / combustible (m)</label><input id="distanceVegetation" type="number" min="0" step="1" placeholder="ex. 10"></div>
+                </div>
+                <div class="control-row">
+                    <div class="field"><label>Hauteur ou diamètre du combustible (m)</label><input id="dimensionCombustible" type="number" min="0" step="0.1" placeholder="ex. 1 ou 3"></div>
+                    <div class="field"><label>Moyen d'extinction dans un rayon de 20 m?</label><select id="extinctionDisponible"><option value="oui">Oui</option><option value="non">Non</option><option value="inconnu">Inconnu</option></select></div>
+                </div>
+                <button class="small-btn" onclick="evaluerIntervention()">✅ Évaluer la conformité rapide</button>
+                <div id="resultatIntervention" class="intervention-result result-warning">Entrez les observations puis lancez l'évaluation.</div>
+                <p class="note"><b>Note :</b> cet outil est un aide-mémoire opérationnel. La décision finale demeure selon l'officier, la réglementation en vigueur et les consignes SOPFEU.</p>
+            </div>
+            <div class="intervention-panel">
+                <h3>Minute de surveillance</h3>
+                <div class="timer-box">
+                    <div class="timer-value" id="timerIntervention">00:00</div>
+                    <button class="small-btn" onclick="demarrerTimerIntervention()">▶️ Démarrer</button>
+                    <button class="small-btn" onclick="arreterTimerIntervention()">⏸️ Pause</button>
+                    <button class="small-btn" onclick="reinitialiserTimerIntervention()">↩️ Réinitialiser</button>
+                </div>
+                <p class="note">Utilisable pour documenter une période de surveillance ou de refroidissement avant de quitter les lieux.</p>
+                <h3 style="margin-top:18px;">Notes d'intervention</h3>
+                <div class="field"><label>Constats / actions prises</label><textarea id="notesIntervention" rows="6" placeholder="Ex. feu éteint, responsable informé, distance insuffisante, moyen d'extinction absent..."></textarea></div>
+                <button class="small-btn" onclick="copierRapportIntervention()">📋 Copier le rapport</button>
+            </div>
+        </div>
+        <div class="intervention-grid">
+            <div class="intervention-panel">
+                <h3>Checklist d'intervention</h3>
+                <div class="checklist" id="checklistIntervention">
+                    <label class="check-item"><input type="checkbox"> Identifier le responsable sur place.</label>
+                    <label class="check-item"><input type="checkbox"> Vérifier l'indice de danger SOPFEU et les interdictions en vigueur.</label>
+                    <label class="check-item"><input type="checkbox"> Vérifier la vitesse du vent et les projections d'étincelles.</label>
+                    <label class="check-item"><input type="checkbox"> Vérifier les distances avec les bâtiments, la végétation et les matières combustibles.</label>
+                    <label class="check-item"><input type="checkbox"> Confirmer la présence d'un moyen d'extinction dans un rayon de 20 m.</label>
+                    <label class="check-item"><input type="checkbox"> Éteindre le feu si la fumée dérange le voisinage ou si les conditions ne sont pas respectées.</label>
+                    <label class="check-item"><input type="checkbox"> Documenter les constats et recommandations.</label>
+                </div>
+            </div>
+            <div class="intervention-panel reglement-details">
+                <h3>Réglementation – aide-mémoire</h3>
+                <details open><summary>Feu de foyer extérieur</summary><ul><li>Permis requis en cas de non-respect des dispositions.</li><li>Distance minimale de 3 m des matières combustibles et bâtiments.</li><li>Foyer en matériau incombustible, superficie et hauteur maximales de 1 m.</li><li>Pare-étincelles, base stable et incombustible.</li><li>Moyen d'extinction disponible dans un rayon de 20 m.</li><li>Respect des interdictions SOPFEU; bois sec non traité seulement; éteindre si la fumée dérange.</li></ul></details>
+                <details><summary>Feu de grève</summary><ul><li>Autorisé seulement si situé à plus de 10 m de toute végétation sèche.</li><li>Au moins 30 m d'un bâtiment.</li><li>Matière ligneuse sèche, non traitée.</li><li>Combustible maximal de 3 m de hauteur et de diamètre.</li><li>Ne pas allumer si interdiction SOPFEU, danger élevé ou vent supérieur à 20 km/h.</li><li>Surveillance par une personne majeure jusqu'à extinction complète.</li></ul></details>
+                <details><summary>Feu à ciel ouvert</summary><ul><li>Interdit sans permis de brûlage.</li><li>Terrain dégagé, à plus de 30 m d'un bâtiment.</li><li>Bois sec, non traité et non contaminé seulement.</li><li>Combustible et feu : maximum 3 m de hauteur et de diamètre.</li><li>Ne pas allumer si interdiction SOPFEU, danger supérieur à élevé ou vent supérieur à 20 km/h.</li><li>Permis de feu valable 30 jours.</li></ul></details>
+                <details><summary>Feux d'artifice domestiques</summary><ul><li>Personne responsable de 18 ans ou plus.</li><li>Distance minimale de 5 m des personnes, bâtiments, véhicules et matières inflammables lors de la mise à feu.</li><li>Respect des directives du fabricant et des distances de sécurité.</li><li>Vent maximal de 20 km/h selon Environnement Canada.</li></ul></details>
+            </div>
         </div>
     </div>
 </section>
@@ -168,10 +271,16 @@ if(window.visualViewport){window.visualViewport.addEventListener('resize',invali
 function afficherVue(vue){
     document.getElementById('vueCarte').classList.toggle('active',vue==='carte');
     document.getElementById('vueStats').classList.toggle('active',vue==='stats');
+    document.getElementById('vueIntervention').classList.toggle('active',vue==='intervention');
     document.getElementById('btnCarte').classList.toggle('active',vue==='carte');
     document.getElementById('btnStats').classList.toggle('active',vue==='stats');
+    document.getElementById('btnIntervention').classList.toggle('active',vue==='intervention');
     if(vue==='carte'){
         setTimeout(()=>map.invalidateSize(true),300);
+        return;
+    }
+    if(vue==='intervention'){
+        setTimeout(()=>mettreAJourIntervention(),250);
         return;
     }
     if(vue==='stats'){
@@ -424,6 +533,85 @@ function telechargerJson(nomFichier,data){
 function verifierJsonHistorique(){
     chargerHistoriques().then(data=>console.log('Vérification JSON historique:', data.length, 'permis'));
 }
+
+let timerInterventionInterval=null;
+let timerInterventionSecondes=0;
+function obtenirNombreChamp(id){
+    const v=parseFloat(document.getElementById(id)?.value);
+    return isNaN(v)?null:v;
+}
+function mettreAJourIntervention(){
+    const danger=document.getElementById('dangerGlobal')?.innerText || '--';
+    const badge=document.getElementById('badgeDangerIntervention');
+    if(badge){badge.innerText='🔥 SOPFEU : '+danger;badge.className='badge';}
+    const vent=obtenirNombreChamp('ventIntervention');
+    const badgeVent=document.getElementById('badgeVentIntervention');
+    if(badgeVent){badgeVent.innerText='💨 Vent : '+(vent===null?'--':vent)+' km/h';badgeVent.className='badge '+(vent!==null&&vent>20?'danger':'');}
+}
+function evaluerIntervention(){
+    const type=document.getElementById('typeIntervention').value;
+    const vent=obtenirNombreChamp('ventIntervention');
+    const batiment=obtenirNombreChamp('distanceBatiment');
+    const vegetation=obtenirNombreChamp('distanceVegetation');
+    const dimension=obtenirNombreChamp('dimensionCombustible');
+    const extinction=document.getElementById('extinctionDisponible').value;
+    const messages=[];
+    let niveau='ok';
+    function probleme(msg){messages.push('❌ '+msg);niveau='danger';}
+    function attention(msg){messages.push('⚠️ '+msg);if(niveau!=='danger')niveau='warning';}
+    function ok(msg){messages.push('✅ '+msg);}
+    if(vent===null) attention('Vitesse du vent non renseignée.'); else if(vent>20) probleme('Vent supérieur à 20 km/h : intervention/arrêt recommandé selon le type de feu.'); else ok('Vent à 20 km/h ou moins.');
+    if(extinction==='non') probleme('Aucun moyen d’extinction disponible dans un rayon de 20 m.'); else if(extinction==='inconnu') attention('Moyen d’extinction à confirmer.'); else ok('Moyen d’extinction indiqué disponible.');
+    if(type==='foyer'){
+        if(batiment!==null && batiment<3) probleme('Distance bâtiment/matières combustibles inférieure à 3 m.'); else if(batiment===null) attention('Distance aux bâtiments/matières combustibles à mesurer.'); else ok('Distance de 3 m ou plus indiquée.');
+        if(dimension!==null && dimension>1) probleme('Foyer supérieur à 1 m de hauteur ou de superficie.'); else if(dimension===null) attention('Dimension du foyer à confirmer.'); else ok('Dimension de 1 m ou moins indiquée.');
+    }
+    if(type==='greve'){
+        if(vegetation!==null && vegetation<=10) probleme('Feu de grève à 10 m ou moins de végétation sèche.'); else if(vegetation===null) attention('Distance à la végétation sèche à mesurer.'); else ok('Plus de 10 m de végétation sèche indiqué.');
+        if(batiment!==null && batiment<30) probleme('Distance bâtiment inférieure à 30 m.'); else if(batiment===null) attention('Distance au bâtiment à mesurer.'); else ok('Distance bâtiment de 30 m ou plus indiquée.');
+        if(dimension!==null && dimension>3) probleme('Combustible supérieur à 3 m de hauteur ou de diamètre.'); else if(dimension===null) attention('Dimension du combustible à confirmer.'); else ok('Combustible de 3 m ou moins indiqué.');
+    }
+    if(type==='ciel'){
+        if(batiment!==null && batiment<30) probleme('Feu à ciel ouvert à moins de 30 m d’un bâtiment.'); else if(batiment===null) attention('Distance au bâtiment à mesurer.'); else ok('Distance bâtiment de 30 m ou plus indiquée.');
+        if(dimension!==null && dimension>3) probleme('Feu/combustible supérieur à 3 m de hauteur ou de diamètre.'); else if(dimension===null) attention('Dimension du feu à confirmer.'); else ok('Dimension de 3 m ou moins indiquée.');
+        attention('Vérifier la présence d’un permis de brûlage valide.');
+    }
+    if(type==='artifice'){
+        if(batiment!==null && batiment<5) probleme('Distance de mise à feu inférieure à 5 m des personnes/bâtiments/véhicules/matières inflammables.'); else if(batiment===null) attention('Distance de sécurité de 5 m à confirmer.'); else ok('Distance minimale de 5 m indiquée.');
+        attention('Confirmer que la personne responsable a 18 ans ou plus et que les directives du fabricant sont respectées.');
+    }
+    const result=document.getElementById('resultatIntervention');
+    result.className='intervention-result '+(niveau==='danger'?'result-danger':niveau==='warning'?'result-warning':'result-ok');
+    result.innerHTML='<b>Résultat rapide :</b><br>'+messages.join('<br>');
+    const badge=document.getElementById('badgeDecisionIntervention');
+    if(badge){badge.className='badge '+(niveau==='danger'?'danger':niveau==='warning'?'warning':'success');badge.innerText=niveau==='danger'?'📋 Non conforme / éteindre':niveau==='warning'?'📋 Vérifications requises':'📋 Conditions de base OK';}
+    mettreAJourIntervention();
+}
+function afficherTimerIntervention(){
+    const m=String(Math.floor(timerInterventionSecondes/60)).padStart(2,'0');
+    const s=String(timerInterventionSecondes%60).padStart(2,'0');
+    const el=document.getElementById('timerIntervention');
+    if(el)el.innerText=m+':'+s;
+}
+function demarrerTimerIntervention(){if(timerInterventionInterval)return;timerInterventionInterval=setInterval(()=>{timerInterventionSecondes++;afficherTimerIntervention();},1000);}
+function arreterTimerIntervention(){clearInterval(timerInterventionInterval);timerInterventionInterval=null;}
+function reinitialiserTimerIntervention(){arreterTimerIntervention();timerInterventionSecondes=0;afficherTimerIntervention();}
+function copierRapportIntervention(){
+    const lignes=[];
+    lignes.push('Rapport rapide - feu extérieur');
+    lignes.push('Date/heure : '+new Date().toLocaleString('fr-CA'));
+    lignes.push('Type : '+document.getElementById('typeIntervention').selectedOptions[0].text);
+    lignes.push('Danger SOPFEU affiché : '+(document.getElementById('dangerGlobal')?.innerText||'--'));
+    lignes.push('Vent : '+(document.getElementById('ventIntervention').value||'--')+' km/h');
+    lignes.push('Distance bâtiment : '+(document.getElementById('distanceBatiment').value||'--')+' m');
+    lignes.push('Distance végétation/combustible : '+(document.getElementById('distanceVegetation').value||'--')+' m');
+    lignes.push('Dimension combustible : '+(document.getElementById('dimensionCombustible').value||'--')+' m');
+    lignes.push('Extinction disponible : '+document.getElementById('extinctionDisponible').value);
+    lignes.push('Temps de surveillance : '+document.getElementById('timerIntervention').innerText);
+    lignes.push('Notes : '+(document.getElementById('notesIntervention').value||''));
+    navigator.clipboard.writeText(lignes.join('\n')).then(()=>alert('Rapport copié dans le presse-papiers.')).catch(()=>alert(lignes.join('\n')));
+}
+
 function demarrer(){
     initialiserCartePrincipale();
     chargerPermis();
