@@ -11,7 +11,7 @@
 
 <style>
 :root{
-    --bleu:#4b0000;--bleu2:#7a0000;--bleu3:#b40000;--gris:#170101;--vert:#4f8f2f;--jaune:#f4c542;--rouge:#c40000;--orange:#ff7a1a;--texte:#f8fafc;--muted:#f4d1d1;--white:#ffffff;
+    --bleu:#4b0000;--bleu2:#7a0000;--bleu3:#b40000;--gris:#170101;--vert:#4f8f2f;--jaune:#f4c542;--rouge:#c40000;--orange:#ff7a1a;--texte:#f8fafc;--muted:#5b0000;--white:#ffffff;
     --fond1:#120000;--fond2:#3a0000;--fond3:#7a0000;--fond4:#b40000;--noirRouge:#090000;
 }
 *{box-sizing:border-box;}
@@ -89,6 +89,84 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;op
 
 @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
 @media(max-width:768px){body{overflow-x:hidden;}.header{padding:25px 15px;}.header h1{font-size:28px;line-height:1.2;}.logo{max-height:95px;}.navbar{position:static;}.stats{flex-direction:column;padding:15px;gap:12px;}.layout{display:flex;flex-direction:column;padding:15px;gap:15px;}#map{order:1;width:100%;height:65vh;height:65dvh;min-height:420px;border-radius:14px;flex:none;}.sidebar{order:2;width:100%;max-height:none;box-sizing:border-box;}.card{width:100%;}.permis-item{font-size:14px;}.stats-page{padding:15px;}.kpi-grid{grid-template-columns:1fr;}.chart-box{height:300px;}#heatmap{width:100%;height:65vh;height:65dvh;min-height:430px;border-radius:14px;}.panel{overflow:hidden;}}
+
+/* ===== Correction contraste - conserver le fond rouge, foncer les textes sur les panneaux blancs ===== */
+.card,
+.sidebar,
+.stats-header,
+.kpi,
+.panel,
+.intervention-header,
+.intervention-panel,
+.empty-state,
+.check-item,
+.reglement-details details{
+    color:#1f2937 !important;
+}
+
+.sidebar h3,
+.stats-header h2,
+.panel h3,
+.intervention-header h2,
+.intervention-panel h3,
+.permis-numero,
+.popup-section,
+.kpi .value,
+.timer-value{
+    color:#4b0000 !important;
+}
+
+.stats-header p,
+.intervention-header p,
+.note,
+.panel .note,
+.intervention-panel .note,
+.field label,
+.kpi .label,
+.permis-date,
+.card p{
+    color:#4b5563 !important;
+    opacity:1 !important;
+}
+
+.field label,
+.kpi .label{
+    font-weight:800 !important;
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+    color:#6b7280 !important;
+    opacity:1 !important;
+}
+
+.badge{
+    color:#1f2937 !important;
+}
+
+.danger-zone{
+    text-shadow:none !important;
+}
+
+.danger-zone .zone-name,
+.danger-zone .zone-level{
+    color:inherit !important;
+}
+
+.result-warning{
+    color:#713f12 !important;
+}
+
+.result-danger{
+    color:#7f1d1d !important;
+}
+
+.result-ok{
+    color:#14532d !important;
+}
+
+/* Les titres restent rouges fonces, mais les petits textes ne sont plus rose pale. */
+
 </style>
 </head>
 <body>
@@ -410,13 +488,25 @@ async function chargerPermis(recalculStats=false, forceCloudflare=false){
         if(recalculStats || document.getElementById('vueStats').classList.contains('active')) genererStatistiques();
     }catch(error){console.error('Erreur lors du chargement des permis :',error);}
 }
+function couleurTexteContraste(couleur){
+    if(!couleur) return '#ffffff';
+    let c=String(couleur).trim();
+    const noms={yellow:'#111827',jaune:'#111827',red:'#ffffff',green:'#ffffff',orange:'#111827'};
+    if(noms[c.toLowerCase()]) return noms[c.toLowerCase()];
+    if(c[0]==='#') c=c.slice(1);
+    if(c.length===3) c=c.split('').map(x=>x+x).join('');
+    if(!/^[0-9a-fA-F]{6}$/.test(c)) return '#ffffff';
+    const r=parseInt(c.slice(0,2),16), g=parseInt(c.slice(2,4),16), b=parseInt(c.slice(4,6),16);
+    const luminance=(0.299*r+0.587*g+0.114*b)/255;
+    return luminance>0.58 ? '#111827' : '#ffffff';
+}
 async function chargerSopfeu(forceCloudflare=false){
     try{
         let d=null;const cache=!forceCloudflare?lireCacheDonnees(CACHE_SOPFEU_KEY,TTL_SOPFEU):null;
         if(cache&&cache.data){d=cache.data;console.log('SOPFEU lu depuis cache local');}else{const r=await fetch(API_SOPFEU+'?t='+Date.now());d=await r.json();sauverCacheDonnees(CACHE_SOPFEU_KEY,d);}
-        if(d.mataneChicsChocs){document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;document.getElementById('dangerCard').style.background=d.mataneChicsChocs.couleur;}
+        if(d.mataneChicsChocs){const dc=document.getElementById('dangerCard');document.getElementById('dangerGlobal').innerText=d.mataneChicsChocs.niveau;dc.style.background=d.mataneChicsChocs.couleur;dc.style.color=couleurTexteContraste(d.mataneChicsChocs.couleur);dc.querySelectorAll('h2,p').forEach(el=>el.style.color=dc.style.color);}
         document.getElementById('zonesDanger').innerHTML='';
-        [d.rimouskiMatapedia,d.mataneChicsChocs].filter(Boolean).forEach(z=>{const e=document.createElement('div');e.className='danger-zone';e.style.background=z.couleur;e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;document.getElementById('zonesDanger').appendChild(e);});
+        [d.rimouskiMatapedia,d.mataneChicsChocs].filter(Boolean).forEach(z=>{const e=document.createElement('div');e.className='danger-zone';e.style.background=z.couleur;e.style.color=couleurTexteContraste(z.couleur);e.innerHTML=`<div class="zone-name">🔥 ${z.nom}</div><div class="zone-level">${z.niveau}</div>`;document.getElementById('zonesDanger').appendChild(e);});
     }catch(error){console.error('Erreur lors du chargement SOPFEU :',error);}
 }
 function compterParMunicipalite(){const c={};permisCache.forEach(p=>{const m=lireMunicipaliteDepuisPermis(p);c[m]=(c[m]||0)+1;});return c;}
