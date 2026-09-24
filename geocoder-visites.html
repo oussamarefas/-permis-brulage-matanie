@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Géocoder les adresses de prévention</title>
+
+<script src.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.jsscript>
+
+<style>
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+button{
+    padding:12px 20px;
+    margin:10px;
+    cursor:pointer;
+}
+#log{
+    white-space:pre-wrap;
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:8px;
+    max-height:400px;
+    overflow:auto;
+}
+</style>
+</head>
+<body>
+
+<h1>Géocoder les adresses</h1>
+
+<input type="file" id="fileInput" accept=".xlsx,.csv">
+
+<button onclick="traiter()">Géocoder</button>
+
+<div id="log"></div>
+
+<script>
+
+function pause(ms){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function geocoderAdresse(adresse){
+
+    const url =
+      'https://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+      + encodeURIComponent(adresse);
+
+    const r = await fetch(url);
+
+    const data = await r.json();
+
+    if(data.length===0){
+        return null;
+    }
+
+    return {
+        latitude:data[0].lat,
+        longitude:data[0].lon
+    };
+}
+
+async function traiter(){
+
+    const fichier =
+        document.getElementById("fileInput").files[0];
+
+    if(!fichier){
+        alert("Choisir un fichier");
+        return;
+    }
+
+    const data =
+      await fichier.arrayBuffer();
+
+    const workbook =
+      XLSX.read(data);
+
+    const ws =
+      workbook.Sheets[workbook.SheetNames[0]];
+
+    const lignes =
+      XLSX.utils.sheet_to_json(ws);
+
+    const resultat=[];
+
+    let compteur=0;
+
+    for(const ligne of lignes){
+
+        compteur++;
+
+        const adresse =
+          ligne["Adresse complète"];
+
+        document.getElementById("log")
+          .innerText=
+          "Adresse "+compteur+
+          " : "+adresse;
+
+        const geo =
+          await geocoderAdresse(
+             adresse + ", Matane, Québec, Canada"
+          );
+
+        if(geo){
+
+            resultat.push({
+                Adresse:adresse,
+                Latitude:geo.latitude,
+                Longitude:geo.longitude
+            });
+
+        }
+
+        await pause(1100);
+
+    }
+
+    const nouveau =
+      XLSX.utils.json_to_sheet(resultat);
+
+    const wb =
+      XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        nouveau,
+        "Coordonnees"
+    );
+
+    XLSX.writeFile(
+        wb,
+        "Adresses_GPS.xlsx"
+    );
+
+    alert(
+      "Terminé : "+
+      resultat.length+
+      " adresses géocodées"
+    );
+}
+</script>
+
+</body>
+</html>
